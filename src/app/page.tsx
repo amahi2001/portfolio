@@ -1,23 +1,21 @@
 "use client";
-// import Image from "next/image";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { Image } from "react-bootstrap";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
 import { TypeAnimation } from "react-type-animation";
 
 const images = {
   headshot: "headshot.jpeg",
   space: "stars.jpeg",
-  space2:
-    "https://images.unsplash.com/photo-1509515837298-2c67a3933321?auto=format&fit=crop&q=80&w=3088&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 };
 
 export default function Home() {
   const parallax = useRef<IParallax>(null!);
+  const [showSecond, setShowSecond] = useState(false);
   return (
     <Parallax pages={2} ref={parallax}>
       {/* space background */}
@@ -33,7 +31,6 @@ export default function Home() {
       {/* First Page, HeadShot + type animation */}
       <ParallaxLayer
         speed={0.5}
-        // offset={0.2}
         style={{
           display: "flex",
           alignItems: "center",
@@ -42,29 +39,14 @@ export default function Home() {
       >
         <Container>
           <Row>
-            <Col className="text-center m-auto">
-              <Image
-                alt="Abrar's headshot"
-                src={images.headshot}
-                roundedCircle
-                fluid
-                style={{ maxWidth: "30%", maxHeight: "30%" }}
-              />
-            </Col>
-          </Row>
-          <Row className="mt-4">
             <Col className="text-center">
               <TypeAnimation
+                cursor={false}
                 sequence={[
-                  // Same substring at the start will only be typed out once, initially
                   "Hi I'm Abrar 👋",
-                  1000, // wait 1s before replacing "Mice" with "Hamsters"
-                  "I am a Software Engineer",
-                  1000,
-                  "I build web apps",
-                  1000,
-                  "I build mobile apps",
-                  1000,
+                  () => {
+                    setTimeout(() => setShowSecond(true), 1000);
+                  },
                 ]}
                 wrapper="h1"
                 className="display-6"
@@ -78,17 +60,53 @@ export default function Home() {
               />
             </Col>
           </Row>
+          <Row className="my-4">
+            <Col className="text-center m-auto">
+              <Image
+                alt="Abrar's headshot"
+                src={images.headshot}
+                roundedCircle
+                fluid
+                style={{ maxWidth: "30%", maxHeight: "30%" }}
+              />
+            </Col>
+          </Row>
+
+          <Row>
+            <Col className="text-center">
+              {showSecond && (
+                <TypeAnimation
+                  sequence={[
+                    "I am a Software Engineer",
+                    1000,
+                    "I build web apps",
+                    1000,
+                    "I build mobile apps",
+                    1000,
+                  ]}
+                  wrapper="h2"
+                  className="display-6"
+                  speed={20}
+                  style={{
+                    fontSize: "2em",
+                    display: "inline-block",
+                    color: "white",
+                  }}
+                  // repeat={Infinity}
+                />
+              )}
+            </Col>
+          </Row>
+
           <Row className="mt-4">
             <Col className="text-center">
               <Button
+                aria-label="scroll down"
                 variant="link"
-                className="text-light"
+                className="text-light opacity-75"
                 onClick={() => parallax.current?.scrollTo(1)}
-                style={{
-                  opacity: "50%",
-                }}
               >
-                Scroll down
+                &or;
               </Button>
             </Col>
           </Row>

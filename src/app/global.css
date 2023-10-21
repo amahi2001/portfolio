@@ -1,0 +1,15 @@
+:root{
+    --main-color: #f700ff;
+}
+
+::-moz-selection {
+    background: var(--main-color);
+}
+
+::-webkit-selection {
+    background: var(--main-color);
+}
+
+::selection {
+    background: var(--main-color);
+}
