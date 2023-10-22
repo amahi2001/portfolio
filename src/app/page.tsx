@@ -2,7 +2,10 @@
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 import Collapse from "react-bootstrap/Collapse";
+import Fade from "react-bootstrap/Fade";
 import Container from "react-bootstrap/Container";
 import { Image } from "react-bootstrap";
 import { TypeAnimation } from "react-type-animation";
@@ -38,29 +41,20 @@ export default function Home() {
         }}
       />
 
-      {/* LinkedIn and GitHub Buttons */}
-      <ParallaxLayer sticky={{ start: 0, end: 2 }}>
-        <Collapse in={showAnimatedText}>
-          <Row className="text-center justify-content-end">
-            <Col xs="auto">
-              <Button
-                aria-label="github"
-                variant="link text-white"
-                href={links.github}
-              >
-                <FontAwesomeIcon icon={faGithub} size="2x" />
-              </Button>
-              <Button
-                aria-label="linkedin"
-                variant="link text-white"
-                href={links.linkedIn}
-              >
-                <FontAwesomeIcon icon={faLinkedin} size="2x" />
-              </Button>
-            </Col>
-          </Row>
-        </Collapse>
-      </ParallaxLayer>
+      {/* LinkedIn and Github links at top */}
+      <Navbar
+        sticky="top"
+        bg="transparent"
+        variant="dark"
+        className=" justify-content-end"
+      >
+        <Navbar.Brand target="_blank" href={links.github}>
+          <FontAwesomeIcon icon={faGithub} size="2x" />
+        </Navbar.Brand>
+        <Navbar.Brand target="_blank" href={links.linkedIn}>
+          <FontAwesomeIcon icon={faLinkedin} size="2x" />
+        </Navbar.Brand>
+      </Navbar>
 
       {/* First Page, HeadShot + type animation */}
       <ParallaxLayer
@@ -72,6 +66,7 @@ export default function Home() {
         }}
       >
         <Container>
+          {/* Name and Greeting */}
           <Row>
             <Col className="text-center">
               <TypeAnimation
@@ -105,7 +100,8 @@ export default function Home() {
               />
             </Col>
           </Row>
-          <Collapse in={showAnimatedText} mountOnEnter>
+
+          <Fade in={showAnimatedText} mountOnEnter>
             <Row>
               <Col className="text-center">
                 <TypeAnimation
@@ -128,26 +124,28 @@ export default function Home() {
                 />
               </Col>
             </Row>
+          </Fade>
+          <Collapse in={showAnimatedText}>
+            <Row className="mt-4">
+              <Col className="text-center">
+                <Button
+                  aria-label="scroll down"
+                  variant="link"
+                  className="text-light"
+                  onClick={() => parallax.current.scrollTo(1)}
+                >
+                  Scroll down to learn more
+                </Button>
+              </Col>
+            </Row>
           </Collapse>
-
-          <Row className="mt-4">
-            <Col className="text-center">
-              <Button
-                aria-label="scroll down"
-                variant="link"
-                className="text-light opacity-75"
-                onClick={() => parallax.current?.scrollTo(1)}
-              >
-                Scroll down to learn more
-              </Button>
-            </Col>
-          </Row>
         </Container>
       </ParallaxLayer>
       {/* Second Layer */}
       <ParallaxLayer
         offset={1}
         speed={0.5}
+        onClick={() => parallax.current.scrollTo(0)}
         style={{
           display: "flex",
           alignItems: "center",
