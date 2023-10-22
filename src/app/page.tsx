@@ -144,7 +144,7 @@ export default function Home() {
               </Col>
             </Row>
           </Collapse>
-          <Collapse in={showAnimatedText}>
+          <Collapse in={showDesc}>
             <Row className="mt-4">
               <Col className="text-center">
                 <Button
