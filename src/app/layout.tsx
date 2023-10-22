@@ -17,9 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={ubuntu.className}>
+      <body className={`text-light`}>
         {children}
-        {process.env.NODE_ENV == "production" && (
+        {process.env.NODE_ENV === "production" && (
           <AnimatedCursor
             innerSize={8}
             outerSize={35}

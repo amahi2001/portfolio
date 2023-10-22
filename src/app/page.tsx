@@ -3,7 +3,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
 import Collapse from "react-bootstrap/Collapse";
 import Fade from "react-bootstrap/Fade";
 import Container from "react-bootstrap/Container";
@@ -17,6 +16,7 @@ import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
 const images = {
   headshot: "headshot.jpeg",
   space: "stars.jpeg",
+  stars: "stars.jpg",
 };
 
 const links = {
@@ -28,6 +28,7 @@ export default function Home() {
   const parallax = useRef<IParallax>(null!);
   //shows animated text below the headshot
   const [showAnimatedText, setShowAnimatedText] = useState(false);
+  const [showDesc, setShowDesc] = useState(false);
   return (
     <Parallax pages={2} ref={parallax}>
       {/* space background */}
@@ -36,7 +37,7 @@ export default function Home() {
         speed={0}
         factor={2}
         style={{
-          backgroundImage: `url(${images.space})`,
+          backgroundImage: `url(${images.stars})`,
           backgroundSize: "cover",
         }}
       />
@@ -58,6 +59,7 @@ export default function Home() {
 
       {/* First Page, HeadShot + type animation */}
       <ParallaxLayer
+        onClick={() => parallax.current.scrollTo(1)}
         speed={0.5}
         style={{
           display: "flex",
@@ -78,7 +80,6 @@ export default function Home() {
                   },
                 ]}
                 wrapper="h1"
-                className="display-6"
                 speed={20}
                 style={{
                   fontSize: "2em",
@@ -111,10 +112,13 @@ export default function Home() {
                     "I build software for mobile",
                     1000,
                     "I build software.",
+                    () => {
+                      setTimeout(() => setShowDesc(true), 1000);
+                    },
                   ]}
                   wrapper="h2"
-                  className="display-6"
                   speed={20}
+                  deletionSpeed={20}
                   style={{
                     fontSize: "2em",
                     display: "inline-block",
@@ -125,6 +129,21 @@ export default function Home() {
               </Col>
             </Row>
           </Fade>
+          <Collapse in={showDesc}>
+            <Row className="mt-4">
+              <Col className="text-center">
+                <p className="lead">
+                  I have always been fascinated by the intersection of math and
+                  technology, and look to apply what I learn in school to
+                  real-world situations. In my free time, you will find me
+                  working on some cool computer problems, volunteering, or
+                  learning new concepts in finance and tech. My passion for STEM
+                  drives me to continually expand my knowledge and make a
+                  difference in the lives of others.
+                </p>
+              </Col>
+            </Row>
+          </Collapse>
           <Collapse in={showAnimatedText}>
             <Row className="mt-4">
               <Col className="text-center">

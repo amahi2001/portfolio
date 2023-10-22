@@ -1,17 +1,17 @@
 :root {
-    --main-color: #f700ff;
+    --highlight-color: #f700ff;
 }
 
 ::-moz-selection {
-    background: var(--main-color);
+    background: var(--highlight-color);
 }
 
 ::-webkit-selection {
-    background: var(--main-color);
+    background: var(--highlight-color);
 }
 
 ::selection {
-    background: var(--main-color);
+    background: var(--highlight-color);
 }
 
 html {
