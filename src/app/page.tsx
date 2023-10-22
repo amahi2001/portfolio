@@ -1,21 +1,30 @@
 "use client";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Collapse from "react-bootstrap/Collapse";
+import Container from "react-bootstrap/Container";
 import { Image } from "react-bootstrap";
-import { useRef, useState } from "react";
-import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
 import { TypeAnimation } from "react-type-animation";
+import { useRef, useState } from "react";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
 
 const images = {
   headshot: "headshot.jpeg",
   space: "stars.jpeg",
 };
 
+const links = {
+  linkedIn: "https://www.linkedin.com/in/abrarmahi/",
+  github: "https://github.com/amahi2001",
+};
+
 export default function Home() {
   const parallax = useRef<IParallax>(null!);
-  const [showSecond, setShowSecond] = useState(false);
+  //shows animated text below the headshot
+  const [showAnimatedText, setShowAnimatedText] = useState(false);
   return (
     <Parallax pages={2} ref={parallax}>
       {/* space background */}
@@ -28,6 +37,31 @@ export default function Home() {
           backgroundSize: "cover",
         }}
       />
+
+      {/* LinkedIn and GitHub Buttons */}
+      <ParallaxLayer sticky={{ start: 0, end: 2 }}>
+        <Collapse in={showAnimatedText}>
+          <Row className="text-center justify-content-end">
+            <Col xs="auto">
+              <Button
+                aria-label="github"
+                variant="link text-white"
+                href={links.github}
+              >
+                <FontAwesomeIcon icon={faGithub} size="2x" />
+              </Button>
+              <Button
+                aria-label="linkedin"
+                variant="link text-white"
+                href={links.linkedIn}
+              >
+                <FontAwesomeIcon icon={faLinkedin} size="2x" />
+              </Button>
+            </Col>
+          </Row>
+        </Collapse>
+      </ParallaxLayer>
+
       {/* First Page, HeadShot + type animation */}
       <ParallaxLayer
         speed={0.5}
@@ -43,9 +77,9 @@ export default function Home() {
               <TypeAnimation
                 cursor={false}
                 sequence={[
-                  "Hi I'm Abrar 👋",
+                  "Hi I'm Abrar Mahi 👋",
                   () => {
-                    setTimeout(() => setShowSecond(true), 1000);
+                    setTimeout(() => setShowAnimatedText(true), 1000);
                   },
                 ]}
                 wrapper="h1"
@@ -71,18 +105,16 @@ export default function Home() {
               />
             </Col>
           </Row>
-
-          <Row>
-            <Col className="text-center">
-              {showSecond && (
+          <Collapse in={showAnimatedText} mountOnEnter>
+            <Row>
+              <Col className="text-center">
                 <TypeAnimation
                   sequence={[
-                    "I am a Software Engineer",
+                    "I build software for the web",
                     1000,
-                    "I build web apps",
+                    "I build software for mobile",
                     1000,
-                    "I build mobile apps",
-                    1000,
+                    "I build software.",
                   ]}
                   wrapper="h2"
                   className="display-6"
@@ -94,9 +126,9 @@ export default function Home() {
                   }}
                   // repeat={Infinity}
                 />
-              )}
-            </Col>
-          </Row>
+              </Col>
+            </Row>
+          </Collapse>
 
           <Row className="mt-4">
             <Col className="text-center">
@@ -106,24 +138,28 @@ export default function Home() {
                 className="text-light opacity-75"
                 onClick={() => parallax.current?.scrollTo(1)}
               >
-                &or;
+                Scroll down to learn more
               </Button>
             </Col>
           </Row>
         </Container>
       </ParallaxLayer>
       {/* Second Layer */}
-      <ParallaxLayer offset={1}>
+      <ParallaxLayer
+        offset={1}
+        speed={0.5}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <TypeAnimation
           sequence={[
             // Same substring at the start will only be typed out once, initially
-            "We produce food for Mice",
+            "Test 1",
             1000, // wait 1s before replacing "Mice" with "Hamsters"
-            "We produce food for Hamsters",
-            1000,
-            "We produce food for Guinea Pigs",
-            1000,
-            "We produce food for Chinchillas",
+            "Test 2",
             1000,
           ]}
           wrapper="span"
