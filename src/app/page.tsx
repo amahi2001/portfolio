@@ -30,95 +30,58 @@ export default function Home() {
   const [showAnimatedText, setShowAnimatedText] = useState(false);
   const [showDesc, setShowDesc] = useState(false);
   return (
-    <Parallax pages={2} ref={parallax}>
-      {/* space background */}
-      <ParallaxLayer
-        offset={0}
-        speed={0}
-        factor={2}
-        style={{
-          backgroundImage: `url(${images.stars})`,
-          backgroundSize: "cover",
-        }}
-      />
+    <div>
+      <Parallax pages={2} ref={parallax}>
+        {/* space background */}
+        <ParallaxLayer
+          offset={0}
+          speed={0}
+          factor={2}
+          style={{
+            backgroundImage: `url(${images.stars})`,
+            backgroundSize: "cover",
+          }}
+        />
 
-      {/* LinkedIn and Github links at top */}
-      <Navbar
-        sticky="top"
-        bg="transparent"
-        variant="dark"
-        className=" justify-content-end"
-      >
-        <Navbar.Brand target="_blank" href={links.github}>
-          <FontAwesomeIcon icon={faGithub} size="2x" />
-        </Navbar.Brand>
-        <Navbar.Brand target="_blank" href={links.linkedIn}>
-          <FontAwesomeIcon icon={faLinkedin} size="2x" />
-        </Navbar.Brand>
-      </Navbar>
+        {/* LinkedIn and Github links at top */}
+        <Navbar
+          sticky="top"
+          bg="transparent"
+          variant="dark"
+          className=" justify-content-end"
+        >
+          <Navbar.Brand target="_blank" href={links.github}>
+            <FontAwesomeIcon icon={faGithub} size="2x" />
+          </Navbar.Brand>
+          <Navbar.Brand target="_blank" href={links.linkedIn}>
+            <FontAwesomeIcon icon={faLinkedin} size="2x" />
+          </Navbar.Brand>
+        </Navbar>
 
-      {/* First Page, HeadShot + type animation */}
-      <ParallaxLayer
-        onClick={() => parallax.current.scrollTo(1)}
-        speed={0.5}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Container>
-          {/* Name and Greeting */}
-          <Row>
-            <Col className="text-center">
-              <TypeAnimation
-                cursor={false}
-                sequence={[
-                  "Hi I'm Abrar Mahi 👋",
-                  () => {
-                    setTimeout(() => setShowAnimatedText(true), 1000);
-                  },
-                ]}
-                wrapper="h1"
-                speed={20}
-                style={{
-                  fontSize: "2em",
-                  display: "inline-block",
-                  color: "white",
-                }}
-                // repeat={Infinity}
-              />
-            </Col>
-          </Row>
-          <Row className="my-4">
-            <Col className="text-center m-auto">
-              <Image
-                alt="Abrar's headshot"
-                src={images.headshot}
-                roundedCircle
-                fluid
-                style={{ maxWidth: "30%", maxHeight: "30%" }}
-              />
-            </Col>
-          </Row>
-
-          <Fade in={showAnimatedText} mountOnEnter>
+        {/* First Page, HeadShot + type animation */}
+        <ParallaxLayer
+          onClick={() => parallax.current.scrollTo(1)}
+          speed={0.5}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Container className="mt-4">
+            {/* Name and Greeting */}
             <Row>
               <Col className="text-center">
                 <TypeAnimation
+                  cursor={false}
                   sequence={[
-                    "I build software for the web",
-                    1000,
-                    "I build software for mobile",
-                    1000,
-                    "I build software.",
+                    "Hi I'm Abrar Mahi 👋",
                     () => {
-                      setTimeout(() => setShowDesc(true), 1000);
+                      setTimeout(() => setShowAnimatedText(true), 1000);
                     },
                   ]}
-                  wrapper="h2"
+                  wrapper="h1"
                   speed={20}
-                  deletionSpeed={20}
                   style={{
                     fontSize: "2em",
                     display: "inline-block",
@@ -128,67 +91,106 @@ export default function Home() {
                 />
               </Col>
             </Row>
-          </Fade>
-          <Collapse in={showDesc}>
-            <Row className="mt-4">
-              <Col className="text-center">
-                <p className="lead">
-                  I have always been fascinated by the intersection of math and
-                  technology, and look to apply what I learn in school to
-                  real-world situations. In my free time, you will find me
-                  working on some cool computer problems, volunteering, or
-                  learning new concepts in finance and tech. My passion for STEM
-                  drives me to continually expand my knowledge and make a
-                  difference in the lives of others.
-                </p>
+            <Row className="my-4">
+              <Col className="text-center m-auto">
+                <Image
+                  alt="Abrar's headshot"
+                  src={images.headshot}
+                  roundedCircle
+                  fluid
+                  style={{ maxWidth: "30%", maxHeight: "30%" }}
+                />
               </Col>
             </Row>
-          </Collapse>
-          <Collapse in={showDesc}>
-            <Row className="mt-4">
-              <Col className="text-center">
-                <Button
-                  aria-label="scroll down"
-                  variant="link"
-                  className="text-light"
-                  onClick={() => parallax.current.scrollTo(1)}
-                >
-                  Scroll down to learn more
-                </Button>
-              </Col>
-            </Row>
-          </Collapse>
-        </Container>
-      </ParallaxLayer>
-      {/* Second Layer */}
-      <ParallaxLayer
-        offset={1}
-        speed={0.5}
-        onClick={() => parallax.current.scrollTo(0)}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <TypeAnimation
-          sequence={[
-            // Same substring at the start will only be typed out once, initially
-            "Test 1",
-            1000, // wait 1s before replacing "Mice" with "Hamsters"
-            "Test 2",
-            1000,
-          ]}
-          wrapper="span"
-          speed={1}
+
+            <Fade in={showAnimatedText} mountOnEnter>
+              <Row>
+                <Col className="text-center">
+                  <TypeAnimation
+                    sequence={[
+                      "I build software for the web",
+                      1000,
+                      "I build software for mobile",
+                      1000,
+                      "I build software.",
+                      () => {
+                        setTimeout(() => setShowDesc(true), 1000);
+                      },
+                    ]}
+                    wrapper="h2"
+                    speed={20}
+                    deletionSpeed={20}
+                    style={{
+                      fontSize: "2em",
+                      display: "inline-block",
+                      color: "white",
+                    }}
+                    // repeat={Infinity}
+                  />
+                </Col>
+              </Row>
+            </Fade>
+            <Collapse in={showDesc}>
+              <Row className="mt-4">
+                <Col className="text-center">
+                  <p className="lead">
+                    I have always been fascinated by the intersection of math
+                    and technology, and look to apply what I learn in school to
+                    real-world situations. In my free time, you will find me
+                    working on some cool computer problems, volunteering, or
+                    learning new concepts in finance and tech. My passion for
+                    STEM drives me to continually expand my knowledge and make a
+                    difference in the lives of others.
+                  </p>
+                </Col>
+              </Row>
+            </Collapse>
+            <Collapse in={showDesc}>
+              <Row className="mt-4">
+                <Col className="text-center">
+                  <Button
+                    aria-label="scroll down"
+                    variant="link"
+                    className="text-light"
+                    onClick={() => parallax.current.scrollTo(1)}
+                  >
+                    Scroll down to learn more
+                  </Button>
+                </Col>
+              </Row>
+            </Collapse>
+          </Container>
+        </ParallaxLayer>
+        {/* Second Layer */}
+        <ParallaxLayer
+          offset={1}
+          speed={0.5}
+          onClick={() => parallax.current.scrollTo(0)}
           style={{
-            fontSize: "2em",
-            display: "inline-block",
-            color: "white",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
-          repeat={Infinity}
-        />
-      </ParallaxLayer>
-    </Parallax>
+        >
+          <TypeAnimation
+            sequence={[
+              // Same substring at the start will only be typed out once, initially
+              "Test 1",
+              1000, // wait 1s before replacing "Mice" with "Hamsters"
+              "Test 2",
+              1000,
+            ]}
+            wrapper="span"
+            speed={1}
+            style={{
+              fontSize: "2em",
+              display: "inline-block",
+              color: "white",
+            }}
+            repeat={Infinity}
+          />
+        </ParallaxLayer>
+      </Parallax>
+    </div>
   );
 }
