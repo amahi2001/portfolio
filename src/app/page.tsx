@@ -8,11 +8,11 @@ import Fade from "react-bootstrap/Fade";
 import Container from "react-bootstrap/Container";
 import { Image } from "react-bootstrap";
 import { TypeAnimation } from "react-type-animation";
-import { useRef, useState } from "react";
+import { use, useRef, useState } from "react";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
-import useIsBrowser from "@/hooks/useIsBrowser";
+import { useMediaQuery } from "react-responsive";
 
 const images = {
   headshot: "headshot.jpeg",
@@ -26,7 +26,7 @@ const links = {
 };
 
 export default function Home() {
-  const isLargeViewPort = useIsBrowser();
+  const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
   const parallax = useRef<IParallax>(null!);
   //shows animated text below the headshot
   const [showAnimatedText, setShowAnimatedText] = useState(false);
@@ -71,7 +71,7 @@ export default function Home() {
           }}
         >
           <Container
-            {...(!isLargeViewPort &&
+            {...(isMobile &&
               showDesc && {
                 style: {
                   paddingTop: "65vh",
