@@ -12,6 +12,7 @@ import { useRef, useState } from "react";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
+import useIsBrowser from "@/hooks/useIsBrowser";
 
 const images = {
   headshot: "headshot.jpeg",
@@ -25,6 +26,7 @@ const links = {
 };
 
 export default function Home() {
+  const isLargeViewPort = useIsBrowser();
   const parallax = useRef<IParallax>(null!);
   //shows animated text below the headshot
   const [showAnimatedText, setShowAnimatedText] = useState(false);
@@ -68,7 +70,14 @@ export default function Home() {
             justifyContent: "center",
           }}
         >
-          <Container className="mt-4">
+          <Container
+            {...(!isLargeViewPort &&
+              showDesc && {
+                style: {
+                  paddingTop: "65vh",
+                },
+              })}
+          >
             {/* Name and Greeting */}
             <Row>
               <Col className="text-center">
