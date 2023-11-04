@@ -6,9 +6,10 @@ import Navbar from "react-bootstrap/Navbar";
 import Collapse from "react-bootstrap/Collapse";
 import Fade from "react-bootstrap/Fade";
 import Container from "react-bootstrap/Container";
+import AnimatedCursor from "react-animated-cursor";
 import { Image } from "react-bootstrap";
 import { TypeAnimation } from "react-type-animation";
-import { use, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
@@ -26,6 +27,7 @@ const links = {
 };
 
 export default function Home() {
+  // max width of 800px and height of 600px
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
   const parallax = useRef<IParallax>(null!);
   //shows animated text below the headshot
@@ -66,17 +68,16 @@ export default function Home() {
           speed={0.5}
           style={{
             display: "flex",
-            alignItems: "center",
+            alignItems: isMobile ? "normal" : "center",
             justifyContent: "center",
           }}
         >
           <Container
-            {...(isMobile &&
-              showDesc && {
-                style: {
-                  paddingTop: "65vh",
-                },
-              })}
+            {...(isMobile && {
+              style: {
+                paddingTop: "12vh",
+              },
+            })}
           >
             {/* Name and Greeting */}
             <Row>
@@ -90,7 +91,7 @@ export default function Home() {
                     },
                   ]}
                   wrapper="h1"
-                  speed={20}
+                  speed={40}
                   style={{
                     fontSize: "2em",
                     display: "inline-block",
@@ -117,18 +118,18 @@ export default function Home() {
                 <Col className="text-center">
                   <TypeAnimation
                     sequence={[
-                      "I build software for the web",
-                      1000,
-                      "I build software for mobile",
-                      1000,
-                      "I build software.",
-                      () => {
-                        setTimeout(() => setShowDesc(true), 1000);
-                      },
+                      "I transform complex problems into elegant software",
+                      2500,
+                      "I build smarter, faster, and more intuitive systems.",
+                      2500,
+                      "I turn coffee into code ☕.",
+                      2500,
+                      () => setShowDesc(true),
                     ]}
                     wrapper="h2"
-                    speed={20}
-                    deletionSpeed={20}
+                    speed={45}
+                    deletionSpeed={75}
+                    // preRenderFirstString
                     style={{
                       fontSize: "2em",
                       display: "inline-block",
@@ -142,7 +143,7 @@ export default function Home() {
             <Collapse in={showDesc}>
               <Row className="mt-4">
                 <Col className="text-center">
-                  <p className="lead">
+                  <p className="lead" id="prof_sum">
                     I have always been fascinated by the intersection of math
                     and technology, and look to apply what I learn in school to
                     real-world situations. In my free time, you will find me
@@ -200,6 +201,22 @@ export default function Home() {
           />
         </ParallaxLayer>
       </Parallax>
+      {process.env.NODE_ENV === "production" && !isMobile && (
+        <AnimatedCursor
+          innerSize={8}
+          outerSize={35}
+          innerScale={1}
+          outerScale={2}
+          outerAlpha={0}
+          // hasBlendMode={true}
+          innerStyle={{
+            backgroundColor: "var(--cursor-color)",
+          }}
+          outerStyle={{
+            border: "3px solid var(--cursor-color)",
+          }}
+        />
+      )}
     </div>
   );
 }
