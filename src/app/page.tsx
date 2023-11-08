@@ -134,7 +134,6 @@ export default function Home() {
                       fontSize: "1.5em",
                       fontWeight: "300",
                       display: "inline-block",
-                      color: "white",
                     }}
                     // repeat={Infinity}
                   />
@@ -151,19 +150,25 @@ export default function Home() {
                   <p className="lead">
                     As a full-stack engineer with a keen eye for the cutting
                     edge, I pride myself on being a jack of all trades in the
-                    tech world. Armed with a diverse skill set from Python to
-                    Go, and JavaScript to Dart, I've crafted responsive
-                    interfaces and robust back-ends using frameworks like
-                    Django, React, and Flutter. At the heart of my approach is a
-                    relentless pursuit of the newest technologies and best
-                    practices, ensuring that every line of code not only solves
-                    a problem but also pushes the envelope of what's possible.
+                    tech world. Armed with a diverse skill set from C++ to
+                    Python, and JavaScript to Dart, I&apos;ve crafted responsive
+                    interfaces and robust back-ends using frameworks like{" "}
+                    <b>Django, React, and Flutter</b>.
+                  </p>
+                  <p className="lead">
+                    At the heart of my approach is a relentless pursuit of the
+                    newest technologies and best practices, ensuring that every
+                    line of code not only solves a problem but also pushes the
+                    envelope of what&apos;s possible.
+                  </p>
+                  <p className="lead">
                     My tenure at The New York Public Library and an Algorithms
                     Development Internship at NASA underscore my adaptability
-                    and dedication. Whether it's implementing CI/CD pipelines or
-                    enhancing satellite data frameworks, my experience is a
-                    testament to my capability to not just navigate but excel in
-                    the ever-evolving landscape of software development.
+                    and dedication. Whether it&apos;s implementing CI/CD
+                    pipelines or enhancing satellite data frameworks, my
+                    experience is a testament to my capability to not just
+                    navigate but excel in the ever-evolving landscape of
+                    software development.
                   </p>
                 </Col>
               </Row>

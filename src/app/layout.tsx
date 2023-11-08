@@ -1,5 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./global.css";
+import "./override.scss";
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 const ubuntu = Ubuntu({ weight: ['300', '400', '500'],  subsets: ["latin"] });

@@ -1,0 +1,42 @@
+$highlight-color: #f700ff;
+
+/* when highlighting text */
+::-moz-selection {
+  background: $highlight-color;
+}
+
+::-webkit-selection {
+  background: $highlight-color;
+}
+
+::selection {
+  background: $highlight-color;
+}
+
+/* changing the cursor color to white */
+html {
+  --cursor-color: #fff;
+}
+
+p.lead {
+  font-size: 16px !important;
+  font-weight: 300;
+}
+
+b {
+  font-weight: 700;
+  color: $highlight-color;
+}
+
+// required imports
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+//overriding Bootstrap variables
+$light: #a8b7cb;
+$theme-colors: (
+  "light": $light,
+);
+
+@import "~bootstrap/scss/bootstrap.scss";
