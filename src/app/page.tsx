@@ -3,13 +3,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import Collapse from "react-bootstrap/Collapse";
 import Fade from "react-bootstrap/Fade";
 import Container from "react-bootstrap/Container";
 import AnimatedCursor from "react-animated-cursor";
 import { Image } from "react-bootstrap";
 import { TypeAnimation } from "react-type-animation";
-import { useRef, useState } from "react";
+import { useRef, useState, Fragment } from "react";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
@@ -27,6 +28,7 @@ const links = {
 };
 
 export default function Home() {
+  const production = process.env.NODE_ENV === "production";
   // max width of 800px and height of 600px
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
   const parallax = useRef<IParallax>(null!);
@@ -68,36 +70,34 @@ export default function Home() {
           speed={0.5}
           style={{
             display: "flex",
-            alignItems: isMobile ? "normal" : "center",
+            alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <Container
-            {...(isMobile && {
-              style: {
-                paddingTop: "12vh",
-              },
-            })}
-          >
+          <Container>
             {/* Name and Greeting */}
-            <Row>
+            <Row
+              style={{
+                marginTop: isMobile ? "30%" : 0,
+              }}
+            >
               <Col className="text-center">
                 <TypeAnimation
                   cursor={false}
                   sequence={[
-                    "Hi I'm Abrar Mahi 👋",
-                    () => {
-                      setTimeout(() => setShowAnimatedText(true), 1000);
-                    },
+                    "Hi I'm Abrar Mahi 👋🏾",
+                    1000,
+                    () => setShowAnimatedText(true),
                   ]}
                   wrapper="h1"
                   speed={40}
                   style={{
-                    fontSize: "2em",
+                    fontSize: "1.5em",
+                    fontWeight: "300",
                     display: "inline-block",
-                    color: "white",
                   }}
-                  // repeat={Infinity}
+                  repeat={1}
+                  preRenderFirstString={showAnimatedText}
                 />
               </Col>
             </Row>
@@ -131,7 +131,8 @@ export default function Home() {
                     deletionSpeed={75}
                     // preRenderFirstString
                     style={{
-                      fontSize: "2em",
+                      fontSize: "1.5em",
+                      fontWeight: "300",
                       display: "inline-block",
                       color: "white",
                     }}
@@ -140,22 +141,34 @@ export default function Home() {
                 </Col>
               </Row>
             </Fade>
-            <Collapse in={showDesc}>
-              <Row className="mt-4">
-                <Col className="text-center">
-                  <p className="lead" id="prof_sum">
-                    I have always been fascinated by the intersection of math
-                    and technology, and look to apply what I learn in school to
-                    real-world situations. In my free time, you will find me
-                    working on some cool computer problems, volunteering, or
-                    learning new concepts in finance and tech. My passion for
-                    STEM drives me to continually expand my knowledge and make a
-                    difference in the lives of others.
+            <Fade
+              // in={showDesc}
+              in
+              onEntering={() => parallax.current.scrollTo(0.1)}
+            >
+              <Row className="mt-4 justify-content-center">
+                <Col md={8} className="text-left">
+                  <p className="lead">
+                    As a full-stack engineer with a keen eye for the cutting
+                    edge, I pride myself on being a jack of all trades in the
+                    tech world. Armed with a diverse skill set from Python to
+                    Go, and JavaScript to Dart, I've crafted responsive
+                    interfaces and robust back-ends using frameworks like
+                    Django, React, and Flutter. At the heart of my approach is a
+                    relentless pursuit of the newest technologies and best
+                    practices, ensuring that every line of code not only solves
+                    a problem but also pushes the envelope of what's possible.
+                    My tenure at The New York Public Library and an Algorithms
+                    Development Internship at NASA underscore my adaptability
+                    and dedication. Whether it's implementing CI/CD pipelines or
+                    enhancing satellite data frameworks, my experience is a
+                    testament to my capability to not just navigate but excel in
+                    the ever-evolving landscape of software development.
                   </p>
                 </Col>
               </Row>
-            </Collapse>
-            <Collapse in={showDesc}>
+            </Fade>
+            <Fade in={showDesc}>
               <Row className="mt-4">
                 <Col className="text-center">
                   <Button
@@ -168,7 +181,7 @@ export default function Home() {
                   </Button>
                 </Col>
               </Row>
-            </Collapse>
+            </Fade>
           </Container>
         </ParallaxLayer>
         {/* Second Layer */}
@@ -182,26 +195,44 @@ export default function Home() {
             justifyContent: "center",
           }}
         >
-          <TypeAnimation
-            sequence={[
-              // Same substring at the start will only be typed out once, initially
-              "Test 1",
-              1000, // wait 1s before replacing "Mice" with "Hamsters"
-              "Test 2",
-              1000,
-            ]}
-            wrapper="span"
-            speed={1}
-            style={{
-              fontSize: "2em",
-              display: "inline-block",
-              color: "white",
-            }}
-            repeat={Infinity}
-          />
+          <Container>
+            <Row>
+              <Col>
+                <p className="lead" id="prof_sum">
+                  👶🏽 As a child, I was the kid who dismantled toys to marvel at
+                  their circuits—my first foray into a lifelong fascination with
+                  technology.
+                  <br />
+                  <br />
+                  🧑🏾 By my teens, I was assembling PCs from cast-off parts and
+                  scripting in Python, laying the groundwork for a future in
+                  software development. That future took shape after a pivotal
+                  summer at NYU Tandon&apos;s STEM program, where robotics
+                  turned my code into kinetic energy and set my course.
+                  <br />
+                  <br />
+                  👨🏾‍💻 Today, I&apos;m immersed in building and leading projects
+                  that leverage React, Python and Google Cloud and beyond,
+                  turning complex challenges into elegant solutions. My
+                  professional journey has been a rich tapestry of experiences,
+                  from developing Python frameworks for NASA to engineering
+                  full-stack solutions for The New York Public Library. Each
+                  role has honed my ability to not just write code, but to solve
+                  problems and lead projects that make a tangible impact.
+                  <br />
+                  <br />
+                  👨🏾‍🔬 Away from the screen, I&apos;m an explorer at heart,
+                  whether it&apos;s contributing to tech forums, immerse myself
+                  in the worlds of soccer and martial arts, or simply enjoying
+                  the quest for knowledge in the evolving landscape of
+                  technology.
+                </p>
+              </Col>
+            </Row>
+          </Container>
         </ParallaxLayer>
       </Parallax>
-      {process.env.NODE_ENV === "production" && !isMobile && (
+      {production && !isMobile && (
         <AnimatedCursor
           innerSize={8}
           outerSize={35}
