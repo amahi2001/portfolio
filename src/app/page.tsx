@@ -141,8 +141,7 @@ export default function Home() {
               </Row>
             </Fade>
             <Fade
-              // in={showDesc}
-              in
+              in={production ? showDesc : true}
               onEntering={() => parallax.current.scrollTo(0.1)}
             >
               <Row className="mt-4 justify-content-center">
