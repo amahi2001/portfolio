@@ -2,6 +2,7 @@
     --highlight-color: #f700ff;
 }
 
+/* when highlighting text */
 ::-moz-selection {
     background: var(--highlight-color);
 }
@@ -14,6 +15,12 @@
     background: var(--highlight-color);
 }
 
+/* changing the cursor color to white */
 html {
     --cursor-color: #fff
+}
+
+p.lead {
+    font-size: 16px !important;
+    font-weight: 300;
 }
