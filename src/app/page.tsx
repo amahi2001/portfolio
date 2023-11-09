@@ -70,7 +70,7 @@ export default function Home() {
           speed={0.5}
           style={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "auto",
             justifyContent: "center",
           }}
         >
@@ -78,7 +78,7 @@ export default function Home() {
             {/* Name and Greeting */}
             <Row
               style={{
-                marginTop: isMobile ? "30%" : 0,
+                marginTop: isMobile ? "30%" : "5%",
               }}
             >
               <Col className="text-center">
@@ -161,13 +161,12 @@ export default function Home() {
                     envelope of what&apos;s possible.
                   </p>
                   <p className="lead">
-                    My tenure at The New York Public Library and an Algorithms
-                    Development Internship at NASA underscore my adaptability
-                    and dedication. Whether it&apos;s implementing CI/CD
-                    pipelines or enhancing satellite data frameworks, my
-                    experience is a testament to my capability to not just
-                    navigate but excel in the ever-evolving landscape of
-                    software development.
+                    My tenure at <b>The New York Public Library</b> and
+                    Internship at <b>NASA</b> underscore my adaptability and
+                    dedication. Whether it&apos;s implementing CI/CD pipelines
+                    or enhancing satellite data frameworks, my experience is a
+                    testament to my capability to not just navigate but excel in
+                    the ever-evolving landscape of software development.
                   </p>
                 </Col>
               </Row>
