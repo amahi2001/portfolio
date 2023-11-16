@@ -37,7 +37,7 @@ export default function Home() {
   const [showDesc, setShowDesc] = useState(false);
   return (
     <div>
-      <Parallax pages={2} ref={parallax}>
+      <Parallax pages={2} ref={parallax} enabled={showDesc}>
         {/* space background */}
         <ParallaxLayer
           offset={0}
@@ -66,7 +66,7 @@ export default function Home() {
 
         {/* First Page, HeadShot + type animation */}
         <ParallaxLayer
-          onClick={() => parallax.current.scrollTo(1)}
+          onClick={() => showDesc && parallax.current.scrollTo(1)}
           speed={0.5}
           style={{
             display: "flex",
