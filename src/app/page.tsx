@@ -6,8 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
-// import Collapse from "react-bootstrap/Collapse";
-import Fade from "react-bootstrap/Fade";
+import { default as BSFade } from "react-bootstrap/Fade";
 import Container from "react-bootstrap/Container";
 import AnimatedCursor from "react-animated-cursor";
 import { Image } from "react-bootstrap";
@@ -17,6 +16,7 @@ import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
 import { useMediaQuery } from "react-responsive";
+import { Fade } from "react-awesome-reveal";
 
 const images = {
   headshot: "headshot.jpeg",
@@ -40,14 +40,6 @@ export default function Home() {
   const [showDesc, setShowDesc] = useState(false);
 
   const [showOffcanvas, setShowOffcanvas] = useState(false);
-
-  const handleCloseOffcanvas = () => setShowOffcanvas(false);
-  const handleToggleMenu = () => {
-    if (isMobile) {
-      setShowOffcanvas(!showOffcanvas);
-    }
-  };
-
   return (
     <Fragment>
       <Parallax pages={2} ref={parallax} enabled={production ? showDesc : true}>
@@ -125,105 +117,107 @@ export default function Home() {
         >
           <Container>
             {/* Name and Greeting */}
-            <Row className="name-row">
-              <Col className="text-center">
-                <TypeAnimation
-                  cursor={false}
-                  sequence={[
-                    "Hi I'm Abrar Mahi 👋🏾",
-                    1000,
-                    () => setShowAnimatedText(true),
-                  ]}
-                  wrapper="h1"
-                  speed={40}
-                  repeat={1}
-                  preRenderFirstString={showAnimatedText}
-                />
-              </Col>
-            </Row>
-            <Row className="my-4">
-              <Col className="text-center m-auto">
-                <Image
-                  alt="Abrar's headshot"
-                  src={images.headshot}
-                  roundedCircle
-                  fluid
-                  style={{ maxWidth: "30%", maxHeight: "30%" }}
-                />
-              </Col>
-            </Row>
-
-            <Fade in={showAnimatedText} mountOnEnter>
-              <Row>
+            <Fade cascade>
+              <Row className="name-row">
                 <Col className="text-center">
                   <TypeAnimation
+                    cursor={false}
                     sequence={[
-                      "I transform complex problems into elegant software",
-                      2500,
-                      "I build smarter, faster, and more intuitive systems.",
-                      2500,
-                      "I turn coffee into code ☕.",
-                      2500,
-                      () => setShowDesc(true),
+                      "Hi I'm Abrar Mahi 👋🏾",
+                      1000,
+                      () => setShowAnimatedText(true),
                     ]}
-                    wrapper="h2"
-                    speed={45}
-                    deletionSpeed={75}
-                    // preRenderFirstString
-                    style={{
-                      fontSize: "1.5em",
-                      fontWeight: "300",
-                      display: "inline-block",
-                    }}
-                    // repeat={Infinity}
+                    wrapper="h1"
+                    speed={40}
+                    repeat={1}
+                    preRenderFirstString={showAnimatedText}
                   />
                 </Col>
               </Row>
-            </Fade>
-            <Fade
-              in={production ? showDesc : true}
-              onEntering={() => parallax.current.scrollTo(0.1)}
-            >
-              <Row className="mt-4 justify-content-center">
-                <Col md={8} className="text-left">
-                  <p className="lead">
-                    As a full-stack engineer with a keen eye for the cutting
-                    edge, I pride myself on being a jack of all trades in the
-                    tech world. Armed with a diverse skill set from C++ to
-                    Python, and JavaScript to Dart, I&apos;ve crafted responsive
-                    interfaces and robust back-ends using frameworks like{" "}
-                    <b>Django, React, and Flutter</b>.
-                  </p>
-                  <p className="lead">
-                    At the heart of my approach is a relentless pursuit of the
-                    newest technologies and best practices, ensuring that every
-                    line of code not only solves a problem but also pushes the
-                    envelope of what&apos;s possible.
-                  </p>
-                  <p className="lead">
-                    My tenure at <b>The New York Public Library</b> and
-                    Internship at <b>NASA</b> underscore my adaptability and
-                    dedication. Whether it&apos;s implementing CI/CD pipelines
-                    or enhancing satellite data frameworks, my experience is a
-                    testament to my capability to not just navigate but excel in
-                    the ever-evolving landscape of software development.
-                  </p>
+
+              <Row className="my-4">
+                <Col className="text-center m-auto">
+                  <Image
+                    alt="Abrar's headshot"
+                    src={images.headshot}
+                    roundedCircle
+                    fluid
+                    style={{ maxWidth: "30%", maxHeight: "30%" }}
+                  />
                 </Col>
               </Row>
-            </Fade>
-            <Fade in={showDesc}>
-              <Row className="mt-4">
-                <Col className="text-center">
-                  <Button
-                    aria-label="scroll down"
-                    variant="link"
-                    className="text-light"
-                    onClick={() => parallax.current.scrollTo(1)}
-                  >
-                    Scroll down to learn more
-                  </Button>
-                </Col>
-              </Row>
+              <BSFade in={showAnimatedText} mountOnEnter>
+                <Row>
+                  <Col className="text-center">
+                    <TypeAnimation
+                      sequence={[
+                        "I transform complex problems into elegant software",
+                        2500,
+                        "I build smarter, faster, and more intuitive systems.",
+                        2500,
+                        "I turn coffee into code ☕.",
+                        2500,
+                        () => setShowDesc(true),
+                      ]}
+                      wrapper="h2"
+                      speed={45}
+                      deletionSpeed={75}
+                      // preRenderFirstString
+                      style={{
+                        fontSize: "1.5em",
+                        fontWeight: "300",
+                        display: "inline-block",
+                      }}
+                      // repeat={Infinity}
+                    />
+                  </Col>
+                </Row>
+              </BSFade>
+              <BSFade
+                in={production ? showDesc : true}
+                onEntering={() => parallax.current.scrollTo(0.1)}
+              >
+                <Row className="mt-4 justify-content-center">
+                  <Col md={8} className="text-left">
+                    <p className="lead">
+                      As a full-stack engineer with a keen eye for the cutting
+                      edge, I pride myself on being a jack of all trades in the
+                      tech world. Armed with a diverse skill set from C++ to
+                      Python, and JavaScript to Dart, I&apos;ve crafted
+                      responsive interfaces and robust back-ends using
+                      frameworks like <b>Django, React, and Flutter</b>.
+                    </p>
+                    <p className="lead">
+                      At the heart of my approach is a relentless pursuit of the
+                      newest technologies and best practices, ensuring that
+                      every line of code not only solves a problem but also
+                      pushes the envelope of what&apos;s possible.
+                    </p>
+                    <p className="lead">
+                      My tenure at <b>The New York Public Library</b> and
+                      Internship at <b>NASA</b> underscore my adaptability and
+                      dedication. Whether it&apos;s implementing CI/CD pipelines
+                      or enhancing satellite data frameworks, my experience is a
+                      testament to my capability to not just navigate but excel
+                      in the ever-evolving landscape of software development.
+                    </p>
+                  </Col>
+                </Row>
+              </BSFade>
+              <BSFade in={showDesc}>
+                <Row className="mt-4">
+                  <Col className="text-center">
+                    <Button
+                      aria-label="scroll down"
+                      variant="link"
+                      className="text-light"
+                      onClick={() => parallax.current.scrollTo(1)}
+                    >
+                      Scroll down to learn more
+                    </Button>
+                  </Col>
+                </Row>
+              </BSFade>
             </Fade>
           </Container>
         </ParallaxLayer>
@@ -239,42 +233,48 @@ export default function Home() {
           }}
         >
           <Container>
-            <Row>
-              <Col className="text-center">
-                <h2>Professional Summary</h2>
-              </Col>
-            </Row>
+            <Fade>
+              <Row className="mb-4">
+                <Col className="text-center">
+                  <h2>Professional Summary</h2>
+                </Col>
+              </Row>
+            </Fade>
+
             <Row>
               <Col>
-                <p className="lead" id="prof_sum">
-                  👶🏽 As a child, I was the kid who dismantled toys to marvel at
-                  their circuits—my first foray into a lifelong fascination with
-                  technology.
-                  <br />
-                  <br />
-                  🧑🏾 By my teens, I was assembling PCs from cast-off parts and
-                  scripting in Python, laying the groundwork for a future in
-                  software development. That future took shape after a pivotal
-                  summer at NYU Tandon&apos;s STEM program, where robotics
-                  turned my code into kinetic energy and set my course.
-                  <br />
-                  <br />
-                  👨🏾‍💻 Today, I&apos;m immersed in building and leading projects
-                  that leverage React, Python and Google Cloud and beyond,
-                  turning complex challenges into elegant solutions. My
-                  professional journey has been a rich tapestry of experiences,
-                  from developing Python frameworks for NASA to engineering
-                  full-stack solutions for The New York Public Library. Each
-                  role has honed my ability to not just write code, but to solve
-                  problems and lead projects that make a tangible impact.
-                  <br />
-                  <br />
-                  👨🏾‍🔬 Away from the screen, I&apos;m an explorer at heart,
-                  whether it&apos;s contributing to tech forums, immerse myself
-                  in the worlds of soccer and martial arts, or simply enjoying
-                  the quest for knowledge in the evolving landscape of
-                  technology.
-                </p>
+                <Fade cascade>
+                  <p className="lead" id="prof_sum">
+                    👶🏽 As a child, I was the kid who dismantled toys to marvel
+                    at their circuits—my first foray into a lifelong fascination
+                    with technology.
+                  </p>
+                  <p className="lead">
+                    🧑🏾 By my teens, I was assembling PCs from cast-off parts and
+                    scripting in Python, laying the groundwork for a future in
+                    software development. That future took shape after a pivotal
+                    summer at NYU Tandon&apos;s STEM program, where robotics
+                    turned my code into kinetic energy and set my course.
+                  </p>
+                  <p className="lead">
+                    👨🏾‍💻 Today, I&apos;m immersed in building and leading projects
+                    that leverage React, Python and Google Cloud and beyond,
+                    turning complex challenges into elegant solutions. My
+                    professional journey has been a rich tapestry of
+                    experiences, from developing Python frameworks for NASA to
+                    engineering full-stack solutions for The New York Public
+                    Library. Each role has honed my ability to not just write
+                    code, but to solve problems and lead projects that make a
+                    tangible impact.
+                  </p>
+                  <p className="lead">
+                    👨🏾‍🔬 Away from the screen, I&apos;m an explorer at heart,
+                    whether it&apos;s contributing to tech forums, immersing
+                    myself in the worlds of soccer and martial arts, or simply
+                    enjoying the quest for knowledge in the evolving landscape
+                    of technology.
+                  </p>
+                </Fade>
               </Col>
             </Row>
           </Container>
