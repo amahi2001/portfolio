@@ -80,7 +80,7 @@ export default function Home() {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body className="me-auto">
-              <BSFade in={showDesc}>
+              <BSFade in={production && showDesc}>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <Nav.Link href="#action1">Home</Nav.Link>
                   <Nav.Link href="#action2">Link</Nav.Link>
