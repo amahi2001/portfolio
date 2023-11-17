@@ -3,8 +3,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Collapse from "react-bootstrap/Collapse";
+// import NavDropdown from "react-bootstrap/NavDropdown";
+// import Collapse from "react-bootstrap/Collapse";
 import Fade from "react-bootstrap/Fade";
 import Container from "react-bootstrap/Container";
 import AnimatedCursor from "react-animated-cursor";
@@ -29,6 +29,7 @@ const links = {
 
 export default function Home() {
   const production = process.env.NODE_ENV === "production";
+  // const production = true; //TODO: remove this for production
   // max width of 800px and height of 600px
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
   const parallax = useRef<IParallax>(null!);
@@ -36,8 +37,8 @@ export default function Home() {
   const [showAnimatedText, setShowAnimatedText] = useState(false);
   const [showDesc, setShowDesc] = useState(false);
   return (
-    <div>
-      <Parallax pages={2} ref={parallax} enabled={showDesc}>
+    <Fragment>
+      <Parallax pages={2} ref={parallax} enabled={production ? showDesc : true}>
         {/* space background */}
         <ParallaxLayer
           offset={0}
@@ -70,7 +71,7 @@ export default function Home() {
           speed={0.5}
           style={{
             display: "flex",
-            alignItems: "auto",
+            alignItems: isMobile ? "auto" : "center",
             justifyContent: "center",
           }}
         >
@@ -251,6 +252,6 @@ export default function Home() {
           }}
         />
       )}
-    </div>
+    </Fragment>
   );
 }
