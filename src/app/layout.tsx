@@ -1,7 +1,10 @@
-import "./override.scss";
+import "./global.scss";
 import type { Metadata } from "next";
-import { Nunito, Ubuntu } from "next/font/google";
-const nunito = Nunito({ weight: ['300', '400', '500', "700"],  subsets: ["latin"] });
+import { Nunito } from "next/font/google";
+const nunito = Nunito({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Welcome to my portfolio",
@@ -13,12 +16,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  
   return (
     <html lang="en">
-      <body className={`text-light ${nunito.className}`}>
-        {children}
-      </body>
+      <body className={`text-light ${nunito.className}`}>{children}</body>
     </html>
   );
 }

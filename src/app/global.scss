@@ -18,9 +18,25 @@ html {
   --cursor-color: #fff;
 }
 
+p, h1, h2 {
+  font-weight: 300 !important;
+}
+
 p.lead {
-  font-size: 16px !important;
-  font-weight: 300;
+  font-size: 16px; // Default font size for small screens
+
+  @media (min-width: 768px) {
+    // This is a common breakpoint for larger screens
+    font-size: 20px; // Font size for screens wider than 768px
+  }
+}
+
+h1 {
+  display: inline-block;
+  font-size: 1.5em;
+  @media (min-width: 768px) {
+    font-size: 2.5em; // Font size for screens wider than 768px
+  }
 }
 
 b {
@@ -42,12 +58,17 @@ b {
 
 @keyframes textShine {
   0% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
   100% {
-      background-position: 100% 50%;
+    background-position: 100% 50%;
   }
 }
+
+.semi-transparent {
+  background-color: rgba(0, 0, 0, 0.75); /* Black with 50% transparency */
+}
+
 
 // required imports
 @import "~bootstrap/scss/functions";
