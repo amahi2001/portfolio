@@ -251,7 +251,7 @@ export default function Home() {
             <Row>
               <Col>
                 <Fade cascade>
-                  <p className="lead" id="prof_sum">
+                  <p className="lead">
                     👶🏽 As a child, I was the kid who dismantled toys to marvel
                     at their circuits—my first foray into a lifelong fascination
                     with technology.
