@@ -39,7 +39,6 @@ export default function Home() {
   const [showAnimatedText, setShowAnimatedText] = useState(false);
   const [showDesc, setShowDesc] = useState(false);
 
-  const [showOffcanvas, setShowOffcanvas] = useState(false);
   return (
     <Fragment>
       <Parallax pages={2} ref={parallax} enabled={production ? showDesc : true}>
