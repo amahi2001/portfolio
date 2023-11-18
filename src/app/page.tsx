@@ -253,7 +253,7 @@ export default function Home() {
                 </Row>
               </Fade>
 
-              <Row>
+              <Row className="mb-4">
                 <Col>
                   <Fade cascade>
                     <p className="lead">
