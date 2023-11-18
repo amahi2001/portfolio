@@ -65,6 +65,7 @@ export default function Home() {
             <Navbar.Toggle
               aria-controls="offcanvasNavbar-expand-lg"
               className="me-auto"
+              disabled={!showDesc}
             />
           </BSFade>
 
@@ -80,7 +81,7 @@ export default function Home() {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body className="me-auto">
-              <BSFade in={production && showDesc}>
+              <BSFade in={production ? showDesc : true}>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <Nav.Link href="#action1">Home</Nav.Link>
                   <Nav.Link href="#action2">Link</Nav.Link>
@@ -135,7 +136,6 @@ export default function Home() {
                     ]}
                     wrapper="h1"
                     speed={40}
-                    repeat={1}
                     preRenderFirstString={showAnimatedText}
                   />
                 </Col>
@@ -167,14 +167,12 @@ export default function Home() {
                       ]}
                       wrapper="h2"
                       speed={45}
-                      deletionSpeed={75}
-                      // preRenderFirstString
+                      deletionSpeed={90}
                       style={{
                         fontSize: "1.5em",
                         fontWeight: "300",
                         display: "inline-block",
                       }}
-                      // repeat={Infinity}
                     />
                   </Col>
                 </Row>
