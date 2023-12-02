@@ -43,10 +43,10 @@ b {
   font-weight: 500 !important;
   background: linear-gradient(
     to right,
-    #7953cd 20%,
-    #00affa 30%,
-    #0190cd 70%,
-    #764ada 80%
+    #f9d423 20%,  /* a vivid yellow */
+    #ff4e50 30%,  /* a bright red */
+    #f9b32f 70%,  /* a warm orange */
+    #f76b1c 80%   /* a deep orange */
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -82,7 +82,7 @@ b {
 @import "~bootstrap/scss/mixins";
 
 //overriding Bootstrap variables
-$light: #a8b7cb;
+// $light: #a8b7cb;
 $theme-colors: (
   "light": $light,
 );

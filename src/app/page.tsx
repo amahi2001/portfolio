@@ -23,6 +23,7 @@ const images = {
   headshot: "headshot.jpeg",
   space: "stars.jpeg",
   stars: "stars.jpg",
+  vector: "vector.webp",
 };
 
 const links = {
@@ -52,7 +53,7 @@ export default function Home() {
           speed={0}
           factor={2}
           style={{
-            backgroundImage: `url(${images.stars})`,
+            backgroundImage: `url(${images.vector})`,
             backgroundSize: "cover",
           }}
         />
