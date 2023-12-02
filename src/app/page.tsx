@@ -129,7 +129,11 @@ export default function Home() {
               justifyContent: "center",
             }}
           >
-            <Container>
+            <Container
+              style={{
+                height: "100dvh",
+              }}
+            >
               {/* Name and Greeting */}
               <Fade cascade>
                 <Row className="name-row">
