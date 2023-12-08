@@ -107,6 +107,8 @@ export default function Home() {
               </BSFade>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
+          {/* //todo: remove this for production */}
+          <p className="text-wrap text-center">🚧 Under Construction 🚧</p>
 
           {/* github and linkedin icons */}
           <Navbar.Brand target="_blank" href={links.github}>
