@@ -1,4 +1,4 @@
-$highlight-color: #f700ff;
+$highlight-color: #6b6c67;
 
 /* when highlighting text */
 ::-moz-selection {
@@ -18,7 +18,9 @@ html {
   --cursor-color: #fff;
 }
 
-p, h1, h2 {
+p,
+h1,
+h2 {
   font-weight: 300 !important;
 }
 
@@ -42,11 +44,11 @@ h1 {
 b {
   font-weight: 500 !important;
   background: linear-gradient(
-    to right,
-    #f9d423 20%,  /* a vivid yellow */
-    #ff4e50 30%,  /* a bright red */
-    #f9b32f 70%,  /* a warm orange */
-    #f76b1c 80%   /* a deep orange */
+    to left,
+    #f9d423 20%,
+    /* a vivid yellow */ #ff4e50 30%,
+    /* a bright red */ #f9b32f 70%,
+    /* a warm orange */ #f76b1c 80% /* a deep orange */
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -66,25 +68,49 @@ b {
 }
 
 .semi-transparent {
-  background-color: rgba(0, 0, 0, 0.65); /* Black with 50% transparency */
+  background-color: rgba(6, 43, 35, 0.65); /* Black with 50% transparency */
 }
 
-.name-row{
+.name-row {
   margin-top: 10% !important;
   @media (max-width: 800px) {
     margin-top: 25% !important;
   }
 }
 
-// required imports
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
+//!vars
+$light: #d6d9ce;
+$success: #a5ab93;
 
 //overriding Bootstrap variables
 // $light: #a8b7cb;
+// Required
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/maps";
+
 $theme-colors: (
   "light": $light,
+  "success": $success,
 );
-
+// required imports
 @import "~bootstrap/scss/bootstrap.scss";
+
+.work-link {
+  @extend .border-start;
+  @extend .text-light;
+  &:focus {
+    border-color: $cyan-600 !important;
+    @extend .border-3;
+    @extend .bg-opacity-10;
+    @extend .bg-primary;
+  }
+  &:hover {
+    border-color: $cyan-100 !important;
+    @extend .border-3;
+    @extend .bg-opacity-10;
+    @extend .bg-primary;
+  }
+}

@@ -1,29 +1,31 @@
 "use client";
+//react-bootstrap
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import Tab from "react-bootstrap/Tab";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { default as BSFade } from "react-bootstrap/Fade";
 import Container from "react-bootstrap/Container";
-import AnimatedCursor from "react-animated-cursor";
 import { Image } from "react-bootstrap";
+// other component libraries
+import AnimatedCursor from "react-animated-cursor";
 import { TypeAnimation } from "react-type-animation";
-import { useRef, useState } from "react";
+import { Fade } from "react-awesome-reveal";
+import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
+//hooks
 import { useMediaQuery } from "react-responsive";
-import { Fade } from "react-awesome-reveal";
 import useStorage from "@/hooks/useStorage";
+//react
+import { useRef, useState } from "react";
 
 const images = {
   headshot: "headshot.jpeg",
-  space: "stars.jpeg",
-  stars: "stars.jpg",
-  vector: "vector.webp",
 };
 
 const links = {
@@ -46,15 +48,19 @@ export default function Home() {
 
   return (
     <main>
-      <Parallax pages={2} ref={parallax} enabled={production ? showDesc : true}>
+      <Parallax pages={3} ref={parallax} enabled={production ? showDesc : true}>
         {/* space background */}
         <ParallaxLayer
           offset={0}
           speed={0}
-          factor={2}
+          factor={3}
           style={{
-            backgroundImage: `url(${images.vector})`,
+            background: "linear-gradient(to left top, #000000, #073027)",
+            // backgroundImage: `url(${images.pastel})`,
             backgroundSize: "cover",
+            backgroundPosition: "right",
+            //zoom
+            // transform: "scale(0.5)",
           }}
         />
 
@@ -200,7 +206,7 @@ export default function Home() {
                 onEntering={() => parallax.current.scrollTo(0.1)}
               >
                 <Row className="mt-4 justify-content-center">
-                  <Col md={8} className="text-left">
+                  <Col md={8} className="text-left border-start">
                     <p className="lead">
                       As a full-stack engineer with a keen eye for the cutting
                       edge, I pride myself on being a jack of all trades in the
@@ -247,14 +253,18 @@ export default function Home() {
         <ParallaxLayer
           offset={1}
           speed={0.5}
-          onClick={() => parallax.current.scrollTo(0)}
+          onClick={() => parallax.current.scrollTo(2)}
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <Container>
+          <Container
+            style={{
+              height: "100dvh",
+            }}
+          >
             <Fade>
               <Row className="mb-4">
                 <Col className="text-center">
@@ -263,8 +273,8 @@ export default function Home() {
               </Row>
             </Fade>
 
-            <Row className="mb-4">
-              <Col>
+            <Row className="mb-4 justify-content-center">
+              <Col md={8} className="border-start">
                 <Fade cascade>
                   <p className="lead">
                     👶🏽 As a child, I was the kid who dismantled toys to marvel
@@ -298,6 +308,59 @@ export default function Home() {
                   </p>
                 </Fade>
               </Col>
+            </Row>
+          </Container>
+        </ParallaxLayer>
+
+        {/* Third Layer */}
+        <ParallaxLayer
+          offset={2}
+          speed={0.5}
+          // onClick={() => parallax.current.scrollTo(0)}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Container
+            style={{
+              height: "100dvh",
+            }}
+          >
+            <Fade>
+              <Row className="mb-4">
+                <Col className="text-center">
+                  <h2>Where I&apos;ve worked</h2>
+                </Col>
+              </Row>
+            </Fade>
+
+            <Row className="mb-4">
+              <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                <Row>
+                  <Col sm={3}>
+                    <Nav className="flex-column">
+                      <Nav.Item>
+                        <Nav.Link className="work-link" eventKey="first">
+                          Tab 1
+                        </Nav.Link>
+                      </Nav.Item>
+                      <Nav.Item>
+                        <Nav.Link className="work-link" eventKey="second">
+                          Tab 2
+                        </Nav.Link>
+                      </Nav.Item>
+                    </Nav>
+                  </Col>
+                  <Col sm={9}>
+                    <Tab.Content>
+                      <Tab.Pane eventKey="first">First tab content</Tab.Pane>
+                      <Tab.Pane eventKey="second">Second tab content</Tab.Pane>
+                    </Tab.Content>
+                  </Col>
+                </Row>
+              </Tab.Container>
             </Row>
           </Container>
         </ParallaxLayer>
