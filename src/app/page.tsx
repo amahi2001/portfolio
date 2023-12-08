@@ -108,7 +108,11 @@ export default function Home() {
             </Offcanvas.Body>
           </Navbar.Offcanvas>
           {/* //todo: remove this for production */}
-          <p className="text-wrap text-center">🚧 Under Construction 🚧</p>
+          <Col xs={6} className="mx-auto">
+            <Navbar.Brand className="text-wrap">
+              🚧 Under Construction 🚧
+            </Navbar.Brand>
+          </Col>
 
           {/* github and linkedin icons */}
           <Navbar.Brand target="_blank" href={links.github}>
