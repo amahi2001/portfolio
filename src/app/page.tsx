@@ -23,7 +23,8 @@ import useStorage from "@/hooks/useStorage";
 import headshot from "@assets/headshot.jpeg";
 //components
 import Fishes from "@/app/components/Fishes";
-import Cursor from "@/app/components/Cursor";
+import dynamic from 'next/dynamic';
+
 import { BriefIntro, MoreAboutMe } from "./components/Content";
 //react & next
 import { useRef, useState, useEffect } from "react";
@@ -34,10 +35,15 @@ const links = {
   github: "https://github.com/amahi2001",
 };
 
+const Cursor = dynamic(
+  () => import('@/app/components/Cursor'),
+  { ssr: false } // This will load the component client side only
+);
+
 export default function Home() {
   const { getItem, setItem } = useStorage();
-  const production = process.env.NODE_ENV === "production";
-  // const production = true; //TODO: remove this for production
+  // const production = process.env.NODE_ENV === "production";
+  const production = true; //TODO: remove this for production
   // max width of 800px and height of 600px
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
   const parallax = useRef<IParallax>(null!);
@@ -117,9 +123,7 @@ export default function Home() {
           </Navbar.Offcanvas>
           {/* //todo: remove this for production */}
           <Col xs={6} className="mx-auto text-wrap">
-            <Navbar.Brand>
-              🚧 Under Construction 🚧
-            </Navbar.Brand>
+            <Navbar.Brand>🚧 Under Construction 🚧</Navbar.Brand>
           </Col>
 
           {/* github and linkedin icons */}
@@ -205,12 +209,10 @@ export default function Home() {
                   </Col>
                 </Row>
               </BSFade>
-              <BSFade
+              <BriefIntro
                 in={production ? showDesc : true}
                 onEntering={() => parallax.current.scrollTo(0.1)}
-              >
-                <BriefIntro />
-              </BSFade>
+              />
               <BSFade in={showDesc}>
                 <Row className="mt-4">
                   <Col className="text-center">
