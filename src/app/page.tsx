@@ -10,7 +10,6 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { default as BSFade } from "react-bootstrap/Fade";
 import Container from "react-bootstrap/Container";
-import { Image } from "react-bootstrap";
 // other component libraries
 import AnimatedCursor from "react-animated-cursor";
 import { TypeAnimation } from "react-type-animation";
@@ -21,12 +20,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //hooks
 import { useMediaQuery } from "react-responsive";
 import useStorage from "@/hooks/useStorage";
-//react
+//images
+import headshot from "@assets/headshot.jpeg";
+import fishLeft from "@assets/fish-left.png";
+import fishRight from "@assets/fish-right.png";
+import shark from "@assets/shark.png";
+// import squid from "@assets/squid.png";
+//react & next 
 import { useRef, useState } from "react";
+import Image from "next/image";
 
-const images = {
-  headshot: "headshot.jpeg",
-};
 
 const links = {
   linkedIn: "https://www.linkedin.com/in/abrarmahi/",
@@ -49,19 +52,12 @@ export default function Home() {
   return (
     <main>
       <Parallax pages={3} ref={parallax} enabled={production ? showDesc : true}>
-        {/* space background */}
+        {/* background layer */}
         <ParallaxLayer
+          className="parallax-bg"
           offset={0}
           speed={0}
           factor={3}
-          style={{
-            background: "linear-gradient(to left top, #000000, #073027)",
-            // backgroundImage: `url(${images.pastel})`,
-            backgroundSize: "cover",
-            backgroundPosition: "right",
-            //zoom
-            // transform: "scale(0.5)",
-          }}
         />
 
         {/* LinkedIn and Github links at top */}
@@ -129,6 +125,16 @@ export default function Home() {
           </Navbar.Brand>
         </Navbar>
 
+        <ParallaxLayer className="fish-layer-left" offset={1.3} speed={-0.2}>
+          <Image className="fish-left" src={fishLeft} alt="fish" />
+        </ParallaxLayer>
+        <ParallaxLayer className="fish-layer-right" offset={2.3} speed={-0.3}>
+          <Image className="fish-right" src={fishRight} alt="fish" />
+        </ParallaxLayer>
+        <ParallaxLayer className="shark-layer" offset={1.5} speed={-0.4}>
+          <Image className="shark" src={shark} alt="shark" />
+        </ParallaxLayer>
+
         {/* First Page, HeadShot + type animation */}
         <ParallaxLayer
           onClick={() => showDesc && parallax.current.scrollTo(1)}
@@ -165,10 +171,9 @@ export default function Home() {
               <Row className="my-4">
                 <Col className="text-center m-auto">
                   <Image
+                    className="img-fluid rounded-circle"
+                    src={headshot}
                     alt="Abrar's headshot"
-                    src={images.headshot}
-                    roundedCircle
-                    fluid
                     style={{ maxWidth: "30%", maxHeight: "30%" }}
                   />
                 </Col>
@@ -336,31 +341,35 @@ export default function Home() {
               </Row>
             </Fade>
 
-            <Row className="mb-4">
-              <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                <Row>
-                  <Col sm={3}>
-                    <Nav className="flex-column">
-                      <Nav.Item>
-                        <Nav.Link className="work-link" eventKey="first">
-                          Tab 1
-                        </Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link className="work-link" eventKey="second">
-                          Tab 2
-                        </Nav.Link>
-                      </Nav.Item>
-                    </Nav>
-                  </Col>
-                  <Col sm={9}>
-                    <Tab.Content>
-                      <Tab.Pane eventKey="first">First tab content</Tab.Pane>
-                      <Tab.Pane eventKey="second">Second tab content</Tab.Pane>
-                    </Tab.Content>
-                  </Col>
-                </Row>
-              </Tab.Container>
+            <Row className="mb-4 justify-content-center">
+              <Col md={8}>
+                <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                  <Row>
+                    <Col sm={3}>
+                      <Nav className="flex-column">
+                        <Nav.Item>
+                          <Nav.Link className="work-link" eventKey="first">
+                            Tab 1
+                          </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                          <Nav.Link className="work-link" eventKey="second">
+                            Tab 2
+                          </Nav.Link>
+                        </Nav.Item>
+                      </Nav>
+                    </Col>
+                    <Col sm={9}>
+                      <Tab.Content>
+                        <Tab.Pane eventKey="first">First tab content</Tab.Pane>
+                        <Tab.Pane eventKey="second">
+                          Second tab content
+                        </Tab.Pane>
+                      </Tab.Content>
+                    </Col>
+                  </Row>
+                </Tab.Container>
+              </Col>
             </Row>
           </Container>
         </ParallaxLayer>
