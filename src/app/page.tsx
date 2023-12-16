@@ -173,6 +173,7 @@ export default function Home() {
                   <Image
                     className="img-fluid rounded-circle"
                     src={headshot}
+                    priority
                     alt="Abrar's headshot"
                     style={{ maxWidth: "30%", maxHeight: "30%" }}
                   />
