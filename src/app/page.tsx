@@ -23,7 +23,7 @@ import useStorage from "@/hooks/useStorage";
 import headshot from "@assets/headshot.jpeg";
 //components
 import Fishes from "@/app/components/Fishes";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
 import { BriefIntro, MoreAboutMe } from "./components/Content";
 //react & next
@@ -36,14 +36,14 @@ const links = {
 };
 
 const Cursor = dynamic(
-  () => import('@/app/components/Cursor'),
+  () => import("@/app/components/Cursor"),
   { ssr: false } // This will load the component client side only
 );
 
 export default function Home() {
   const { getItem, setItem } = useStorage();
-  // const production = process.env.NODE_ENV === "production";
-  const production = true; //TODO: remove this for production
+  const production = process.env.NODE_ENV === "production";
+  // const production = true; //TODO: remove this for production
   // max width of 800px and height of 600px
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
   const parallax = useRef<IParallax>(null!);
@@ -80,7 +80,8 @@ export default function Home() {
           className="semi-transparent"
         >
           {/* toggle for mobile view */}
-          <BSFade in={showDesc}>
+          {/* //Todo : display this after done for production */}
+          <BSFade in={showDesc && !production}>
             <Navbar.Toggle
               aria-controls="offcanvasNavbar-expand-lg"
               className="me-auto"
@@ -89,40 +90,46 @@ export default function Home() {
           </BSFade>
 
           {/* navbar menu, offcanvas in mobile/tablet view */}
-          <Navbar.Offcanvas
-            id="offcanvasNavbar-expand-lg"
-            aria-labelledby="offcanvasNavbarLabel-expand-lg"
-            placement="start"
-          >
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title id="offcanvasNavbarLabel-expand-lg">
-                Offcanvas
-              </Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body className="me-auto">
-              <BSFade in={production ? showDesc : true}>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link href="#action1">Home</Nav.Link>
-                  <Nav.Link href="#action2">Link</Nav.Link>
-                  <NavDropdown
-                    title="Dropdown"
-                    id="offcanvasNavbarDropdown-expand-lg"
-                  >
-                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
-                      Another action
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">
-                      Something else here
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </Nav>
-              </BSFade>
-            </Offcanvas.Body>
-          </Navbar.Offcanvas>
+          {/* //Todo : display this after done for production */}
+          {!production && (
+            <Navbar.Offcanvas
+              id="offcanvasNavbar-expand-lg"
+              aria-labelledby="offcanvasNavbarLabel-expand-lg"
+              placement="start"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id="offcanvasNavbarLabel-expand-lg">
+                  Offcanvas
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body className="me-auto">
+                <BSFade in={production ? showDesc : true}>
+                  <Nav className="justify-content-end flex-grow-1 pe-3">
+                    <Nav.Link href="#action1">Home</Nav.Link>
+                    <Nav.Link href="#action2">Link</Nav.Link>
+                    <NavDropdown
+                      title="Dropdown"
+                      id="offcanvasNavbarDropdown-expand-lg"
+                    >
+                      <NavDropdown.Item href="#action3">
+                        Action
+                      </NavDropdown.Item>
+                      <NavDropdown.Item href="#action4">
+                        Another action
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item href="#action5">
+                        Something else here
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </Nav>
+                </BSFade>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          )}
+
           {/* //todo: remove this for production */}
-          <Col xs={6} className="mx-auto text-wrap">
+          <Col xs={6} className="ms-auto text-wrap">
             <Navbar.Brand>🚧 Under Construction 🚧</Navbar.Brand>
           </Col>
 
