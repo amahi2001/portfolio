@@ -4,6 +4,10 @@ $primary-color: #00916e;
 $dark-color: #000000;
 $nav-color: #003d2f; //should be darker
 $light: #ddfbd2; //text is light
+:root {
+  --cursor-color: #{$light};
+}
+
 
 //! parallax background
 .parallax-bg {

@@ -11,7 +11,6 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { default as BSFade } from "react-bootstrap/Fade";
 import Container from "react-bootstrap/Container";
 // other component libraries
-import AnimatedCursor from "react-animated-cursor";
 import { TypeAnimation } from "react-type-animation";
 import { Fade } from "react-awesome-reveal";
 import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
@@ -22,14 +21,13 @@ import { useMediaQuery } from "react-responsive";
 import useStorage from "@/hooks/useStorage";
 //images
 import headshot from "@assets/headshot.jpeg";
-import fishLeft from "@assets/fish-left.png";
-import fishRight from "@assets/fish-right.png";
-import shark from "@assets/shark.png";
-// import squid from "@assets/squid.png";
-//react & next 
-import { useRef, useState } from "react";
+//components
+import Fishes from "@/app/components/Fishes";
+import Cursor from "@/app/components/Cursor";
+import { BriefIntro, MoreAboutMe } from "./components/Content";
+//react & next
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-
 
 const links = {
   linkedIn: "https://www.linkedin.com/in/abrarmahi/",
@@ -44,10 +42,18 @@ export default function Home() {
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
   const parallax = useRef<IParallax>(null!);
   //shows animated text below the headshot
-  const [showAnimatedText, setShowAnimatedText] = useState(
-    getItem("desc_loaded") === "true"
-  );
-  const [showDesc, setShowDesc] = useState(getItem("desc_loaded") === "true");
+  const [showAnimatedText, setShowAnimatedText] = useState(false);
+  const [showDesc, setShowDesc] = useState(false);
+
+  useEffect(() => {
+    //check if the description has been loaded before
+    const descLoaded = getItem("desc_loaded");
+    if (descLoaded) {
+      setShowAnimatedText(true);
+      setShowDesc(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main>
@@ -60,7 +66,7 @@ export default function Home() {
           factor={3}
         />
 
-        {/* LinkedIn and Github links at top */}
+        {/* Navbar */}
         <Navbar
           expand="lg"
           sticky="top"
@@ -110,8 +116,8 @@ export default function Home() {
             </Offcanvas.Body>
           </Navbar.Offcanvas>
           {/* //todo: remove this for production */}
-          <Col xs={6} className="mx-auto">
-            <Navbar.Brand className="text-wrap">
+          <Col xs={6} className="mx-auto text-wrap">
+            <Navbar.Brand>
               🚧 Under Construction 🚧
             </Navbar.Brand>
           </Col>
@@ -125,16 +131,8 @@ export default function Home() {
           </Navbar.Brand>
         </Navbar>
 
-        <ParallaxLayer className="fish-layer-left" offset={1.3} speed={-0.2}>
-          <Image className="fish-left" src={fishLeft} alt="fish" />
-        </ParallaxLayer>
-        <ParallaxLayer className="fish-layer-right" offset={2.3} speed={-0.3}>
-          <Image className="fish-right" src={fishRight} alt="fish" />
-        </ParallaxLayer>
-        <ParallaxLayer className="shark-layer" offset={1.5} speed={-0.4}>
-          <Image className="shark" src={shark} alt="shark" />
-        </ParallaxLayer>
-
+        {/* Fishes */}
+        <Fishes />
         {/* First Page, HeadShot + type animation */}
         <ParallaxLayer
           onClick={() => showDesc && parallax.current.scrollTo(1)}
@@ -152,8 +150,8 @@ export default function Home() {
           >
             {/* Name and Greeting */}
             <Fade cascade>
-              <Row className="name-row">
-                <Col className="text-center">
+              <Row className="name-row text-center">
+                <Col>
                   <TypeAnimation
                     cursor={false}
                     sequence={[
@@ -211,32 +209,7 @@ export default function Home() {
                 in={production ? showDesc : true}
                 onEntering={() => parallax.current.scrollTo(0.1)}
               >
-                <Row className="mt-4 justify-content-center">
-                  <Col md={8} className="text-left border-start">
-                    <p className="lead">
-                      As a full-stack engineer with a keen eye for the cutting
-                      edge, I pride myself on being a jack of all trades in the
-                      tech world. Armed with a diverse skill set from C++ to
-                      Python, and JavaScript to Dart, I&apos;ve crafted
-                      responsive interfaces and robust back-ends using
-                      frameworks like <b>Django, React, and Flutter</b>.
-                    </p>
-                    <p className="lead">
-                      At the heart of my approach is a relentless pursuit of the
-                      newest technologies and best practices, ensuring that
-                      every line of code not only solves a problem but also
-                      pushes the envelope of what&apos;s possible.
-                    </p>
-                    <p className="lead">
-                      My tenure at <b>The New York Public Library</b> and
-                      Internship at <b>NASA</b> underscore my adaptability and
-                      dedication. Whether it&apos;s implementing CI/CD pipelines
-                      or enhancing satellite data frameworks, my experience is a
-                      testament to my capability to not just navigate but excel
-                      in the ever-evolving landscape of software development.
-                    </p>
-                  </Col>
-                </Row>
+                <BriefIntro />
               </BSFade>
               <BSFade in={showDesc}>
                 <Row className="mt-4">
@@ -281,38 +254,7 @@ export default function Home() {
 
             <Row className="mb-4 justify-content-center">
               <Col md={8} className="border-start">
-                <Fade cascade>
-                  <p className="lead">
-                    👶🏽 As a child, I was the kid who dismantled toys to marvel
-                    at their circuits—my first foray into a lifelong fascination
-                    with technology.
-                  </p>
-                  <p className="lead">
-                    🧑🏾 By my teens, I was assembling PCs from cast-off parts and
-                    scripting in Python, laying the groundwork for a future in
-                    software development. That future took shape after a pivotal
-                    summer at NYU Tandon&apos;s STEM program, where robotics
-                    turned my code into kinetic energy and set my course.
-                  </p>
-                  <p className="lead">
-                    👨🏾‍💻 Today, I&apos;m immersed in building and leading projects
-                    that leverage React, Python and Google Cloud and beyond,
-                    turning complex challenges into elegant solutions. My
-                    professional journey has been a rich tapestry of
-                    experiences, from developing Python frameworks for NASA to
-                    engineering full-stack solutions for The New York Public
-                    Library. Each role has honed my ability to not just write
-                    code, but to solve problems and lead projects that make a
-                    tangible impact.
-                  </p>
-                  <p className="lead">
-                    👨🏾‍🔬 Away from the screen, I&apos;m an explorer at heart,
-                    whether it&apos;s contributing to tech forums, immersing
-                    myself in the worlds of soccer and martial arts, or simply
-                    enjoying the quest for knowledge in the evolving landscape
-                    of technology.
-                  </p>
-                </Fade>
+                <MoreAboutMe />
               </Col>
             </Row>
           </Container>
@@ -334,63 +276,53 @@ export default function Home() {
               height: "100dvh",
             }}
           >
-            <Fade>
+            <Fade cascade>
               <Row className="mb-4">
                 <Col className="text-center">
                   <h2>Where I&apos;ve worked</h2>
                 </Col>
               </Row>
-            </Fade>
 
-            <Row className="mb-4 justify-content-center">
-              <Col md={8}>
-                <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                  <Row>
-                    <Col sm={3}>
-                      <Nav className="flex-column">
-                        <Nav.Item>
-                          <Nav.Link className="work-link" eventKey="first">
-                            Tab 1
-                          </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                          <Nav.Link className="work-link" eventKey="second">
-                            Tab 2
-                          </Nav.Link>
-                        </Nav.Item>
-                      </Nav>
-                    </Col>
-                    <Col sm={9}>
-                      <Tab.Content>
-                        <Tab.Pane eventKey="first">First tab content</Tab.Pane>
-                        <Tab.Pane eventKey="second">
-                          Second tab content
-                        </Tab.Pane>
-                      </Tab.Content>
-                    </Col>
-                  </Row>
-                </Tab.Container>
-              </Col>
-            </Row>
+              <Row className="mb-4 justify-content-center">
+                <Col md={8}>
+                  <Tab.Container
+                    id="left-tabs-example"
+                    defaultActiveKey="first"
+                  >
+                    <Row>
+                      <Col sm={3}>
+                        <Nav className="flex-column">
+                          <Nav.Item>
+                            <Nav.Link className="work-link" eventKey="first">
+                              Tab 1
+                            </Nav.Link>
+                          </Nav.Item>
+                          <Nav.Item>
+                            <Nav.Link className="work-link" eventKey="second">
+                              Tab 2
+                            </Nav.Link>
+                          </Nav.Item>
+                        </Nav>
+                      </Col>
+                      <Col sm={9}>
+                        <Tab.Content>
+                          <Tab.Pane eventKey="first">
+                            First tab content
+                          </Tab.Pane>
+                          <Tab.Pane eventKey="second">
+                            Second tab content
+                          </Tab.Pane>
+                        </Tab.Content>
+                      </Col>
+                    </Row>
+                  </Tab.Container>
+                </Col>
+              </Row>
+            </Fade>
           </Container>
         </ParallaxLayer>
       </Parallax>
-      {production && !isMobile && (
-        <AnimatedCursor
-          innerSize={8}
-          outerSize={35}
-          innerScale={1}
-          outerScale={2}
-          outerAlpha={0}
-          // hasBlendMode={true}
-          innerStyle={{
-            backgroundColor: "var(--cursor-color)",
-          }}
-          outerStyle={{
-            border: "3px solid var(--cursor-color)",
-          }}
-        />
-      )}
+      <Cursor show={production && !isMobile} />
     </main>
   );
 }
