@@ -1,6 +1,8 @@
 import "./global.scss";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+
 const nunito = Nunito({
   weight: ["300", "400", "500", "700"],
   subsets: ["latin"],
@@ -19,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`text-light ${nunito.className}`}>{children}</body>
+      <Analytics />
     </html>
   );
 }
