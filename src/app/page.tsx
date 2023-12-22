@@ -5,7 +5,6 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Tab from "react-bootstrap/Tab";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { default as BSFade } from "react-bootstrap/Fade";
@@ -23,6 +22,7 @@ import useStorage from "@/hooks/useStorage";
 import headshot from "@assets/headshot.jpeg";
 //components
 import Fishes from "@/app/components/Fishes";
+import Jobs from "@/app/components/Jobs";
 import dynamic from "next/dynamic";
 
 import { BriefIntro, MoreAboutMe } from "./components/Content";
@@ -292,41 +292,7 @@ export default function Home() {
                 </Col>
               </Row>
 
-              <Row className="mb-4 justify-content-center">
-                <Col md={8}>
-                  <Tab.Container
-                    id="left-tabs-example"
-                    defaultActiveKey="first"
-                  >
-                    <Row>
-                      <Col sm={3}>
-                        <Nav className="flex-column">
-                          <Nav.Item>
-                            <Nav.Link className="work-link" eventKey="first">
-                              Tab 1
-                            </Nav.Link>
-                          </Nav.Item>
-                          <Nav.Item>
-                            <Nav.Link className="work-link" eventKey="second">
-                              Tab 2
-                            </Nav.Link>
-                          </Nav.Item>
-                        </Nav>
-                      </Col>
-                      <Col sm={9}>
-                        <Tab.Content>
-                          <Tab.Pane eventKey="first">
-                            First tab content
-                          </Tab.Pane>
-                          <Tab.Pane eventKey="second">
-                            Second tab content
-                          </Tab.Pane>
-                        </Tab.Content>
-                      </Col>
-                    </Row>
-                  </Tab.Container>
-                </Col>
-              </Row>
+              <Jobs />
             </Fade>
           </Container>
         </ParallaxLayer>

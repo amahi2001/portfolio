@@ -143,6 +143,15 @@ b {
   }
 }
 
+//!job icons
+.job-icon {
+  //desktop
+  @media (min-width: 768px) {
+    // opacity: 0.5;
+  }
+  margin-bottom: 5px;
+}
+
 //overriding Bootstrap variables
 // $light: #a8b7cb;
 // Required
