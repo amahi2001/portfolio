@@ -15,7 +15,7 @@ export default function Cursor({ show }: { show: boolean }): React.ReactNode {
           backgroundColor: "var(--cursor-color)",
         }}
         outerStyle={{
-          border: "3px solid var(--cursor-color)",
+          border: "2px solid var(--cursor-color)",
         }}
       />
     );
