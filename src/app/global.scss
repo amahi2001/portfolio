@@ -55,10 +55,7 @@ $light: #ddfbd2; //text is light
 .shark {
   width: 30vh;
   height: 30vh;
-  opacity: 0.2;
-  @media (min-width: 768px) {
-    opacity: 0.175;
-  }
+  opacity: 0.175;
 }
 
 .shark-layer {
