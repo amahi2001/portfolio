@@ -2,7 +2,6 @@ import "./global.scss";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const nunito = Nunito({
   weight: ["300", "400", "500", "700"],
@@ -23,7 +22,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`text-light ${nunito.className}`}>{children}</body>
       <Analytics />
-      <SpeedInsights />
     </html>
   );
 }

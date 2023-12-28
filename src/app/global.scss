@@ -2,12 +2,11 @@
 $cursor-highlight-color: #003d2f;
 $primary-color: #23afd1;
 $dark-color: #000000;
-$nav-color: #15667A; //should be darker
+$nav-color: #15667a; //should be darker
 $light: #ddfbd2; //text is light
 :root {
   --cursor-color: #{$light};
 }
-
 
 //! parallax background
 .parallax-bg {
@@ -129,8 +128,19 @@ b {
   }
 }
 
+//! effects
 .semi-transparent {
   background-color: rgba($nav-color, 0.65); //dark green with 65% opacity
+}
+
+.glass-morph {
+  background: rgba(255, 255, 255, 0.01);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  @extend .p-4; 
 }
 
 .name-row {
@@ -166,17 +176,18 @@ $theme-colors: (
 @import "~bootstrap/scss/bootstrap.scss";
 
 .work-link {
-  @extend .border-start;
+  // @extend .border-start;
   @extend .text-light;
+  @extend .rounded-pill;
   &:focus {
     border-color: $cyan-600 !important;
-    @extend .border-3;
+    // @extend .border-3;
     @extend .bg-opacity-10;
     @extend .bg-primary;
   }
   &:hover {
     border-color: $cyan-100 !important;
-    @extend .border-3;
+    // @extend .border-3;
     @extend .bg-opacity-10;
     @extend .bg-primary;
   }

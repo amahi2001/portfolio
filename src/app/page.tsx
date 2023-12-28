@@ -25,7 +25,7 @@ import Fishes from "@/app/components/Fishes";
 import Jobs from "@/app/components/Jobs";
 import dynamic from "next/dynamic";
 
-import { BriefIntro, MoreAboutMe } from "./components/Content";
+import { BriefIntro, MoreAboutMe } from "@/app/components/Content";
 //react & next
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
@@ -261,14 +261,9 @@ export default function Home() {
               </Row>
             </Fade>
 
-            <Row className="mb-4 justify-content-center">
-              <Col md={8} className="border-start">
-                <MoreAboutMe />
-              </Col>
-            </Row>
+            <MoreAboutMe />
           </Container>
         </ParallaxLayer>
-
         {/* Third Layer */}
         <ParallaxLayer
           offset={2}

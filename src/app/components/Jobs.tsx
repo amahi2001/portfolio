@@ -13,7 +13,7 @@ export default function Jobs(): JSX.Element {
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row>
             <Col sm={3}>
-              <Nav className="flex-column">
+              <Nav className="flex-column glass-morph border-start" defaultActiveKey="first" justify>
                 <Nav.Item>
                   <Nav.Link className="work-link" eventKey="first">
                     <Image
@@ -53,7 +53,7 @@ export default function Jobs(): JSX.Element {
               </Nav>
             </Col>
             <Col sm={9}>
-              <Tab.Content>
+              <Tab.Content className="glass-morph">
                 <Tab.Pane eventKey="first">...</Tab.Pane>
                 <Tab.Pane eventKey="second">...</Tab.Pane>
                 <Tab.Pane eventKey="third">...</Tab.Pane>
