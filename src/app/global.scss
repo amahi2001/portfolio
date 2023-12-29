@@ -27,7 +27,8 @@ $light: #ddfbd2; //text is light
   display: flex;
 }
 
-//! fish parallax
+//***************FISHES*****************
+//fish parallax
 .fish-left,
 .fish-right {
   width: 30vh;
@@ -50,7 +51,7 @@ $light: #ddfbd2; //text is light
   justify-content: right;
 }
 
-//! shark parallax
+// shark parallax
 .shark {
   width: 30vh;
   height: 30vh;
@@ -60,8 +61,11 @@ $light: #ddfbd2; //text is light
 .shark-layer {
   justify-content: center;
 }
+//****************************************
 
-//! when highlighting text
+
+//*************************CURSOR***********************
+// when highlighting text
 ::-moz-selection {
   background: $cursor-highlight-color;
 }
@@ -78,6 +82,7 @@ $light: #ddfbd2; //text is light
 html {
   --cursor-color: #fff;
 }
+//*****************************************************
 
 p,
 h1,
@@ -136,6 +141,8 @@ b {
   ) !important; //dark green with 65% opacity
 }
 
+
+
 //! glass morph
 $glass-background: rgba(255, 255, 255, 0.01);
 $glass-border: rgba(255, 255, 255, 0.3);
@@ -149,7 +156,7 @@ $glass-blur-filter: blur(5px);
   box-shadow: $glass-box-shadow;
   -webkit-backdrop-filter: $glass-blur-filter;
   backdrop-filter: $glass-blur-filter;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid $glass-border;
   @extend .p-4;
 }
 
@@ -160,48 +167,20 @@ $glass-blur-filter: blur(5px);
   }
 }
 
-//!job icons!-**********************
-.job-icon {
-  //desktop
-  @media (min-width: 768px) {
-    // opacity: 0.5;
-  }
-  margin-bottom: 5px;
-}
-//!-********************************
 
-//overriding Bootstrap variables
-// $light: #a8b7cb;
-// Required
+$accordion-bg: $glass-background;
+$accordion-border-color: $glass-border;
+$accordion-border-radius: $glass-border-radius;
+$accordion-button-active-bg: coral;
+$accordion-button-color: $light;
+$accordion-icon-color: $light;
+
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/variables-dark";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/maps";
 
-$theme-colors: (
-  "light": $light,
-);
-
-//todo figure out how to turn the accordian icon light themed
-
-$accordion-bg: $glass-background;
-$accordion-border-color: $glass-border;
-$accordion-border-radius: $glass-border-radius;
-$accordion-button-color: $light;
-
-//!work link container
-.work-link-container {
-  @extend .flex-column;
-  @extend .glass-morph;
-  @extend .border-start;
-
-  //mobile/tab view
-  @media (max-width: 1400px) {
-    margin-bottom: 10% !important;
-    margin-left: 10% !important;
-  }
-}
 
 //!work content container
 .work-content {
@@ -215,29 +194,9 @@ $accordion-button-color: $light;
   @extend .text-light;
 }
 
-//! nav links in work section
-.work-link {
-  border: 1px solid transparent;
-  transition: 1s ease;
-  background-color: rgba(
-    $teal-700,
-    0.5
-  ) !important; //dark green with 65% opacity
 
-  @extend .my-1;
-  @extend .text-light;
-  @extend .rounded-pill;
-
-  &:hover {
-    @extend .border;
-  }
-}
-
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  background-color: $cyan-900 !important;
-  @extend .border;
-}
-
+$theme-colors: (
+  "light": $light,
+);
 // required imports
 @import "~bootstrap/scss/bootstrap.scss";
