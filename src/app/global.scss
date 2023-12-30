@@ -150,13 +150,17 @@ $glass-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 $glass-border-radius: 16px;
 $glass-blur-filter: blur(5px);
 
-.glass-morph {
+.glass-bg {
   background: $glass-background;
-  border-radius: $glass-border-radius;
   box-shadow: $glass-box-shadow;
   -webkit-backdrop-filter: $glass-blur-filter;
   backdrop-filter: $glass-blur-filter;
   border: 1px solid $glass-border;
+}
+
+.glass-morph {
+  border-radius: $glass-border-radius;
+  @extend .glass-bg;
   @extend .p-4;
 }
 
