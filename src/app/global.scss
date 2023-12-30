@@ -141,8 +141,6 @@ b {
   ) !important; //dark green with 65% opacity
 }
 
-
-
 //! glass morph
 $glass-background: rgba(255, 255, 255, 0.01);
 $glass-border: rgba(255, 255, 255, 0.3);
@@ -171,7 +169,6 @@ $glass-blur-filter: blur(5px);
   }
 }
 
-
 $accordion-bg: $glass-background;
 $accordion-border-color: $glass-border;
 $accordion-border-radius: $glass-border-radius;
@@ -185,7 +182,6 @@ $accordion-icon-color: $light;
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/maps";
 
-
 //!work content container
 .work-content {
   background: rgba(255, 255, 255, 0.01) !important;
@@ -197,7 +193,6 @@ $accordion-icon-color: $light;
   // @extend .p-4;
   @extend .text-light;
 }
-
 
 $theme-colors: (
   "light": $light,

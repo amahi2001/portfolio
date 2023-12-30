@@ -279,6 +279,7 @@ export default function Home() {
             style={{
               height: "100dvh",
             }}
+            className="overflow-y-auto"
           >
             <Fade cascade>
               <Row className="mb-4">

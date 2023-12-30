@@ -36,8 +36,8 @@ export default function Jobs(): JSX.Element {
   return (
     <Row className="mb-4 justify-content-center">
       <Col sm={8}>
-        <Accordion defaultActiveKey="0" className="overflow-auto">
-          <Accordion.Item eventKey="0" className="work-content" data-bs-scroll="true">
+        <Accordion defaultActiveKey="0">
+          <Accordion.Item eventKey="0" className="work-content">
             <Accordion.Header>
               <LinkImage src={NYPL} alt="NYPL logo" /> NYPL
               <span className="ms-auto">Aug 2022 - Present</span>
@@ -119,7 +119,7 @@ export default function Jobs(): JSX.Element {
               <LinkImage src={Nasa} alt="NASA logo" /> NASA
               <span className="ms-auto">Jun 2022 - Aug 2022</span>
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body >
               <h3 className="text-center py-2 text-decoration-underline">
                 Algorithms Development Intern
               </h3>
@@ -183,8 +183,8 @@ export default function Jobs(): JSX.Element {
                 Cloud Applications Developer Intern
               </h3>
               <p>
-                Delivered web applications and software solutions on <b>GCP</b> while
-                adhering to best practices.
+                Delivered web applications and software solutions on <b>GCP</b>{" "}
+                while adhering to best practices.
               </p>
               <ul>
                 <li>
