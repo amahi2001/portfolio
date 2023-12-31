@@ -276,10 +276,9 @@ export default function Home() {
           }}
         >
           <Container
-            style={{
-              height: "100dvh",
-            }}
-            className="overflow-y-auto"
+            // style={{
+            //   height: "100dvh",
+            // }}
           >
             <Fade cascade>
               <Row className="mb-4">
