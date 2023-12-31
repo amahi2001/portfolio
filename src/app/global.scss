@@ -197,10 +197,9 @@ $accordion-icon-color: $light;
 .work-body {
   //mobile view
   @media (max-width: 800px) {
-    max-height: 55dvh;
+    max-height: 56dvh;
     overflow-y: auto;
   }
-  
 }
 
 $theme-colors: (
