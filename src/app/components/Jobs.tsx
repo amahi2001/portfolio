@@ -35,7 +35,7 @@ const Skills = ({ skillList }: { skillList: string[] }) => (
 export default function Jobs(): JSX.Element {
   return (
     <Row className="mb-4 justify-content-center">
-      <Col sm={8}>
+      <Col sm={8} className="pb-4">
         <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey="0" className="work-content">
             <Accordion.Header>
