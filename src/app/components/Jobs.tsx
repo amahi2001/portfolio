@@ -42,7 +42,7 @@ export default function Jobs(): JSX.Element {
               <LinkImage src={NYPL} alt="NYPL logo" /> NYPL
               <span className="ms-auto">Aug 2022 - Present</span>
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className="work-body">
               <h3 className="text-center py-2 text-decoration-underline">
                 Full Stack Engineer II
               </h3>
@@ -61,11 +61,11 @@ export default function Jobs(): JSX.Element {
                 <li>
                   Led the successful migration and deployment of two critical
                   NYPL websites:{" "}
-                  <a className="link-info" href="https://rs.nypl.org/">
+                  <a className="text-info" href="https://rs.nypl.org/">
                     NYPL Research Statistics
                   </a>{" "}
                   and{" "}
-                  <a className="link-info" href="https://fellowships.nypl.org">
+                  <a className="text-info" href="https://fellowships.nypl.org">
                     NYPL Fellowships
                   </a>
                   , serving hundreds of visitors and researchers daily.
@@ -119,7 +119,7 @@ export default function Jobs(): JSX.Element {
               <LinkImage src={Nasa} alt="NASA logo" /> NASA
               <span className="ms-auto">Jun 2022 - Aug 2022</span>
             </Accordion.Header>
-            <Accordion.Body >
+            <Accordion.Body className="work-body">
               <h3 className="text-center py-2 text-decoration-underline">
                 Algorithms Development Intern
               </h3>
@@ -178,7 +178,7 @@ export default function Jobs(): JSX.Element {
               <LinkImage src={NYPL} alt="NYPL logo" /> NYPL
               <span className="ms-auto">Aug 2021 - Jun 2022</span>
             </Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className="work-body">
               <h3 className="text-center py-2 text-decoration-underline">
                 Cloud Applications Developer Intern
               </h3>
