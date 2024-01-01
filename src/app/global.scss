@@ -27,6 +27,10 @@ $light: #ddfbd2; //text is light
   display: flex;
 }
 
+//***************NAVBAR*****************
+$navbar-dark-toggler-border-color:  none;
+//**************************************
+
 //***************FISHES*****************
 //fish parallax
 .fish-left,
@@ -130,6 +134,13 @@ b {
   }
   100% {
     background-position: 100% 50%;
+  }
+}
+
+.construction {
+  //mobile view
+  @media (max-width: 500px) {
+    font-size: xx-small !important;
   }
 }
 

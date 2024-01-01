@@ -130,7 +130,7 @@ export default function Home() {
 
           {/* //todo: remove this for production */}
           <Col xs={6} className="ms-auto text-wrap">
-            <Navbar.Brand>🚧 Under Construction 🚧</Navbar.Brand>
+            <p className="construction my-auto">🚧 Under Construction 🚧</p>
           </Col>
 
           {/* github and linkedin icons */}
@@ -276,9 +276,9 @@ export default function Home() {
           }}
         >
           <Container
-            // style={{
-            //   height: "100dvh",
-            // }}
+          // style={{
+          //   height: "100dvh",
+          // }}
           >
             <Fade cascade>
               <Row className="mb-4">
