@@ -130,7 +130,7 @@ export default function Home() {
 
           {/* //todo: remove this for production */}
           <Col xs={6} className="ms-auto text-wrap">
-            <p className="construction my-auto">🚧 Under Construction 🚧</p>
+            <Navbar.Brand className="construction">🚧 Under Construction 🚧</Navbar.Brand>
           </Col>
 
           {/* github and linkedin icons */}
