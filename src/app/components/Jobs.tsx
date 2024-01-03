@@ -7,6 +7,13 @@ import Image, { StaticImageData } from "next/image";
 import NYPL from "@assets/nyplico-modified.png";
 import Nasa from "@assets/NASA.png";
 
+import { JetBrains_Mono } from "next/font/google";
+
+const jetBrainsMono = JetBrains_Mono({
+  weight: ["300", "400"],
+  subsets: ["latin"],
+});
+
 const LinkImage = ({ src, alt }: { src: StaticImageData; alt: string }) => (
   <Image
     className="img-fluid rounded-circle me-2"
@@ -25,7 +32,12 @@ const Skills = ({ skillList }: { skillList: string[] }) => (
     gap={2}
   >
     {skillList.map((skill) => (
-      <Badge pill bg="transparent" className="border border-2 p-1" key={skill}>
+      <Badge
+        pill
+        bg="transparent"
+        className={`${jetBrainsMono.className} border border-2 p-2`}
+        key={skill}
+      >
         {skill}
       </Badge>
     ))}
@@ -108,7 +120,6 @@ export default function Jobs(): JSX.Element {
                   "GCP",
                   "AWS Lambda",
                   "Lang Chain",
-                  "PaLM 2",
                   "DialogFlow CX",
                 ]}
               />

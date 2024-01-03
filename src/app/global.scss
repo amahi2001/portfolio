@@ -29,7 +29,7 @@ $white: beige;
 }
 
 //***************NAVBAR*****************
-$navbar-dark-toggler-border-color:  none;
+$navbar-dark-toggler-border-color: none;
 //**************************************
 
 //***************FISHES*****************
@@ -68,7 +68,6 @@ $navbar-dark-toggler-border-color:  none;
 }
 //****************************************
 
-
 //*************************CURSOR***********************
 // when highlighting text
 ::-moz-selection {
@@ -89,6 +88,7 @@ html {
 }
 //*****************************************************
 
+//*************************Typography******************
 p,
 h1,
 h2 {
@@ -137,6 +137,21 @@ b {
     background-position: 100% 50%;
   }
 }
+
+//*****************************************************
+
+//*************************Layer 1**********************
+.layer-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  //mobile view
+  @media (max-width: 800px) {
+    align-items: auto;
+  }
+}
+//*****************************************************
 
 .construction {
   //mobile view

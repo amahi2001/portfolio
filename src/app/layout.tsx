@@ -4,7 +4,7 @@ import { Nunito } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
 const nunito = Nunito({
-  weight: ["300", "400", "500", "700"],
+  weight: ["300", "400", "700"],
   subsets: ["latin"],
 });
 

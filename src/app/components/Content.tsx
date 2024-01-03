@@ -16,13 +16,15 @@ export function BriefIntro({ ...props }: newFadeProps): JSX.Element {
       <Row className="mt-4 justify-content-center">
         <Col md={8} className="text-left border-start glass-morph">
           <p className="lead">
-            As a full-stack engineer with a keen eye for the cutting edge, I
-            pride myself on being a jack of all trades in the tech world. Armed
-            with a diverse skill set from C++ to Python, and JavaScript to Dart,
-            I&apos;ve crafted responsive interfaces and robust back-ends using
-            frameworks like <b>Django, React, and Flutter</b>.
+            I&apos;m a versatile <b>Full-Stack Engineer</b> with a proven track record of
+            problem-solving through innovative software solutions. My experience
+            spans developing responsive interfaces, accurate ML Models and scalable back-ends . With roles at{" "}
+            <b>The New York Public Library</b> and an internship at <b>NASA</b>, I&apos;ve honed my
+            skills in diverse environments, emphasizing adaptable,
+            human-centered technology. Currently, I create
+            scalable, secure, end-to-end solutions on GCP for NYPL.
           </p>
-          <p className="lead">
+          {/* <p className="lead">
             At the heart of my approach is a relentless pursuit of the newest
             technologies and best practices, ensuring that every line of code
             not only solves a problem but also pushes the envelope of
@@ -35,7 +37,7 @@ export function BriefIntro({ ...props }: newFadeProps): JSX.Element {
             frameworks, my experience is a testament to my capability to not
             just navigate but excel in the ever-evolving landscape of software
             development.
-          </p>
+          </p> */}
         </Col>
       </Row>
     </BSFade>

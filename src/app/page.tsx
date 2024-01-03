@@ -130,7 +130,9 @@ export default function Home() {
 
           {/* //todo: remove this for production */}
           <Col xs={6} className="ms-auto text-wrap">
-            <Navbar.Brand className="construction">🚧 Under Construction 🚧</Navbar.Brand>
+            <Navbar.Brand className="construction">
+              🚧 Under Construction 🚧
+            </Navbar.Brand>
           </Col>
 
           {/* github and linkedin icons */}
@@ -146,13 +148,9 @@ export default function Home() {
         <Fishes />
         {/* First Page, HeadShot + type animation */}
         <ParallaxLayer
+          className="layer-1"
           onClick={() => showDesc && parallax.current.scrollTo(1)}
           speed={0.5}
-          style={{
-            display: "flex",
-            alignItems: isMobile ? "auto" : "center",
-            justifyContent: "center",
-          }}
         >
           <Container
             style={{
@@ -208,7 +206,6 @@ export default function Home() {
                       speed={45}
                       deletionSpeed={90}
                       style={{
-                        fontSize: "1.5em",
                         fontWeight: "300",
                         display: "inline-block",
                       }}
