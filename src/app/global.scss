@@ -4,6 +4,7 @@ $primary-color: #23afd1;
 $dark-color: #000000;
 $nav-color: #15667a; //should be darker
 $light: #ddfbd2; //text is light
+$white: beige;
 :root {
   --cursor-color: #{$light};
 }
@@ -215,6 +216,8 @@ $accordion-icon-color: $light;
 
 $theme-colors: (
   "light": $light,
+  "white": $white,
 );
+
 // required imports
 @import "~bootstrap/scss/bootstrap.scss";
