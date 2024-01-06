@@ -2,10 +2,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Stack from "react-bootstrap/Stack";
 import Badge from "react-bootstrap/Badge";
-import Accordion from "react-bootstrap/Accordion";
-import Image, { StaticImageData } from "next/image";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
 import NYPL from "@assets/nyplico-modified.png";
 import Nasa from "@assets/NASA.png";
+import { Fragment } from "react";
+import Image, { StaticImageData } from "next/image";
+
 
 import { JetBrains_Mono } from "next/font/google";
 
@@ -21,6 +24,22 @@ const LinkImage = ({ src, alt }: { src: StaticImageData; alt: string }) => (
     style={{ maxWidth: "50px", maxHeight: "50px" }}
     {...{ src, alt }}
   />
+);
+
+const Job = ({
+  company,
+  date,
+  image,
+}: {
+  company: string;
+  date: string;
+  image: StaticImageData;
+}) => (
+  <Fragment>
+    <LinkImage src={image} alt={`${company} logo`} />
+    <span className="my-auto">{company}</span>
+    <p className="mt-3">{date}</p>
+  </Fragment>
 );
 
 const Skills = ({ skillList }: { skillList: string[] }) => (
@@ -47,14 +66,21 @@ const Skills = ({ skillList }: { skillList: string[] }) => (
 export default function Jobs(): JSX.Element {
   return (
     <Row className="mb-4 justify-content-center">
-      <Col sm={8} className="pb-4">
-        <Accordion defaultActiveKey="0">
-          <Accordion.Item eventKey="0" className="work-content">
-            <Accordion.Header>
-              <LinkImage src={NYPL} alt="NYPL logo" /> NYPL
-              <span className="ms-auto">Aug 2022 - Present</span>
-            </Accordion.Header>
-            <Accordion.Body className="work-body">
+      <Col sm={8} className="pb-4 work-content">
+        <Tabs
+          defaultActiveKey="nypl1"
+          id="work-experience-tabs"
+          className="mb-3"
+          justify
+        >
+          <Tab
+            eventKey="nypl1"
+            title={
+              <Job company="NYPL" date="Aug 2022 - Present" image={NYPL} />
+            }
+          >
+            <div className="work-body">
+              {/* Tab content for NYPL (Aug 2022 - Present) */}
               <h3 className="text-center py-2 text-decoration-underline">
                 Full Stack Engineer II
               </h3>
@@ -123,14 +149,16 @@ export default function Jobs(): JSX.Element {
                   "DialogFlow CX",
                 ]}
               />
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="1" className="work-content">
-            <Accordion.Header>
-              <LinkImage src={Nasa} alt="NASA logo" /> NASA
-              <span className="ms-auto">Jun 2022 - Aug 2022</span>
-            </Accordion.Header>
-            <Accordion.Body className="work-body">
+            </div>
+          </Tab>
+          <Tab
+            eventKey="nasa"
+            title={
+              <Job company="NASA" date="Jun 2022 - Aug 2022" image={Nasa} />
+            }
+          >
+            <div className="work-body">
+              {/* Tab content for NASA (Jun 2022 - Aug 2022) */}
               <h3 className="text-center py-2 text-decoration-underline">
                 Algorithms Development Intern
               </h3>
@@ -182,14 +210,15 @@ export default function Jobs(): JSX.Element {
                   "Linux",
                 ]}
               />
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="2" className="work-content">
-            <Accordion.Header>
-              <LinkImage src={NYPL} alt="NYPL logo" /> NYPL
-              <span className="ms-auto">Aug 2021 - Jun 2022</span>
-            </Accordion.Header>
-            <Accordion.Body className="work-body">
+            </div>
+          </Tab>
+          <Tab
+            eventKey="nypl2"
+            title={
+              <Job company="NYPL" date="Aug 2021 - Jun 2022" image={NYPL} />
+            }
+          >
+            <div className="work-body">
               <h3 className="text-center py-2 text-decoration-underline">
                 Cloud Applications Developer Intern
               </h3>
@@ -245,9 +274,9 @@ export default function Jobs(): JSX.Element {
                   "AWS Lambda",
                 ]}
               />
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
+            </div>
+          </Tab>
+        </Tabs>
       </Col>
     </Row>
   );

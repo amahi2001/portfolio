@@ -196,23 +196,19 @@ $glass-blur-filter: blur(5px);
   }
 }
 
-$accordion-bg: $glass-background;
-$accordion-border-color: $glass-border;
-$accordion-border-radius: $glass-border-radius;
-$accordion-button-active-bg: rgba(beige, 0.65);
-$accordion-button-color: $light;
-$accordion-icon-color: $light;
 
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/variables-dark";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/utilities";
+
 
 //!work content container
 .work-content {
   background: rgba(255, 255, 255, 0.01) !important;
-  // border-radius: 16px !important;
+  border-radius: 16px !important;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
   -webkit-backdrop-filter: blur(5px) !important;
   backdrop-filter: blur(5px) !important;
@@ -224,8 +220,9 @@ $accordion-icon-color: $light;
 .work-body {
   //mobile view
   @media (max-width: 800px) {
-    max-height: 56dvh;
+    max-height: 60dvh;
     overflow-y: auto;
+    font-size: smaller !important;
   }
 }
 
