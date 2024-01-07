@@ -30,17 +30,14 @@ const LinkImage = ({ src, alt }: { src: StaticImageData; alt: string }) => (
 
 const Job = ({
   company,
-  date,
   image,
 }: {
   company: string;
-  date: string;
   image: StaticImageData;
 }) => (
   <Fragment>
     <LinkImage src={image} alt={`${company} logo`} />
     <span className="my-auto">{company}</span>
-    <p className="mt-3">{date}</p>
   </Fragment>
 );
 
@@ -88,27 +85,31 @@ function TabBody({ children }: { children: React.ReactNode }): JSX.Element {
 
 export default function Jobs(): JSX.Element {
   return (
-    <Row className="mb-4 justify-content-center">
-      <Col sm={8} className="pb-4 work-content px-0">
+    <Row className="justify-content-center">
+      <Col sm={8} className="work-content px-0 pb-2">
         <Tabs
           defaultActiveKey="nypl1"
           id="work-experience-tabs"
-          className="work-tab mb-3"
+          className="work-tab mb-1"
           justify
           variant="pills"
         >
           <Tab
             className="work-tab"
             eventKey="nypl1"
-            title={
-              <Job company="NYPL" date="Aug 2022 - Present" image={NYPL} />
-            }
+            title={<Job company="NYPL" image={NYPL} />}
           >
             <TabBody>
               {/* Tab content for NYPL (Aug 2022 - Present) */}
               <h3 className="text-center py-2 text-decoration-underline">
                 Full Stack Engineer II
               </h3>
+              <p
+                className={`text-white text-center  ${jetBrainsMono.className}`}
+              >
+                Aug 2022 - Present
+              </p>
+
               <p>
                 Design, migrate, maintain, and implement secure and scalable
                 enterprise applications and software services on{" "}
@@ -179,15 +180,18 @@ export default function Jobs(): JSX.Element {
           <Tab
             className="work-tab"
             eventKey="nasa"
-            title={
-              <Job company="NASA" date="Jun 2022 - Aug 2022" image={Nasa} />
-            }
+            title={<Job company="NASA" image={Nasa} />}
           >
             <TabBody>
               {/* Tab content for NASA (Jun 2022 - Aug 2022) */}
               <h3 className="text-center py-2 text-decoration-underline">
                 Algorithms Development Intern
               </h3>
+              <p
+                className={`text-white text-center  ${jetBrainsMono.className}`}
+              >
+                Jun 2022 - Aug 2022
+              </p>
               <p>
                 Developed a feature-rich <b>Python</b> framework and CLI for
                 accurate estimation of Earth’s system parameters from satellite
@@ -241,14 +245,17 @@ export default function Jobs(): JSX.Element {
           <Tab
             className="work-tab"
             eventKey="nypl2"
-            title={
-              <Job company="NYPL" date="Aug 2021 - Jun 2022" image={NYPL} />
-            }
+            title={<Job company="NYPL" image={NYPL} />}
           >
             <TabBody>
               <h3 className="text-center py-2 text-decoration-underline">
                 Cloud Applications Developer Intern
               </h3>
+              <p
+                className={`text-white text-center  ${jetBrainsMono.className}`}
+              >
+                Aug 2021 - Jun 2022
+              </p>
               <p>
                 Delivered web applications and software solutions on <b>GCP</b>{" "}
                 while adhering to best practices.
