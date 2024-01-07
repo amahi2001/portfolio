@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 //react-bootstrap
 import Row from "react-bootstrap/Row";
@@ -28,7 +27,7 @@ import dynamic from "next/dynamic";
 
 import { BriefIntro, MoreAboutMe } from "@/app/components/Content";
 //react & next
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 
 const links = {
@@ -48,7 +47,6 @@ export default function Home() {
   // max width of 800px and height of 600px
   const isMobile = useMediaQuery({ query: "(max-width: 800px)" });
   const parallax = useRef<IParallax>(null!);
-  const navRef = useRef<HTMLDivElement>(null!);
   //shows animated text below the headshot
   const [showAnimatedText, setShowAnimatedText] = useState(false);
   const [showDesc, setShowDesc] = useState(false);
@@ -60,34 +58,8 @@ export default function Home() {
       setShowAnimatedText(true);
       setShowDesc(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  //scroll listener for mobile
-  const setScrollNum = useState(0)[1];
-  const handleWheelEvent = useCallback(() => {
-    const { container, current } = parallax.current;
-    const scrollPercent =
-      current / (container.current.scrollHeight - window.innerHeight);
-
-    setScrollNum((prev) => {
-      if (prev > scrollPercent) {
-        navRef.current.classList.remove("hidden-nav");
-        navRef.current.classList.add("show-nav");
-      } else {
-        //hide the navbar
-        navRef.current.classList.remove("show-nav");
-        navRef.current.classList.add("hidden-nav");
-      }
-      return scrollPercent;
-    });
-  }, [navRef, parallax, setScrollNum]);
-
-  useEffect(() => {
-    window.addEventListener("touchmove", handleWheelEvent, false);
-    return () => {
-      window.removeEventListener("touchmove", handleWheelEvent);
-    };
-  }, [handleWheelEvent]);
 
   return (
     <main>
@@ -106,7 +78,6 @@ export default function Home() {
           sticky="top"
           variant="dark"
           className="semi-transparent shadow-lg"
-          ref={navRef}
         >
           {/* toggle for mobile view */}
           {/* //Todo : display this after done for production */}
