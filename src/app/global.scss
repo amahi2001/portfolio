@@ -9,7 +9,7 @@ $white: beige;
   --cursor-color: #{$light};
 }
 
-body{
+body {
   scroll-behavior: smooth;
 }
 
@@ -232,13 +232,13 @@ $nav-link-hover-color: $info;
   padding-right: 1rem;
   //mobile view
   @media (max-width: 1000px) {
-    max-height:60dvh ;
+    max-height: 60dvh;
     overflow-y: auto;
     scroll-behavior: smooth;
   }
 }
 
-.work-links{
+.work-links {
   //mobile view
   @media (max-width: 1000px) {
     height: 20dvh !important;
@@ -265,16 +265,17 @@ $nav-link-hover-color: $info;
 
   //make it disappear when user scrolls down
 
-  @media (min-width: 1000px) {
+  @media screen and (min-width: 1000px) and (min-height: 1000px) {
     display: none !important; // Hides the badge on non-mobile devices
   }
 }
 
 .work-tab {
   //mobile view
-  @media (max-width: 800px) {
-    font-size: small !important;
+  @media screen and (max-width: 800px) and (max-height: 800px) {
+    font-size: 0.95rem !important;
   }
+  //if it overflows: then make text smaller
 }
 
 $theme-colors: (
