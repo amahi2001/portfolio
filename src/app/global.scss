@@ -9,6 +9,10 @@ $white: beige;
   --cursor-color: #{$light};
 }
 
+body{
+  scroll-behavior: smooth;
+}
+
 //! parallax background
 .parallax-bg {
   background: linear-gradient(to top, $dark-color, $primary-color);
@@ -161,11 +165,9 @@ b {
 }
 
 //! effects
+$semi-transparent: rgba($nav-color, 0.65);
 .semi-transparent {
-  background-color: rgba(
-    $nav-color,
-    0.65
-  ) !important; //dark green with 65% opacity
+  background-color: $semi-transparent !important; //dark green with 65% opacity
 }
 
 //! glass morph
@@ -196,23 +198,27 @@ $glass-blur-filter: blur(5px);
   }
 }
 
-$accordion-bg: $glass-background;
-$accordion-border-color: $glass-border;
-$accordion-border-radius: $glass-border-radius;
-$accordion-button-active-bg: rgba(beige, 0.65);
-$accordion-button-color: $light;
-$accordion-icon-color: $light;
+$nav-link-transition: color 0.75s ease-in-out,
+  background-color 0.75s ease-in-out, border-color 0.75s ease-in-out;
+$nav-link-color: $light;
+$nav-pills-link-active-bg: rgba(beige, 0.5);
+$nav-pills-border-radius: $glass-border-radius;
+$nav-pills-link-active-color: black;
+// $nav-tabs-link-active-border-color: none;
+// $nav-underline-link-active-color: rgba(beige, 0.65);
 
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/variables-dark";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/utilities";
+$nav-link-hover-color: $info;
 
 //!work content container
 .work-content {
   background: rgba(255, 255, 255, 0.01) !important;
-  // border-radius: 16px !important;
+  border-radius: 16px !important;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
   -webkit-backdrop-filter: blur(5px) !important;
   backdrop-filter: blur(5px) !important;
@@ -222,10 +228,52 @@ $accordion-icon-color: $light;
 }
 
 .work-body {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  //mobile view
+  @media (max-width: 1000px) {
+    max-height:60dvh ;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+}
+
+.work-links{
+  //mobile view
+  @media (max-width: 1000px) {
+    height: 20dvh !important;
+  }
+}
+
+.scroll-badge {
+  @extend .badge;
+  @extend .rounded-pill;
+  @extend .py-2;
+  @extend .px-3;
+  @extend .shadow-lg;
+
+  background: beige !important;
+  color: black !important;
+  border: 2px solid black !important;
+
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  font-size: medium !important;
+
+  //make it disappear when user scrolls down
+
+  @media (min-width: 1000px) {
+    display: none !important; // Hides the badge on non-mobile devices
+  }
+}
+
+.work-tab {
   //mobile view
   @media (max-width: 800px) {
-    max-height: 56dvh;
-    overflow-y: auto;
+    font-size: small !important;
   }
 }
 
