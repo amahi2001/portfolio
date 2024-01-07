@@ -164,11 +164,6 @@ b {
   }
 }
 
-//! effects
-$semi-transparent: rgba($nav-color, 0.65);
-.semi-transparent {
-  background-color: $semi-transparent !important; //dark green with 65% opacity
-}
 
 //! glass morph
 $glass-background: rgba(255, 255, 255, 0.01);
@@ -176,6 +171,14 @@ $glass-border: rgba(255, 255, 255, 0.3);
 $glass-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 $glass-border-radius: 16px;
 $glass-blur-filter: blur(5px);
+
+//! effects
+$semi-transparent: rgba($nav-color, 0.65);
+.semi-transparent {
+  background-color: $semi-transparent !important; //dark green with 65% opacity
+  -webkit-backdrop-filter: $glass-blur-filter;
+  backdrop-filter: $glass-blur-filter;
+}
 
 .glass-bg {
   background: $glass-background;

@@ -77,7 +77,7 @@ export default function Home() {
           expand="lg"
           sticky="top"
           variant="dark"
-          className="semi-transparent"
+          className="semi-transparent shadow-lg"
         >
           {/* toggle for mobile view */}
           {/* //Todo : display this after done for production */}
