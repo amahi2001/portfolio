@@ -6,6 +6,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Image, { StaticImageData } from "next/image";
 import NYPL from "@assets/nyplico-modified.png";
 import Nasa from "@assets/NASA.png";
+import { useRef } from "react";
 
 import { JetBrains_Mono } from "next/font/google";
 
@@ -44,6 +45,29 @@ const Skills = ({ skillList }: { skillList: string[] }) => (
   </Stack>
 );
 
+function AccordionBody({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element {
+  const badgeRef = useRef<HTMLDivElement>(null);
+  function handleScroll(event: React.UIEvent<HTMLDivElement, UIEvent>) {
+    const scrollNum = event.currentTarget.scrollTop;
+    //decrease opacity as scrollNum increases
+    const opacity = 1 - scrollNum / 100;
+    badgeRef.current!.style.opacity = opacity.toString();
+  }
+
+  return (
+    <Accordion.Body className="work-body" onScroll={handleScroll}>
+      {children}
+      <span ref={badgeRef} className="scroll-badge">
+        Scroll Down
+      </span>
+    </Accordion.Body>
+  );
+}
+
 export default function Jobs(): JSX.Element {
   return (
     <Row className="mb-4 justify-content-center">
@@ -54,7 +78,7 @@ export default function Jobs(): JSX.Element {
               <LinkImage src={NYPL} alt="NYPL logo" /> NYPL
               <span className="ms-auto">Aug 2022 - Present</span>
             </Accordion.Header>
-            <Accordion.Body className="work-body">
+            <AccordionBody>
               <h3 className="text-center py-2 text-decoration-underline">
                 Full Stack Engineer II
               </h3>
@@ -123,14 +147,14 @@ export default function Jobs(): JSX.Element {
                   "DialogFlow CX",
                 ]}
               />
-            </Accordion.Body>
+            </AccordionBody>
           </Accordion.Item>
           <Accordion.Item eventKey="1" className="work-content">
             <Accordion.Header>
               <LinkImage src={Nasa} alt="NASA logo" /> NASA
               <span className="ms-auto">Jun 2022 - Aug 2022</span>
             </Accordion.Header>
-            <Accordion.Body className="work-body">
+            <AccordionBody>
               <h3 className="text-center py-2 text-decoration-underline">
                 Algorithms Development Intern
               </h3>
@@ -182,14 +206,14 @@ export default function Jobs(): JSX.Element {
                   "Linux",
                 ]}
               />
-            </Accordion.Body>
+            </AccordionBody>
           </Accordion.Item>
           <Accordion.Item eventKey="2" className="work-content">
             <Accordion.Header>
               <LinkImage src={NYPL} alt="NYPL logo" /> NYPL
               <span className="ms-auto">Aug 2021 - Jun 2022</span>
             </Accordion.Header>
-            <Accordion.Body className="work-body">
+            <AccordionBody>
               <h3 className="text-center py-2 text-decoration-underline">
                 Cloud Applications Developer Intern
               </h3>
@@ -245,7 +269,7 @@ export default function Jobs(): JSX.Element {
                   "AWS Lambda",
                 ]}
               />
-            </Accordion.Body>
+            </AccordionBody>
           </Accordion.Item>
         </Accordion>
       </Col>

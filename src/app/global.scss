@@ -226,6 +226,33 @@ $accordion-icon-color: $light;
   @media (max-width: 800px) {
     max-height: 56dvh;
     overflow-y: auto;
+    font-size: small !important;
+  }
+}
+
+.scroll-badge {
+  @extend .badge;
+  @extend .rounded-pill;
+  @extend .py-2;
+  @extend .px-3;
+  @extend .shadow-lg;
+
+  background: beige !important;
+  color: black !important;
+  border: 2px solid black !important;
+
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease-out;
+  z-index: 1000;
+  font-size: medium !important;
+
+  //make it disappear when user scrolls down
+
+  @media (min-width: 1000px) {
+    display: none !important; // Hides the badge on non-mobile devices
   }
 }
 
