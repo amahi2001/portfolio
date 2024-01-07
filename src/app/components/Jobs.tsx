@@ -1,15 +1,17 @@
+//React Bootstrap
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Stack from "react-bootstrap/Stack";
 import Badge from "react-bootstrap/Badge";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
+//assets
 import NYPL from "@assets/nyplico-modified.png";
 import Nasa from "@assets/NASA.png";
-import { Fragment } from "react";
+//react
+import { Fragment, useRef } from "react";
+//next
 import Image, { StaticImageData } from "next/image";
-
-
 import { JetBrains_Mono } from "next/font/google";
 
 const jetBrainsMono = JetBrains_Mono({
@@ -63,23 +65,46 @@ const Skills = ({ skillList }: { skillList: string[] }) => (
   </Stack>
 );
 
+function TabBody({ children }: { children: React.ReactNode }): JSX.Element {
+  const badgeRef = useRef<HTMLDivElement>(null);
+  function handleScroll(event: React.UIEvent<HTMLDivElement, UIEvent>) {
+    const scrollNum = event.currentTarget.scrollTop;
+    //decrease opacity as scrollNum increases
+    const opacity = 1 - scrollNum / 100;
+    badgeRef.current!.style.opacity = opacity.toString();
+  }
+
+  return (
+    <Fragment>
+      <div className="work-body" onScroll={handleScroll}>
+        {children}
+      </div>
+      <span ref={badgeRef} className="scroll-badge">
+        Scroll Down
+      </span>
+    </Fragment>
+  );
+}
+
 export default function Jobs(): JSX.Element {
   return (
     <Row className="mb-4 justify-content-center">
-      <Col sm={8} className="pb-4 work-content">
+      <Col sm={8} className="pb-4 work-content px-0">
         <Tabs
           defaultActiveKey="nypl1"
           id="work-experience-tabs"
-          className="mb-3"
+          className="work-tab mb-3"
           justify
+          variant="pills"
         >
           <Tab
+            className="work-tab"
             eventKey="nypl1"
             title={
               <Job company="NYPL" date="Aug 2022 - Present" image={NYPL} />
             }
           >
-            <div className="work-body">
+            <TabBody>
               {/* Tab content for NYPL (Aug 2022 - Present) */}
               <h3 className="text-center py-2 text-decoration-underline">
                 Full Stack Engineer II
@@ -149,15 +174,16 @@ export default function Jobs(): JSX.Element {
                   "DialogFlow CX",
                 ]}
               />
-            </div>
+            </TabBody>
           </Tab>
           <Tab
+            className="work-tab"
             eventKey="nasa"
             title={
               <Job company="NASA" date="Jun 2022 - Aug 2022" image={Nasa} />
             }
           >
-            <div className="work-body">
+            <TabBody>
               {/* Tab content for NASA (Jun 2022 - Aug 2022) */}
               <h3 className="text-center py-2 text-decoration-underline">
                 Algorithms Development Intern
@@ -210,15 +236,16 @@ export default function Jobs(): JSX.Element {
                   "Linux",
                 ]}
               />
-            </div>
+            </TabBody>
           </Tab>
           <Tab
+            className="work-tab"
             eventKey="nypl2"
             title={
               <Job company="NYPL" date="Aug 2021 - Jun 2022" image={NYPL} />
             }
           >
-            <div className="work-body">
+            <TabBody>
               <h3 className="text-center py-2 text-decoration-underline">
                 Cloud Applications Developer Intern
               </h3>
@@ -274,7 +301,7 @@ export default function Jobs(): JSX.Element {
                   "AWS Lambda",
                 ]}
               />
-            </div>
+            </TabBody>
           </Tab>
         </Tabs>
       </Col>
