@@ -235,7 +235,7 @@ $nav-link-hover-color: $info;
   padding-right: 1rem;
   //mobile view
   @media (max-width: 1000px) {
-    max-height: 60dvh;
+    max-height: 71dvh;
     overflow-y: auto;
     scroll-behavior: smooth;
   }
@@ -268,7 +268,7 @@ $nav-link-hover-color: $info;
 
   //make it disappear when user scrolls down
 
-  @media screen and (min-width: 1000px) and (min-height: 1000px) {
+  @media screen and (min-width: 1000px) and (min-height: 800px) {
     display: none !important; // Hides the badge on non-mobile devices
   }
 }
