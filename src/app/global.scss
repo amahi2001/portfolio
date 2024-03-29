@@ -5,6 +5,13 @@ $dark-color: #000000;
 $nav-color: #15667a; //should be darker
 $light: #ddfbd2; //text is light
 $white: beige;
+$text-gradient: linear-gradient(
+  to left,
+  #f9d423 20%,
+  #ff4e50 30%,
+  #f9b32f 70%,
+  #f76b1c 80%
+);
 :root {
   --cursor-color: #{$light};
 }
@@ -118,13 +125,7 @@ h1 {
 
 b {
   font-weight: 500 !important;
-  background: linear-gradient(
-    to left,
-    #f9d423 20%,
-    #ff4e50 30%,
-    #f9b32f 70%,
-    #f76b1c 80%
-  );
+  background: $text-gradient;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -163,7 +164,6 @@ b {
     font-size: smaller !important;
   }
 }
-
 
 //! glass morph
 $glass-background: rgba(255, 255, 255, 0.01);
@@ -216,8 +216,9 @@ $nav-pills-link-active-color: black;
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/maps";
 @import "~bootstrap/scss/utilities";
-$nav-link-hover-color: $info;
 
+$nav-link-hover-color: $blue-300;
+// $nav-link-transition: color 1s ease-in-out, background-color 1s ease-in-out;
 //!work content container
 .work-content {
   background: rgba(255, 255, 255, 0.01) !important;
@@ -228,11 +229,13 @@ $nav-link-hover-color: $info;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   // @extend .p-4;
   @extend .text-light;
+  @extend .border-start;
 }
 
 .work-body {
   padding-left: 1rem;
   padding-right: 1rem;
+  border: none;
   //mobile view
   @media (max-width: 1000px) {
     max-height: 71dvh;

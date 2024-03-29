@@ -283,9 +283,8 @@ export default function Home() {
                   <h2>Where I&apos;ve worked</h2>
                 </Col>
               </Row>
-
-              <Jobs />
             </Fade>
+            <Jobs />
           </Container>
         </ParallaxLayer>
       </Parallax>
