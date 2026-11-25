@@ -11,3 +11,5 @@ First person, technically specific, curious. Lead with evidence: a measured outc
 
 ## Constraints
 The site must be useful before JavaScript runs, usable with a keyboard and small screens, and legible to text-only agents. Describe server services with public editorial copy. Keep private infrastructure, access details and the source CV outside the served directory. Do not name clients from consulting or presales work; describe them by sector.
+
+Public contact: amahi2001@gmail.com (mailto in the contact block and profile schema).
