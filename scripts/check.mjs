@@ -23,7 +23,7 @@ const profile = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?
 assert.equal(profile.mainEntity.name, 'Abrar Mahi');
 const role = profile.mainEntity.jobTitle + ' at ' + profile.mainEntity.worksFor.name;
 for (const source of [md, llms, html]) assert(source.includes(role), 'Current role mismatch');
-for (const name of ['LlamaIndex', 'Python Token Killer', 'Graph RAG', 'Jun — Oct 2026', 'abrar-homeserver', 'Squirro', 'NASA Goddard', 'Hunter College', 'Nextcloud', 'Jellyfin', 'AdGuard Home', 'NixOS']) {
+for (const name of ['LlamaIndex', 'Python Token Killer', 'Graph RAG', 'Jun – Oct 2026', 'abrar-homeserver', 'Squirro', 'NASA Goddard', 'Hunter College', 'Nextcloud', 'Jellyfin', 'AdGuard Home', 'NixOS']) {
   assert(md.includes(name), name);
 }
 assert(md.startsWith('# Abrar Mahi'));

@@ -18,4 +18,4 @@
 - id: home
   order: 5
   name: Home services
-  body: Nextcloud keeps my files in step, Jellyfin remembers the playhead, and AdGuard Home keeps trackers off the network. NixOS holds it all together.
+  body: Nextcloud keeps my files in step, Jellyfin remembers the playhead, and AdGuard Home keeps trackers off the network.
