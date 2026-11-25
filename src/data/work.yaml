@@ -17,7 +17,7 @@
   catch: { value: "p. 9", label: "every extracted field cites the page it came from" }
   kind: Document AI · LlamaIndex
   title: Extraction you can audit
-  body: "A checkbox on page nine can change an insurance policy. I helped enterprise teams turn forms and PDFs into structured data that checks itself against the source: extract the field, cite the page, and send low-confidence answers to a person."
+  body: "A checkbox on page nine can change an insurance policy. I helped enterprise teams turn forms and PDFs into structured data you can check against the source: extract the field, cite the page, and send low-confidence answers to a person."
   sample: { source: "Policy · p. 9", field: "☑ Flood coverage", code: "flood_coverage: true  # p.9, conf 0.97" }
   link: { href: "https://watch.getcontrast.io/register/llamaindex-building-document-processing-pipelines-for-agentic-workflows", text: Watch the talk }
 - id: agents

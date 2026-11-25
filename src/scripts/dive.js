@@ -67,6 +67,7 @@ function measure() {
     launch: y => (y - sTop) / (sBot - 0.04 * vh - sTop),
     dock: y => (y - (dTop - vh)) / dH,
   };
+  rulerH = ruler.clientHeight;
   // Ruler ticks where each zone begins, plus the floor.
   $$('.tick', ruler).forEach(t => t.remove());
   const marks = zones.map(z => [z.a, z.top]).concat([[MAX, max + vh * 0.6]]);
@@ -79,7 +80,21 @@ function measure() {
   });
 }
 
-let depth = 0, zoneIndex = 0;
+let depth = 0, zoneIndex = 0, lastZone = 0;
+const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)', EASE_BACK = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+const vignette = $('.vignette'), you = $('.ruler .you'), hold = $('.hold');
+let rulerH = 0;
+// Still water: a per-visitor preference that pauses idle loops and effects.
+const store = { get: () => { try { return localStorage.getItem('still') === '1'; } catch { return false; } }, set: v => { try { localStorage.setItem('still', v ? '1' : '0'); } catch {} } };
+const setStill = on => {
+  html.classList.toggle('still', on);
+  hold.setAttribute('aria-pressed', String(on));
+  hold.setAttribute('aria-label', on ? 'Play animations' : 'Pause animations');
+  hold.textContent = on ? '▶' : '❚❚';
+};
+setStill(store.get());
+hold.addEventListener('click', () => { const on = !html.classList.contains('still'); setStill(on); store.set(on); if (!on) start?.(); });
+const lively = () => !reduce && !html.classList.contains('still');
 function update() {
   const y = scrollY, line = y + vh * 0.6;
   zoneIndex = 0;
@@ -90,9 +105,11 @@ function update() {
   depthOut.textContent = fmt.format(Math.round(depth)) + ' m';
   nameOut.textContent = z.name;
   pips.forEach((p, i) => { p.classList.toggle('on', i < zoneIndex); p.classList.toggle('here', i === zoneIndex); });
-  html.style.setProperty('--depth-p', (depth / MAX).toFixed(3));
-  const rh = ruler.clientHeight;
-  ruler.style.setProperty('--ruler-y', clamp(geo.root(y), 0.02, 0.97) * rh + 'px');
+  if (zoneIndex > lastZone && lively()) pips[zoneIndex]?.animate([{ scale: '1' }, { scale: '1.7' }, { scale: '1' }], { duration: 260, easing: EASE_OUT });
+  lastZone = zoneIndex;
+  // Fixed layers get their own writes: no inherited variables, no page-wide restyle.
+  vignette.style.opacity = (depth / MAX).toFixed(3);
+  you.style.transform = `translateY(${(clamp(geo.root(y), 0.02, 0.97) * rulerH).toFixed(1)}px) translateY(-50%)`;
   if (html.classList.contains('no-sdt')) {
     fallback.forEach(([el, f]) => el && el.style.setProperty('--p', clamp(f()(y)).toFixed(4)));
     zones.forEach(z => z.el.style.setProperty('--p', clamp((y + vh - z.top) / (z.h + vh)).toFixed(4)));
@@ -124,6 +141,7 @@ const C = {
   snow: ['#4f7f8c', '#6f9ea5', '#93bfbd'].map(hex),
   core: hex('#effffb'), glow: hex('#4de3ff'), dim: hex('#1e6e86'),
   sun: hex('#bff8e8'), warm: hex('#ffd08b'), dock: hex('#7dffc8'),
+  silt: ['#8aa0b4', '#b8c8d4', '#6f8296'].map(hex),
 };
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
 const bayer = (x, y) => (BAYER[((y & 3) << 2) | (x & 3)] + 0.5) / 16;
@@ -178,7 +196,7 @@ const box = el => { const r = el.getBoundingClientRect(); return { x: r.left / S
 const angler = $('.abyss .creature'), berth = $('.berth img');
 const snow = Array.from({ length: 170 }, () => ({ x: Math.random(), y: Math.random(), z: Math.random() < 0.3 ? 1 : Math.random() < 0.5 ? 0.6 : 0.35, seed: rand(0, 100), c: Math.floor(rand(0, 3)) }));
 const plankton = Array.from({ length: 30 }, () => ({ x: Math.random(), y: Math.random(), per: rand(1.8, 3.6), ph: Math.random(), seed: rand(0, 100) }));
-let bubbles = [], pops = [], rings = [], litUntil = new Map();
+let bubbles = [], pops = [], rings = [], silt = [], spray = [], litUntil = new Map(), wasUnder = null, flash = 0;
 let pointer = { x: -1e4, y: -1e4 }, lastY = scrollY, vel = 0, t = 0, t0 = performance.now(), docked = false, spawnAcc = 0;
 
 function drawBubble(b) {
@@ -226,6 +244,8 @@ function drawShafts(sun, top) {
 
 function ping() {
   const s = box(sub);
+  // Hull recoil: squash on the pulse, overshoot, settle.
+  if (lively()) sub.animate([{ scale: '1' }, { scale: '1.08 0.92' }, { scale: '0.97 1.04' }, { scale: '1' }], { duration: 300, easing: EASE_OUT });
   rings.push({ x: s.x + s.w * 0.5, y: s.y + s.h * 0.5, r: 2, k: 0 });
   $$('.creature, .berth img').filter(el => box(el).on).forEach((el, i) => setTimeout(() => {
     el.classList.add('lit'); litUntil.set(el, t + 0.9); setTimeout(() => el.classList.remove('lit'), 900);
@@ -237,6 +257,38 @@ addEventListener('pointerdown', e => {
 });
 addEventListener('pointermove', e => { pointer = { x: e.clientX / S, y: e.clientY / S }; }, { passive: true });
 addEventListener('keydown', e => { if ((e.key === 'p' || e.key === 'P') && !e.metaKey && !e.ctrlKey && !e.altKey && !/input|textarea/i.test(e.target.tagName)) ping(); });
+
+function splash(x, y, w) {
+  // Two fans of spray. Heights are relative to the moving waterline.
+  spray = [];
+  for (const side of [-1, 1]) {
+    for (let i = 0; i < 12; i++) {
+      const spread = i / 11;
+      spray.push({ x: x + side * w * rand(0.39, 0.5), y: 0,
+        vx: side * (14 + 48 * spread), vy: -(88 - 38 * spread + rand(-7, 7)) });
+    }
+  }
+  for (let i = 0; i < 16; i++) bubbles.push({ x0: x + rand(-10, 10), x: x, y: y + rand(2, 14), r: rand(0.6, 2.4), vy: -rand(4, 14), ph: rand(0, TAU), wob: 1, top: y + 1 });
+}
+
+// Docking is the end of the dive: silt kicks up off the deck, the scene
+// takes a small decaying thump, the berth lamp lights, and the email
+// button pops once. Juice sized to a large event, but no flashing.
+function dock() {
+  const s = box(sub), floor = s.y + s.h * 0.92;
+  if (lively()) {
+    for (let i = 0; i < 44; i++) {
+      const dir = i % 2 ? 1 : -1, sp = rand(8, 34);
+      silt.push({ x: s.x + s.w * (0.5 + dir * rand(0.1, 0.45)), y: floor, vx: dir * sp, vy: -rand(6, 22), life: 1, max: rand(1.1, 2), c: Math.floor(rand(0, 3)), s: Math.random() < 0.4 ? 2 : 1 });
+    }
+    const frames = [];
+    for (let i = 0; i <= 12; i++) { const k = (1 - i / 12) ** 2 * 4; frames.push({ translate: `${(k * Math.sin(i * 1.7)).toFixed(1)}px ${(k * Math.sin(i * 2.3)).toFixed(1)}px` }); }
+    for (const el of [$('.abyss .ocean'), $('.berth'), $('.traveler')]) el?.animate(frames, { duration: 420, easing: 'linear' });
+    $('.contact .button')?.animate([{ scale: '1' }, { scale: '1.07' }, { scale: '1' }], { duration: 480, delay: 650, easing: EASE_BACK });
+  }
+  flash = 1;
+  setTimeout(ping, 450);
+}
 
 function step(dt) {
   t += dt;
@@ -269,11 +321,28 @@ function step(dt) {
       a.r = Math.cbrt(a.r ** 3 + b.r ** 3); a.wob = 1; bubbles.splice(j--, 1);
     }
   }
-  pops = pops.filter(p => (p.k += dt / 0.22) < 1);
+  pops = pops.filter(p => (p.k += dt / (p.r > 4 ? 0.6 : 0.22)) < 1);
   rings = rings.filter(r => { r.r += dt * 150; r.k += dt / 1.5; return r.k < 1; });
   for (const p of snow) { p.y += dt * (0.004 + 0.004 * p.z); p.x += Math.sin(t * 0.3 + p.seed) * 0.00004; }
   for (const p of plankton) { p.y -= dt * 0.002; p.x += Math.sin(t * 0.2 + p.seed) * 0.00005; }
-  if (!docked && depth >= MAX - 1) { docked = true; setTimeout(ping, 500); }
+  // Launch: the first time the hull drops through the harbor surface, it splashes.
+  const wl = waterline(), under = s.y + s.h * 0.3 > wl;
+  if (wasUnder === false && under && vel > 0) splash(s.x + s.w * 0.5, wl, s.w);
+  wasUnder = under;
+  for (let i = spray.length - 1; i >= 0; i--) {
+    const p = spray[i];
+    p.vy += dt * 150;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    if (p.y >= 0) spray.splice(i, 1);
+  }
+  if (!docked && depth >= MAX - 1) { docked = true; setTimeout(dock, 350); }
+  for (let i = silt.length - 1; i >= 0; i--) {
+    const p = silt[i];
+    const damping = 1 - dt * 2.2;
+    p.vx *= damping; p.vy = p.vy * damping + dt * 6; p.x += p.vx * dt; p.y += p.vy * dt;
+    if ((p.life -= dt / p.max) <= 0) silt.splice(i, 1);
+  }
+  flash = Math.max(0, flash - dt * 4);
   if (depth < MAX - 200) docked = false;
 }
 
@@ -297,7 +366,22 @@ function draw() {
   }
 
   for (const b of bubbles) drawBubble(b);
+  for (const p of spray) {
+    const y = wl + p.y;
+    // A short tail shows the direction of travel even in a single frame.
+    for (let j = 4; j > 0; j--) {
+      const x = p.x - p.vx * j * 0.012, tailY = Math.min(wl, y - p.vy * j * 0.012);
+      col.set(x, tailY, C.rim); col.set(x + 1, tailY, C.lit);
+    }
+    col.set(p.x, y, C.hi); col.set(p.x + 1, y, C.hi);
+  }
+  for (const p of silt) {
+    const a = p.life * 1.4;
+    col.dot(p.x, p.y, C.silt[p.c], a);
+    if (p.s === 2) { col.dot(p.x + 1, p.y, C.silt[p.c], a); col.dot(p.x, p.y + 1, C.silt[p.c], a); col.dot(p.x + 1, p.y + 1, C.silt[p.c], a); }
+  }
   for (const p of pops) {
+    if (p.k < 0) continue;
     const r = p.r + 1 + p.k * 3;
     for (let a = 0; a < TAU; a += 0.5 / r) if (Math.sin(a) < 0.2) col.dot(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r * 0.5, p.k < 0.5 ? C.hi : C.lit, 1 - p.k);
   }
@@ -328,7 +412,7 @@ function draw() {
     const b = box(berth);
     if (b.on) {
       light.glow(b.x + b.w * 0.74, b.y + b.h * 0.52, b.w * 0.16, C.warm, 0.16);
-      if (docked) light.glow(b.x + b.w * 0.905, b.y + b.h * 0.05, 8, C.dock, 0.45 + 0.15 * Math.sin(t * 3));
+      if (docked) light.glow(b.x + b.w * 0.905, b.y + b.h * 0.05, 8 + flash * 10, C.dock, 0.45 + 0.15 * Math.sin(t * 3) + flash * 0.4);
     }
   }
   for (const [el, until] of litUntil) {
@@ -352,16 +436,16 @@ function draw() {
   col.flush(); light.flush();
 }
 
-let running = false;
+let running = false, start = null;
 function frame(now) {
   step(Math.min(0.05, (now - t0) / 1000)); t0 = now;
   draw();
-  running = !document.hidden && requestAnimationFrame(frame);
+  running = !document.hidden && !html.classList.contains('still') && requestAnimationFrame(frame);
 }
 if (!reduce) {
   resize();
   document.body.append(col.cv, light.cv);
-  const start = () => { if (!running && !document.hidden) { t0 = performance.now(); running = requestAnimationFrame(frame); } };
+  start = () => { if (!running && !document.hidden) { t0 = performance.now(); running = requestAnimationFrame(frame); } };
   document.addEventListener('visibilitychange', start);
   start();
 }

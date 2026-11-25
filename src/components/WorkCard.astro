@@ -4,7 +4,7 @@ const { catch: c, kind, title, body, sample, link } = (Astro.props as { entry: C
 ---
 <article>
   <p class="catch"><b>{c.approx && <i class="approx">~</i>}{c.value}</b> <span>{c.label}</span></p>
-  <p class="mono kind">{kind}</p>
+  <p class="mono kind" translate="no">{kind}</p>
   <h3>{title}</h3>
   <p>{body}</p>
   {sample && (

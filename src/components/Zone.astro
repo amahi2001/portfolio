@@ -14,6 +14,7 @@ const { cls, id, depth, name, labelledby, creature, facts = [] } = Astro.props;
 <section id={id} class={`zone ${cls}`} data-depth={depth} data-name={name} aria-labelledby={labelledby}>
   <div class="ocean" aria-hidden="true">
     <div class="landscape"></div>
+    {creature === 'turtle' && <div class="dim"></div>}
     {creature && <img class="creature" src={`/assets/${creature}.webp`} alt="" loading="lazy" width="320" height="190" />}
     {creature && <div class="fore"></div>}
     <div class="marine-snow"></div>

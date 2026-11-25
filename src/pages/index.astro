@@ -14,15 +14,16 @@ const arrow = '↗';
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="helm">
-    <a class="brand" href="#surface" aria-label="amahi.dev, back to the surface"><img src="/assets/mark.svg" alt="" width="28" height="28" />amahi.dev</a>
+    <a class="brand" translate="no" href="#surface" aria-label="amahi.dev, back to the surface"><img src="/assets/mark.svg" alt="" width="28" height="28" />amahi.dev</a>
     <div class="instruments" aria-hidden="true">
       <span class="panel sounder"><small>Depth</small> <b></b></span>
       <span class="pips"><i data-zone="0"></i><i data-zone="1"></i><i data-zone="2"></i><i data-zone="3"></i><em class="zone-name">Harbor</em></span>
     </div>
-    <nav aria-label="Main"><a href="#work">Work</a><a href="#career">Career</a><a href="#server">Lab</a></nav>
+    <nav aria-label="Main"><a href="#work">Work</a><a href="#career">Career</a><a href="#server">Lab</a><button class="hold" type="button" aria-pressed="false" aria-label="Pause animations">❚❚</button></nav>
     <div class="progress" aria-hidden="true"></div>
   </header>
   <div class="ruler" aria-hidden="true"><span class="you">you</span></div>
+  <div class="vignette" aria-hidden="true"></div>
   <main id="main">
     <div class="traveler" aria-hidden="true">
       <div class="launch"><div class="dock-approach">
@@ -39,13 +40,13 @@ const arrow = '↗';
         <div class="surface-intro">
           <p class="lead">{p.lead}</p>
           <p>{p.intro}</p>
-          <ul class="stats">{p.stats.map(([n, label]) => <li><b>{n}</b> {label}</li>)}</ul>
+          <div class="manifest"><p class="manifest-title" aria-hidden="true">Dive manifest</p><dl>{p.stats.map(([n, label]) => <div><dt>{n}</dt><dd>{label}</dd></div>)}</dl></div>
           <div class="actions"><a class="button" href="#reef-entry">Start the dive <span aria-hidden="true">↓</span></a> <a href="#server">Skip to the lab</a></div>
         </div>
       </div>
     </Zone>
 
-    <div class="kelp-crossing" aria-hidden="true"><img src="/assets/kelp.webp" alt="" /></div>
+    <div class="kelp-crossing" aria-hidden="true"><img src="/assets/kelp.webp" alt="" width="96" height="123" loading="lazy" /></div>
 
     <Zone cls="reef" id="reef-entry" depth="10 200" name="Sunlit" labelledby="work-title" creature="turtle"
       facts={[['── 10 m · pressure has already doubled'], ['red light is gone by ~15 m. the sub is yellow in theory only ──', true], ['── 200 m · the sunlight zone ends']]}>
@@ -64,7 +65,7 @@ const arrow = '↗';
         <h2 id="career-title" class="chroma">The dive log<span class="dot">.</span></h2>
         <p class="chapter-intro">{p.careerIntro}</p>
         <div class="timeline">
-          {career.map(({ data: j }) => <article><p class="mono kind">{j.dates}</p><h3>{j.org}</h3><p class="role">{j.role}</p><p>{j.body}</p></article>)}
+          {career.map(({ data: j }) => <article><p class="mono kind">{j.dates}</p><h3 translate="no">{j.org}</h3><p class="role">{j.role}</p><p>{j.body}</p></article>)}
           <p class="education"><strong>{p.education[0]}</strong><br />{p.education[1]}</p>
           <a class="project-link profile-link" href={p.linkedin}>Connect on LinkedIn <span aria-hidden="true">{arrow}</span></a>
         </div>
