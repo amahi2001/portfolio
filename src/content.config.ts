@@ -2,7 +2,7 @@ import { defineCollection } from 'astro:content';
 import { file } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const link = z.object({ href: z.string().url(), text: z.string() });
+const link = z.object({ href: z.url(), text: z.string() });
 
 // Each file is an ordered list; `order` keeps the page order stable.
 export const collections = {

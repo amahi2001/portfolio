@@ -70,10 +70,12 @@ p,dd { text-wrap: pretty; }
 .zone { display: grid; position: relative; isolation: isolate; view-timeline-name: --zone; }
 .ocean,.walk { grid-area: 1 / 1; }
 .ocean { position: sticky; top: 0; align-self: start; height: 100vh; height: 100svh; overflow: hidden; pointer-events: none; background: var(--water); }
-.landscape { position: absolute; inset: -6% 0; background: var(--art) var(--focal,center) / cover no-repeat; image-rendering: pixelated; }
+.landscape { position: absolute; inset: -6% 0; background: var(--art) var(--focal,center) / cover no-repeat; image-rendering: pixelated;
+  /* Whole-number scale: the smallest multiple of the 512 px art that still covers the box */
+  background-size: max(round(up, 100vw, 512px), round(up, 112svh * 1.5015, 512px)) auto; }
 .ocean::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--seam,transparent), transparent 14%, transparent 78%,var(--end)); }
 .marine-snow { position: absolute; inset: -12% 0; opacity: .46; background: url("/assets/plankton.png") repeat; background-size: 206px 260px; image-rendering: pixelated; }
-.creature { position: absolute; z-index: 1; display: block; object-fit: contain; width: var(--size); height: auto; max-height: 32svh; top: var(--top); left: var(--left); }
+.creature { position: absolute; z-index: 1; display: block; object-fit: contain; width: var(--size); width: max(var(--native), round(nearest, var(--size), var(--native))); height: auto; top: var(--top); left: var(--left); }
 .walk { width: min(39rem,70%); margin-left: clamp(1.2rem,8vw,9rem); align-self: start; z-index: 2; position: relative; }
 .zone:not(.surface) .ocean::before {
   content:""; position:absolute; inset:0; z-index:1;
@@ -91,13 +93,13 @@ p,dd { text-wrap: pretty; }
 /* The surface must leave with the reader. Holding the sky behind rising
    white copy makes the introduction disappear at the waterline. */
 .surface .ocean { position:relative; height:100%; align-self:stretch; }
-.surface .landscape { inset:0 0 auto; height:100svh; mask-image:linear-gradient(black 76%,transparent); }
+.surface .landscape { inset:0 0 auto; height:100svh; mask-image:linear-gradient(black 76%,transparent); background-size: cover; background-size: max(round(up, 100vw, 512px), round(up, 100svh * 1.5015, 512px)) auto; }
 .intro { width:100%; margin:0; padding-block:clamp(5.3rem,11svh,9rem) 17svh; }
 .surface-name { text-align:center; color:#132c42; }
 .surface-name h1 { color:#102941; text-shadow:2px 3px #ffe4ac; }
 .surface-name h1 .dot { color:var(--amber); text-shadow:2px 3px #102941; }
 .origin { font:.83rem/1.5 var(--mono); margin-bottom:.3rem; }
-.surface-intro { width:min(40rem,72%); margin:clamp(8rem,24svh,20rem) 0 0 clamp(1.25rem,10vw,10rem); }
+.surface-intro { width:min(40rem,72%); margin:clamp(7.5rem,22.5svh,20rem) 0 0 clamp(1.25rem,10vw,10rem); }
 .lead { font:700 clamp(1.45rem,2.1vw,2.35rem)/1.15 var(--pixel); color:var(--light); margin:0 0 .7rem; max-width:24ch; text-shadow:0 2px 0 #06303c, 0 0 18px #06303c; }
 .surface-intro > p:not([class]) { text-shadow:0 1px 0 #06303c, 0 0 10px #06303c; }
 .surface-intro > p:not([class]),.chapter-intro { max-width: 55ch; }
@@ -108,7 +110,7 @@ p,dd { text-wrap: pretty; }
 .reef {
   view-timeline-name: --zone, --at-work;
   --water:#0a4551; --seam:#0a4551; --end:#082b47; --art:url("/assets/reef.webp"); --shade:#063140ed;
-  --left:74%; --top:40%; --size:clamp(8rem,18vw,18rem); --x0:18%; --x1:-45%; --y0:50%; --y1:-45%;
+  --left:74%; --top:40%; --size:clamp(8rem,18vw,18rem); --native:160px; --x0:18%; --x1:-45%; --y0:50%; --y1:-45%;
 }
 .timeline { border-left:2px dashed #9be0df7d; margin:2rem 0 0 .35rem; padding-left:clamp(1.2rem,3vw,2.4rem); }
 .timeline article { position:relative; padding:0 0 2rem; }
@@ -119,7 +121,7 @@ p,dd { text-wrap: pretty; }
 .twilight {
   view-timeline-name: --zone, --at-career;
   --water:#082b47; --seam:#082b47; --end:#07192d; --art:url("/assets/twilight.webp"); --shade:#0a1938e6; --reading-direction:270deg;
-  --left:8%; --top:47%; --size:clamp(11rem,28vw,30rem); --x0:18%; --x1:-31%; --y0:58%; --y1:-48%;
+  --left:8%; --top:47%; --size:clamp(11rem,28vw,30rem); --native:150px; --x0:18%; --x1:-31%; --y0:58%; --y1:-48%;
 }
 .twilight .walk { justify-self:end; margin-left:0; margin-right:max(12vw,6.8rem); width:min(37rem,48%); }
 .chapter-intro { margin-top:1.1rem; }
@@ -128,7 +130,7 @@ p,dd { text-wrap: pretty; }
 .abyss {
   view-timeline-name: --zone, --at-server;
   --water:#07192d; --seam:#07192d; --end:#061322; --art:url("/assets/abyss.webp"); --shade:#06182de8;
-  --left:76%; --top:28%; --size:clamp(6rem,12vw,13rem); --x0:-32%; --x1:16%; --y0:53%; --y1:-43%;
+  --left:76%; --top:28%; --size:clamp(8rem,16vw,16rem); --native:128px; --x0:-32%; --x1:16%; --y0:53%; --y1:-43%;
 }
 .services dt { font:700 1.6rem/1.2 var(--pixel); color:var(--seafoam); }
 .services dd { margin-top:.3rem; }
@@ -160,7 +162,7 @@ p,dd { text-wrap: pretty; }
 .sub { width:100%; height:auto; display:block; image-rendering:pixelated; }
 .launch,.dock-approach { transform-origin:top left; }
 .kelp-crossing { position:relative; height:0; z-index:5; pointer-events:none; }
-.kelp-crossing img { position:absolute; top:-14svh; right:1.3vw; width:clamp(6rem,13vw,14rem); image-rendering:pixelated; }
+.kelp-crossing img { position:absolute; top:-14svh; right:1.3vw; width:clamp(6rem,13vw,14rem); width:max(96px, round(nearest, clamp(6rem,13vw,14rem), 96px)); height:auto; image-rendering:pixelated; }
 .berth { position:absolute; z-index:2; left:var(--dock-left); bottom:calc(100svh - var(--dock-floor) - var(--dock-size) * .16); width:var(--dock-size); image-rendering:pixelated; }
 .berth img { display:block; width:100%; height:auto; }
 .berth::after { content:""; position:absolute; left:89.3%; top:2.4%; width:2.7%; height:5.2%; background:#a7ffe7; box-shadow:0 0 .65rem #70f5b4; opacity:0; }
@@ -292,7 +294,7 @@ nav a::after { content:""; position:absolute; height:2px; background:var(--amber
              repeating-linear-gradient(to bottom,#a7f8dc88 0 1px,transparent 1px 12.5vh) right .2rem top 0 / .9rem 100% no-repeat; }
 .js .ruler { display:block; }
 .ruler .tick { position:absolute; right:1.25rem; transform:translateY(-50%); white-space:nowrap; }
-.ruler .you { position:absolute; right:0; top:0; transform:translateY(calc(var(--ruler-y,0px) - 50%)); display:flex; align-items:center; gap:.3rem;
+.ruler .you { position:absolute; right:0; top:0; transform:translateY(-50%); display:flex; align-items:center; gap:.3rem;
   color:var(--coral); text-transform:uppercase; letter-spacing:.2em; text-shadow:0 0 8px #ff6b7a99; }
 .ruler .you::after { content:""; width:0; height:0; border-block:5px solid transparent; border-right:8px solid var(--coral); }
 
@@ -324,7 +326,8 @@ nav a::after { content:""; position:absolute; height:2px; background:var(--amber
 /* CRT scanlines and a vignette that deepens on the way down */
 body::after { content:""; position:fixed; inset:0; z-index:10; pointer-events:none;
   background:repeating-linear-gradient(0deg,#0000000f 0 1px,transparent 1px 3px),
-             radial-gradient(ellipse at 50% 45%,transparent 55%,rgb(1 8 16 / calc(.25 + var(--depth-p,0) * .4)) 100%); }
+             radial-gradient(ellipse at 50% 45%,transparent 55%,rgb(1 8 16 / .25) 100%); }
+.vignette { position:fixed; inset:0; z-index:10; pointer-events:none; opacity:0; background:radial-gradient(ellipse at 50% 45%,transparent 50%,rgb(1 8 16 / .5) 100%); }
 
 /* Per-letter bob on the hero name (letters wrapped by dive.js) */
 .chroma .ch { display:inline-block; animation:bob 3.2s ease-in-out infinite; animation-delay:calc(var(--i) * -.21s); }
@@ -397,7 +400,8 @@ h1.chroma { animation:flicker 6s steps(1) infinite; }
 nav a.here::after { opacity:1; }
 
 /* Foreground silhouettes: closest layer, so it drifts fastest */
-.fore { position:absolute; z-index:1; inset:auto 0 -10% 0; height:78%; background:var(--fore) center bottom / cover no-repeat; image-rendering:pixelated; }
+.fore { position:absolute; z-index:1; inset:auto 0 -10% 0; height:78%; background:var(--fore) center bottom / cover no-repeat; image-rendering:pixelated;
+  background-size: max(round(up, 100vw, 480px), round(up, 78svh * 2, 480px)) auto; }
 .reef { --fore:url("/assets/reef-fore.webp"); }
 .twilight { --fore:url("/assets/twilight-fore.webp"); }
 .abyss { --fore:url("/assets/abyss-fore.webp"); }
@@ -406,7 +410,7 @@ nav a.here::after { opacity:1; }
   @media (prefers-reduced-motion: no-preference) { .fore { animation:fore-drift linear both; animation-timeline:--zone; } }
 }
 .no-sdt .fore { animation:fore-drift 1s linear both paused; animation-delay:calc(var(--p,0) * -1s); }
-@media (max-width: 47rem) { .fore { opacity:.75; height:60%; } }
+@media (max-width: 47rem) { .fore { opacity:.75; height:60%; background-size: max(round(up, 100vw, 480px), round(up, 60svh * 2, 480px)) auto; } }
 /* The harbor holds still so the hull rides its waterline */
 .surface .landscape,.no-sdt .surface .landscape { animation:none; }
 @media (max-width: 47rem) {
@@ -419,16 +423,47 @@ nav a.here::after { opacity:1; }
 
 /* Reading light: the reef dims while its chapter is being read and
    returns to full colour between chapters */
-@keyframes reading-dim { 0%,100% { filter:none; } 24%,80% { filter:saturate(.55) brightness(.62); } }
+.dim { position:absolute; inset:0; z-index:1; background:#05222e; opacity:0; pointer-events:none; }
+@keyframes reading-dim { 0%,100% { opacity:0; } 24%,80% { opacity:.5; } }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .reef .landscape { animation:water-drift linear both, reading-dim linear both; animation-timeline:--zone, --zone; }
+    .reef .dim { animation:reading-dim linear both; animation-timeline:--zone; }
   }
 }
-@media (prefers-reduced-motion: reduce) { .reef .landscape { filter:saturate(.6) brightness(.7); } }
+@media (prefers-reduced-motion: reduce) { .reef .dim { opacity:.42; } }
 
 /* Thermoclines: a soft band of water where one zone gives way to the next */
 .twilight::before,.abyss::before { content:""; position:absolute; z-index:1; left:0; right:0; top:-28vh; height:56vh; pointer-events:none;
   background:linear-gradient(to bottom,transparent,var(--blend) 45%,var(--blend) 55%,transparent); }
 .twilight { --blend:#0a3550; }
 .abyss { --blend:#081c35; }
+
+/* Touch: no double-tap delay; a tap highlight that belongs to the palette */
+html { -webkit-tap-highlight-color:#4de3ff33; }
+a,button { touch-action:manipulation; }
+
+/* Press feedback, quick and small */
+.actions .button { transition:background-color .15s ease, box-shadow .2s ease, scale .12s cubic-bezier(0.23,1,0.32,1); }
+.actions .button:active { scale:.97; }
+
+/* Still water: one switch pauses every idle loop and the water effects */
+.hold { display:none; margin-left:clamp(.4rem,1.5vw,1.2rem); padding:.25rem .5rem; min-width:2.2rem; min-height:2.2rem; font:1.15rem/1 var(--hud); color:var(--seafoam);
+  background:transparent; border:1px solid #4de3ff55; cursor:pointer; }
+.hold:hover { border-color:var(--seafoam); color:var(--light); }
+.hold:focus-visible { outline:3px solid var(--amber); outline-offset:3px; }
+.js .hold { display:inline-block; }
+.helm nav { align-items:center; }
+.still .sub,.still .chroma .ch,.still h1.chroma { animation-play-state:paused !important; }
+.still .creature { animation-play-state:running, paused; }
+.still .fx,.still .vignette { visibility:hidden; }
+@media (max-width: 47rem) { .still .creature { animation-play-state:running, running, paused; } .hold { margin-left:.2rem; min-width:1.9rem; padding:.2rem .35rem; } }
+@media (prefers-reduced-motion: reduce) { .js .hold { display:none; } }
+
+/* Dive manifest: the three proofs, read off an instrument rather than cards */
+.manifest { margin:1.2rem 0 0; max-width:34rem; padding:.55rem .9rem .6rem; background:#06283ad9; border:1px solid #4de3ff40;
+  clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px),0 6px); }
+.manifest-title { font:1.05rem/1.3 var(--hud); letter-spacing:.2em; text-transform:uppercase; color:var(--seafoam); margin:0 0 .2rem; }
+.manifest dl { margin:0; }
+.manifest dl > div { display:grid; grid-template-columns:4.8ch 1fr; gap:.8rem; align-items:baseline; padding:.08rem 0; border-top:1px dashed #a7f8dc33; }
+.manifest dt { font:400 1.85rem/1.05 var(--hud); color:var(--amber); text-shadow:0 0 12px #ffd08b55; font-variant-numeric:tabular-nums; }
+.manifest dd { margin:0; font:.875rem/1.35 var(--mono); color:#d8f3ef; }

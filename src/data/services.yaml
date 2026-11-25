@@ -6,7 +6,7 @@
 - id: ci
   order: 2
   name: CI runners
-  body: Self-hosted GitHub Actions runners, so my private repositories are tested here instead of on rented minutes.
+  body: Self-hosted GitHub Actions runners. I test my private repositories here instead of on rented minutes.
 - id: gateway
   order: 3
   name: Agent gateway

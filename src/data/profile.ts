@@ -22,6 +22,6 @@ export const profile = {
   workIntro: 'Five things I’ve built, each with the number I’d want to see if I were the one reading.',
   careerIntro: 'Since 2022: from satellite retrievals to the documents enterprises bet money on.',
   education: ['Hunter College, CUNY', 'BA in Computer Science, minor in Mathematics. Magna cum laude with departmental honors, 2023.'],
-  labIntro: 'My old gaming PC, rebuilt as a single NixOS flake. Every service below is declared in code, so the whole machine can be rebuilt from one repository.',
+  labIntro: 'My old gaming PC, rebuilt as a single NixOS flake. I declare every service below in code, so I can rebuild the whole machine from one repository.',
   contact: 'If you’re building agents that have to be right about documents, or you want to compare notes on running them on your own metal, I’d like to hear from you.',
 } as const;
