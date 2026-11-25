@@ -297,7 +297,7 @@ nav a::after { content:""; position:absolute; height:2px; background:var(--amber
 
 .facts { grid-area:1/1; position:relative; z-index:2; pointer-events:none; }
 .facts { display:none; }
-.facts p { position:absolute; top:var(--at); right:calc(var(--ruler-w) + var(--hull-size) + 2.4rem); max-width:min(29ch,24vw); text-align:right;
+.facts p { position:absolute; right:calc(var(--ruler-w) + var(--hull-size) + 2.4rem); max-width:min(29ch,24vw); text-align:right;
   font:1.2rem/1.25 var(--hud); letter-spacing:.08em; color:#d6f4f0b8; text-shadow:0 2px 0 #000a, 0 0 12px #021019; }
 .twilight .facts p { right:auto; left:clamp(1.2rem,4vw,4rem); text-align:left; }
 @media (min-width: 75rem) { .facts { display:block; } }
@@ -400,3 +400,7 @@ nav a.here::after { opacity:1; }
 @media (max-width: 47rem) {
   .zone:not(.surface) .ocean::before { background:linear-gradient(90deg,var(--shade) 0 58%,color-mix(in srgb,var(--shade) 45%,transparent) 100%); }
 }
+/* Fact depths live here: the server's CSP forbids inline style attributes */
+.reef .facts p:nth-child(1) { top:9%; } .reef .facts p:nth-child(2) { top:38%; } .reef .facts p:nth-child(3) { top:70%; }
+.twilight .facts p:nth-child(1) { top:12%; } .twilight .facts p:nth-child(2) { top:52%; } .twilight .facts p:nth-child(3) { top:86%; }
+.abyss .facts p:nth-child(1) { top:8%; } .abyss .facts p:nth-child(2) { top:40%; } .abyss .facts p:nth-child(3) { top:74%; }
