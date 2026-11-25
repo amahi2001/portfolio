@@ -9,8 +9,13 @@ const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
 assert.equal(new Set(ids).size, ids.length);
 for (const [, ref] of html.matchAll(/(?:href|src)="([/#][^"]*)"/g)) {
   if (ref.startsWith('#')) assert(ids.includes(ref.slice(1)), ref);
-  else assert(existsSync('out' + ref), ref);
+  else assert(existsSync('out' + new URL(ref, 'https://amahi.dev').pathname), ref);
 }
+const css = readFileSync('out/style.css', 'utf8');
+for (const [, asset] of css.matchAll(/url\("(\/assets\/[^"]+)"\)/g)) {
+  assert(existsSync('out' + asset), asset);
+}
+assert.doesNotMatch(md, /!\[.*?\]\(.*?\.webp\)/, 'Decorative scenery leaked into Markdown');
 const profile = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
 assert.equal(profile.mainEntity.name, 'Abrar Mahi');
 const role = profile.mainEntity.jobTitle + ' at ' + profile.mainEntity.worksFor.name;
