@@ -29,4 +29,6 @@ assert(llms.startsWith('# Abrar Mahi\n\n> '));
 assert(llms.includes('https://amahi.dev/index.md'));
 assert.deepEqual(readdirSync('out').sort(), ['assets', 'dive.js', 'index.html', 'index.md', 'llms.txt', 'robots.txt', 'sitemap.xml', 'style.css']);
 assert.doesNotMatch(html + md + llms, /https?:\/\/(?:[\w.-]+\.amahi\.dev|localhost|127\.0\.0\.1)\b/i);
+assert.doesNotMatch(html, /\sstyle="/, 'Inline style attributes break the server CSP');
+assert.doesNotMatch(html, /<script(?![^>]*(?:type="application\/ld\+json"|src=))/, 'Inline scripts break the server CSP');
 console.log('Verified public files, local links, fragments, structured data and Markdown content.');
