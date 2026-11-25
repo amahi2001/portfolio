@@ -1,9 +1,10 @@
+.PHONY: init run-dev
 init:
-	nvm use 20
-	pnpm install
+	npm run build
 
 run-dev:
-	pnpm run dev
+	npm run dev
 
-deploy-dev:
-	vercel
+.PHONY: design-tools
+design-tools:
+	npx --yes impeccable@4.11.0 install --providers=codex --scope=project --yes
