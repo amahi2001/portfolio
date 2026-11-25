@@ -20,13 +20,13 @@ const profile = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?
 assert.equal(profile.mainEntity.name, 'Abrar Mahi');
 const role = profile.mainEntity.jobTitle + ' at ' + profile.mainEntity.worksFor.name;
 for (const source of [md, llms, html]) assert(source.includes(role), 'Current role mismatch');
-for (const name of ['LlamaIndex', 'Python Token Killer', 'Squirro', 'NASA Goddard', 'Hunter College', 'Nextcloud', 'Jellyfin', 'AdGuard Home', 'NixOS']) {
+for (const name of ['LlamaIndex', 'Python Token Killer', 'Graph RAG', 'Jun — Oct 2026', 'abrar-homeserver', 'Squirro', 'NASA Goddard', 'Hunter College', 'Nextcloud', 'Jellyfin', 'AdGuard Home', 'NixOS']) {
   assert(md.includes(name), name);
 }
 assert(md.startsWith('# Abrar Mahi'));
 assert(md.includes('flood_coverage: true'));
 assert(llms.startsWith('# Abrar Mahi\n\n> '));
 assert(llms.includes('https://amahi.dev/index.md'));
-assert.deepEqual(readdirSync('out').sort(), ['assets', 'index.html', 'index.md', 'llms.txt', 'robots.txt', 'sitemap.xml', 'style.css']);
+assert.deepEqual(readdirSync('out').sort(), ['assets', 'dive.js', 'index.html', 'index.md', 'llms.txt', 'robots.txt', 'sitemap.xml', 'style.css']);
 assert.doesNotMatch(html + md + llms, /https?:\/\/(?:[\w.-]+\.amahi\.dev|localhost|127\.0\.0\.1)\b/i);
 console.log('Verified public files, local links, fragments, structured data and Markdown content.');
