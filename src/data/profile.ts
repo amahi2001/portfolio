@@ -11,7 +11,7 @@ export const profile = {
   ptk: 'https://github.com/amahi2001/python-token-killer',
   title: 'Abrar Mahi | Applied AI engineer, New York',
   description: 'Abrar Mahi is a Member of Technical Staff at Squirro in New York. He builds document AI and agents that show their work, wrote ptk (76% fewer LLM tokens), and runs a NixOS lab for coding agents.',
-  ogDescription: 'Document AI that shows its work, agents that earn their tokens, and a NixOS lab at the bottom of the sea. A portfolio from New York.',
+  ogDescription: 'Document AI that cites its sources, a library that cuts LLM tokens by 76%, and a NixOS lab at the bottom of the sea. A portfolio from New York.',
   lead: 'I build AI that reads the documents companies actually run on, and makes it show its work.',
   intro: 'Member of Technical Staff at Squirro. Before that: LlamaIndex, The New York Public Library and NASA Goddard. After hours I run a NixOS lab where coding agents get their own dev boxes. You’re reading this page on it.',
   stats: [
@@ -19,7 +19,7 @@ export const profile = {
     ['10k+', 'daily visitors on library sites I shipped'],
     ['76%', 'fewer LLM tokens on my library’s benchmark suite'],
   ],
-  workIntro: 'Five things I’ve built, each with the number I’d want to see if I were the one reading.',
+  workIntro: 'Five things I’ve built, numbers first.',
   careerIntro: 'Since 2022: from satellite retrievals to the documents enterprises bet money on.',
   education: ['Hunter College, CUNY', 'BA in Computer Science, minor in Mathematics. Magna cum laude with departmental honors, 2023.'],
   labIntro: 'My old gaming PC, rebuilt as a single NixOS flake. I declare every service below in code, so I can rebuild the whole machine from one repository.',
