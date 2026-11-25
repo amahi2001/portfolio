@@ -1,15 +1,17 @@
-# The underwater portfolio
+# A dive from New York Harbor
 
-The entire page follows a continuous scroll from New York Harbor into a fictional ocean. The portfolio’s original underwater parallax and Krillion’s pixel-art dive informed the direction. Native anchors let visitors go straight to work, career, or the home server.
+Abrar’s name sits above the harbor waterline. A yellow survey sub follows the reader down past the sunlit reef and the twilight canyon. The trip ends at a lit berth beside the home server. The original portfolio’s underwater parallax and the way Krillion keeps its traveler in frame informed the journey.
 
-## The descent
+## Travel and shortcuts
 
-The surface opens on a skyline, a buoy, and a small yellow survey sub. Selected work sits in a sunlit reef with a turtle. The career log crosses a darker jellyfish canyon with a passing whale. The final stop is a lit seafloor station beside the home server tour. Original ImageGen landscapes and transparent creatures ship as local WebP files. Tiny suspended particles form a separate foreground layer.
+Scrolling carries the waterline overhead. Near the first reef, kelp crosses in front of the hull. The same sub then parks in the reading margin until the station comes into view. At the bottom the hull settles onto the berth and the signal light changes. The header shows the illustrated dive depth and current chapter.
 
-## Motion and reading
+Work, Career and Server in the navigation jump to the reading position. The launch button points to the reef entrance. LinkedIn is accessible from Career and from the station. Screen readers skip the scenery and use the same headings and links.
 
-Each chapter has a sticky, viewport-sized scene behind naturally scrolling text. CSS view timelines move distant terrain, animals, and particles at different rates. A line below the navigation shows overall scroll progress. Browsers without view timelines retain the sticky scenery. Reduced-motion mode keeps the artwork in the document flow with fixed poses. The site uses native links and requires no JavaScript.
+## Reading under water
 
-## Type and color
+The reef shows a sample source field and its extracted value beside the insurance talk. The dashed chronology belongs to Career. At the station the services are a glossary, and the contact links sit beside the berth. On phones, passing animals recede while text is on screen. The sub has its own lane at the right edge.
 
-Self-host Pixelify Sans for names and chapter headings. Use IBM Plex Mono for navigation and labels, and system sans for paragraphs. Seafoam links each chapter visually. Warm amber marks actions against water that deepens from teal to indigo and midnight blue.
+## Implementation
+
+Self-hosted Pixelify Sans handles titles, IBM Plex Mono handles instruments, and system sans handles prose. Warm amber marks actions against water that shifts from teal to indigo. All scene art is local WebP. Motion follows native scrolling through CSS timelines. Reduced-motion mode uses stationary poses at sea and at the dock. The page remains readable and navigable without JavaScript or timeline support.
