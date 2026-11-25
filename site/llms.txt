@@ -1,7 +1,9 @@
 # Abrar Mahi
 
-> Abrar Mahi is a New York-based Member of Technical Staff at Squirro. His portfolio covers applied AI, public software, and the services he self-hosts.
+> Abrar Mahi is a New York-based Member of Technical Staff at Squirro. He builds document AI and agents that cite their sources, wrote the open-source Python Token Killer (76% fewer LLM tokens on its benchmark suite), and runs a NixOS home lab where coding agents work in their own dev boxes.
 
 ## Portfolio
 
-- [Portfolio in Markdown](https://amahi.dev/index.md): Selected projects, career history, education, a public tour of the home server, and professional contact links.
+- [Portfolio in Markdown](https://amahi.dev/index.md): Selected work with measured outcomes, career history (Squirro, LlamaIndex, The New York Public Library, NASA Goddard), education, a public tour of the home lab, and professional contact links.
+- [Home lab configuration](https://github.com/amahi2001/abrar-homeserver): The public NixOS flake behind the server that hosts this site.
+- [Python Token Killer](https://github.com/amahi2001/python-token-killer): Dependency-free Python library that compresses objects before they reach a language model.
