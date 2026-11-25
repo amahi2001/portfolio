@@ -69,19 +69,19 @@ function measure() {
   };
   // Ruler ticks where each zone begins, plus the floor.
   $$('.tick', ruler).forEach(t => t.remove());
-  const marks = zones.map(z => [z.a, z.top]).concat([[MAX, max + vh * 0.45]]);
+  const marks = zones.map(z => [z.a, z.top]).concat([[MAX, max + vh * 0.6]]);
   marks.slice(1).forEach(([m, y]) => {
     const t = document.createElement('span');
     t.className = 'tick';
     t.textContent = fmt.format(m) + ' m';
-    t.style.top = clamp((y - vh * 0.45) / max) * 100 + '%';
+    t.style.top = clamp((y - vh * 0.6) / max, 0.02, 0.97) * 100 + '%';
     ruler.append(t);
   });
 }
 
 let depth = 0, zoneIndex = 0;
 function update() {
-  const y = scrollY, line = y + vh * 0.45;
+  const y = scrollY, line = y + vh * 0.6;
   zoneIndex = 0;
   zones.forEach((z, i) => { if (line >= z.top) zoneIndex = i; });
   const z = zones[zoneIndex];
@@ -91,7 +91,8 @@ function update() {
   nameOut.textContent = z.name;
   pips.forEach((p, i) => { p.classList.toggle('on', i < zoneIndex); p.classList.toggle('here', i === zoneIndex); });
   html.style.setProperty('--depth-p', (depth / MAX).toFixed(3));
-  ruler.style.setProperty('--ruler-y', clamp(geo.root(y)) * ruler.clientHeight + 'px');
+  const rh = ruler.clientHeight;
+  ruler.style.setProperty('--ruler-y', clamp(geo.root(y), 0.02, 0.97) * rh + 'px');
   if (html.classList.contains('no-sdt')) {
     fallback.forEach(([el, f]) => el && el.style.setProperty('--p', clamp(f()(y)).toFixed(4)));
     zones.forEach(z => z.el.style.setProperty('--p', clamp((y + vh - z.top) / (z.h + vh)).toFixed(4)));
@@ -305,7 +306,7 @@ function draw() {
   // brighter near the pointer.
   const bio = clamp((depth - 900) / 600);
   if (bio > 0) {
-    const x0 = innerWidth < 760 ? 0 : 0.52;
+    const x0 = innerWidth < 760 ? 0.8 : 0.52;
     for (const p of plankton) {
       const x = (x0 + (((p.x % 1) + 1) % 1) * (1 - x0)) * BW, y = ((((p.y - sY * 0.12 / BH) % 1) + 1) % 1) * BH;
       const u = (t / p.per + p.ph) % 1, near = clamp(1 - Math.hypot(x - pointer.x, y - pointer.y) / 40);

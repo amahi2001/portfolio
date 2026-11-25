@@ -21,7 +21,7 @@
   <meta property="og:image" content="https://amahi.dev/assets/surface.webp">
   <meta property="og:image:alt" content="A pixel-art dive beneath New York Harbor">
   <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","url":"https://amahi.dev/","mainEntity":{"@type":"Person","@id":"https://amahi.dev/#abrar","name":"Abrar Mahi","jobTitle":"Member of Technical Staff","worksFor":{"@type":"Organization","name":"Squirro"},"alumniOf":{"@type":"CollegeOrUniversity","name":"Hunter College"},"sameAs":["https://github.com/amahi2001","https://www.linkedin.com/in/abrarmahi/"]}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","url":"https://amahi.dev/","mainEntity":{"@type":"Person","@id":"https://amahi.dev/#abrar","name":"Abrar Mahi","email":"mailto:amahi2001@gmail.com","jobTitle":"Member of Technical Staff","worksFor":{"@type":"Organization","name":"Squirro"},"alumniOf":{"@type":"CollegeOrUniversity","name":"Hunter College"},"sameAs":["https://github.com/amahi2001","https://www.linkedin.com/in/abrarmahi/"]}}</script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -57,7 +57,7 @@
           <ul class="stats">
             <li><b>15+</b> enterprise GenAI proofs of concept</li>
             <li><b>10k+</b> daily visitors on library sites I shipped</li>
-            <li><b>76%</b> fewer LLM tokens with my library, ptk</li>
+            <li><b>76%</b> fewer LLM tokens on my library’s benchmark suite</li>
           </ul>
           <div class="actions"><a class="button" href="#reef-entry">Start the dive <span aria-hidden="true">↓</span></a> <a href="#server">Skip to the lab</a></div>
         </div>
@@ -82,6 +82,13 @@
         <p class="chapter-intro">Five things I’ve built, each with the number I’d want to see if I were the one reading.</p>
         <div class="work-list">
           <article>
+            <p class="catch"><b>76%</b> <span>fewer tokens on JSON, code, logs, records and prose (tiktoken cl100k), 89% on code alone</span></p>
+            <p class="mono kind">Open source · Python</p>
+            <h3>ptk, the Python Token Killer</h3>
+            <p>Agents burn context on nulls, docstrings and log spam. Python Token Killer is a dependency-free library that compresses any Python object, whether JSON, code, logs or diffs, before it reaches a model. One call, on PyPI.</p>
+            <a class="project-link" href="https://github.com/amahi2001/python-token-killer">Source and benchmarks <span aria-hidden="true">↗</span></a>
+          </article>
+          <article>
             <p class="catch"><b>15+</b> <span>enterprise PoCs across banking, payments and semiconductors</span></p>
             <p class="mono kind">Graph RAG · Squirro</p>
             <h3>The demo that became the house pattern</h3>
@@ -100,14 +107,7 @@
             <a class="project-link" href="https://watch.getcontrast.io/register/llamaindex-building-document-processing-pipelines-for-agentic-workflows">Watch the talk <span aria-hidden="true">↗</span></a>
           </article>
           <article>
-            <p class="catch"><b>76%</b> <span>fewer tokens across the benchmark suite, 89% on source code</span></p>
-            <p class="mono kind">Open source · Python</p>
-            <h3>ptk, the Python Token Killer</h3>
-            <p>Agents burn context on nulls, docstrings and log spam. Python Token Killer is a dependency-free library that compresses any Python object, whether JSON, code, logs or diffs, before it reaches a model. One call, on PyPI.</p>
-            <a class="project-link" href="https://github.com/amahi2001/python-token-killer">Source and benchmarks <span aria-hidden="true">↗</span></a>
-          </article>
-          <article>
-            <p class="catch"><b>40%</b> <span>better data accuracy, roughly, than the manual workflow</span></p>
+            <p class="catch"><b><i class="approx">~</i>40%</b> <span>lift in data accuracy over the manual workflow</span></p>
             <p class="mono kind">Agents · Squirro</p>
             <h3>Agents with a real job</h3>
             <p>I designed LangChain agents for institutional data providers, Salesforce contact management and web research, wired together with MCP tools and custom pipeline steps. They replaced copy-and-paste work and lifted data accuracy by about 40 percent.</p>
@@ -176,6 +176,7 @@
         <footer id="contact" class="contact">
           <h2 class="chroma">Say hello<span class="dot">.</span></h2>
           <p>If you’re building agents that have to be right about documents, or you want to compare notes on running them on your own metal, I’d like to hear from you.</p>
+          <div class="actions"><a class="button" href="mailto:amahi2001@gmail.com">amahi2001@gmail.com <span aria-hidden="true">↗</span></a></div>
           <div class="footer-links">
             <a href="https://www.linkedin.com/in/abrarmahi/">LinkedIn <span aria-hidden="true">↗</span></a>
             <a href="https://github.com/amahi2001">GitHub <span aria-hidden="true">↗</span></a>
