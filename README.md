@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# amahi.dev
 
-## Getting Started
+Abrar Mahi’s portfolio runs as static files on his NixOS server. Edit the page and service descriptions in `site/index.html`. The build derives `index.md` from the same copy. Keep `llms.txt`, page metadata, and the profile schema in sync when the current role changes.
 
-First, run the development server:
+## Develop
 
-```bash
+Run these in the portfolio devbox with Node 24 and Python 3.
+
+```sh
+npm ci
+npm test
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open port 3000. Rebuild after editing. The build writes `out/`, containing only public files. Fonts and artwork are served locally. Font licenses ship alongside the assets.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Publish on the server
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Run `npm test` in the devbox from a clean release commit. On the host, install the verified `out/` into a new root-owned directory under `/srv/www/portfolio/releases/`. Point `/srv/www/portfolio/current` to that release with an atomic symlink rename. Preserve the preceding release for rollback. Nginx serves the release directly, so the devbox can be stopped.
 
-## Learn More
+The host configuration is in [the NixOS web module](https://github.com/amahi2001/abrar-homeserver/blob/main/web.nix). It owns HTTPS, certificate renewal, and the canonical www redirect. The public directory contains editorial descriptions of services. The dashboard and service hosts have their own access controls.
 
-To learn more about Next.js, take a look at the following resources:
+The legacy Vercel configuration builds a redirect to the canonical domain when deployed. The homepage and its assets are served by the home server.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Impeccable for Codex
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Run `make design-tools` from the project root to install the upstream CLI 4.11.0 project bundle and Codex hook manifest. Restart Codex, then review and approve the project hook in `/hooks`. The project-scoped installation is local to the checkout. `PRODUCT.md` and `DESIGN.md` contain the portfolio’s context.
 
-## Deploy on Vercel
+Run `.agents/skills/impeccable/scripts/impeccable hooks status` to inspect the wiring. Run `npx impeccable detect http://127.0.0.1:3000` against the preview. Use `npx impeccable update --scope=project` for updates and review changed hooks again. To uninstall, run `.agents/skills/impeccable/scripts/impeccable hooks reset`, then remove the project-local `.agents/skills/impeccable` directory.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[Impeccable setup](https://impeccable.style/docs) · [llms.txt proposal](https://llmstxt.org/)

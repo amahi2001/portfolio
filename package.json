@@ -1,39 +1,13 @@
 {
-  "name": "portfolio",
-  "version": "0.1.0",
+  "name": "amahi-portfolio",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "deploy:dev": "vercel"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.11.3",
-    "@fortawesome/free-brands-svg-icons": "^6.5.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@react-spring/parallax": "^9.7.3",
-    "@vercel/analytics": "^1.1.1",
-    "@vercel/speed-insights": "^1.0.2",
-    "bootstrap": "^5.3.2",
-    "next": "13.5.4",
-    "react": "^18.2.0",
-    "react-animated-cursor": "^2.11.2",
-    "react-awesome-reveal": "^4.2.7",
-    "react-bootstrap": "^2.9.2",
-    "react-dom": "^18.2.0",
-    "react-responsive": "^9.0.2",
-    "react-type-animation": "^3.2.0",
-    "sass": "^1.69.6",
-    "sharp": "^0.33.1"
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && python3 -m http.server 3000 --bind 0.0.0.0 --directory out",
+    "start": "python3 -m http.server 3000 --bind 0.0.0.0 --directory out",
+    "test": "npm run build && node scripts/check.mjs"
   },
   "devDependencies": {
-    "@types/node": "^20.10.6",
-    "@types/react": "^18.2.46",
-    "@types/react-dom": "^18.2.18",
-    "eslint": "^8.56.0",
-    "eslint-config-next": "13.5.4",
-    "typescript": "^5.3.3"
+    "turndown": "7.2.2"
   }
 }

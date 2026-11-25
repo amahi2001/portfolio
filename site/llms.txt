@@ -1,0 +1,7 @@
+# Abrar Mahi
+
+> Abrar Mahi is a New York-based Member of Technical Staff at Squirro. His portfolio covers applied AI, public software, and the services he self-hosts.
+
+## Portfolio
+
+- [Portfolio in Markdown](https://amahi.dev/index.md): Selected projects, career history, education, a public tour of the home server, and professional contact links.
