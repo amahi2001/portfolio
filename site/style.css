@@ -30,7 +30,8 @@
   --park-x: calc(100vw - var(--hull-size) - var(--ruler-w) - .7rem);
   --park-y: 43svh;
   --launch-x: 65vw;
-  --launch-y: 32svh;
+  --waterline: 47svh;
+  --launch-y: calc(var(--waterline) - var(--hull-size) * 1.05);
   --dock-size: clamp(13rem, 25vw, 25rem);
   --dock-left: calc(95vw - var(--dock-size));
   --dock-floor: 78svh;
@@ -83,7 +84,7 @@ p,dd { text-wrap: pretty; }
 .depth-tag::before { content:""; width: 1.5rem; height:.4rem; border-block: 2px solid currentColor; }
 .kind { margin-bottom:.26rem; }
 .surface {
-  --water:#0a4253; --end:#0a4551; --art:url("/assets/surface.webp");
+  --water:#0a4253; --end:#0a4551; --art:url("/assets/surface.webp"); --focal:center 47%;
   view-timeline-name: --zone, --launch-run;
   min-height: 132vh; min-height: 132svh;
 }
@@ -96,7 +97,7 @@ p,dd { text-wrap: pretty; }
 .surface-name h1 { color:#102941; text-shadow:2px 3px #ffe4ac; }
 .surface-name h1 .dot { color:#834220; }
 .origin { font:.83rem/1.5 var(--mono); margin-bottom:.3rem; }
-.surface-intro { width:min(37rem,72%); margin:clamp(7rem,21svh,17rem) 0 0 clamp(1.25rem,10vw,10rem); }
+.surface-intro { width:min(37rem,72%); margin:clamp(9rem,27svh,20rem) 0 0 clamp(1.25rem,10vw,10rem); }
 .lead { font:700 clamp(1.65rem,2.65vw,2.8rem)/1.12 var(--pixel); color:var(--light); margin:0 0 .8rem; }
 .surface-intro > p:not([class]),.chapter-intro { max-width: 55ch; }
 .actions { margin-top:1.45rem; gap:1.2rem 1.65rem; }
@@ -222,13 +223,13 @@ nav a::after { content:""; position:absolute; height:2px; background:var(--amber
   .brand { font-size:1.2rem; gap:.35rem; }
   nav { gap:clamp(.55rem,2.4vw,.9rem); }
   nav a { font-size:.81rem; }
-  :root { --hull-size:2.7rem; --park-y:39svh; --launch-x:71vw; --launch-y:32svh; --dock-size:min(55vw,16rem); --dock-left:calc(96vw - var(--dock-size)); --dock-floor:86svh; }
+  :root { --hull-size:2.7rem; --park-y:39svh; --launch-x:68vw; --dock-size:min(55vw,16rem); --dock-left:calc(96vw - var(--dock-size)); --dock-floor:86svh; }
   .walk:not(.intro),.twilight .walk { width:min(calc(100% - var(--lane)),35rem); justify-self:start; margin-inline:5%; }
   .instruments { justify-self:center; white-space:nowrap; }
-  .surface { --focal:65% center; }
+  .surface { --focal:62% 47%; }
   .intro { padding-top:clamp(4.3rem,12svh,7rem); }
   .surface-name h1 { font-size:clamp(3.4rem,13.8vw,5.7rem); }
-  .surface-intro { width:min(calc(100% - var(--lane)),32rem); margin:clamp(8.2rem,25svh,15rem) 0 0 5%; }
+  .surface-intro { width:min(calc(100% - var(--lane)),32rem); margin:clamp(9rem,31svh,17rem) 0 0 5%; }
   .field-example { grid-template-columns:1fr; }
   .source-field { width:fit-content; }
   .services > div { display:block; }
@@ -378,6 +379,24 @@ h1.chroma { animation:flicker 6s steps(1) infinite; }
 }
 @media (min-width: 120rem) {
   body { font-size:1.15rem; }
-  .walk { width:min(44rem,70%); }
+  .walk:not(.intro) { width:min(44rem,70%); }
+  .surface-intro { width:min(44rem,60%); }
 }
 nav a.here::after { opacity:1; }
+
+/* Foreground silhouettes: closest layer, so it drifts fastest */
+.fore { position:absolute; z-index:1; inset:auto 0 -10% 0; height:78%; background:var(--fore) center bottom / cover no-repeat; image-rendering:pixelated; }
+.reef { --fore:url("/assets/reef-fore.webp"); }
+.twilight { --fore:url("/assets/twilight-fore.webp"); }
+.abyss { --fore:url("/assets/abyss-fore.webp"); }
+@keyframes fore-drift { from { transform:translateY(16%); } to { transform:translateY(-10%); } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) { .fore { animation:fore-drift linear both; animation-timeline:--zone; } }
+}
+.no-sdt .fore { animation:fore-drift 1s linear both paused; animation-delay:calc(var(--p,0) * -1s); }
+@media (max-width: 47rem) { .fore { opacity:.75; height:60%; } }
+/* The harbor holds still so the hull rides its waterline */
+.surface .landscape,.no-sdt .surface .landscape { animation:none; }
+@media (max-width: 47rem) {
+  .zone:not(.surface) .ocean::before { background:linear-gradient(90deg,var(--shade) 0 58%,color-mix(in srgb,var(--shade) 45%,transparent) 100%); }
+}

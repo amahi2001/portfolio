@@ -38,11 +38,17 @@ if (h1 && !reduce) {
   h1.setAttribute('aria-label', h1.textContent);
   const wrap = document.createElement('span');
   wrap.setAttribute('aria-hidden', 'true');
-  [...text.textContent].forEach((c, i) => {
-    if (c === ' ') return wrap.append(' ');
-    const s = document.createElement('span');
-    s.className = 'ch'; s.style.setProperty('--i', i); s.textContent = c;
-    wrap.append(s);
+  let i = 0;
+  text.textContent.split(' ').forEach((w, n) => {
+    if (n) wrap.append(' ');
+    const word = document.createElement('span');
+    word.style.whiteSpace = 'nowrap';
+    for (const c of w) {
+      const s = document.createElement('span');
+      s.className = 'ch'; s.style.setProperty('--i', i++); s.textContent = c;
+      word.append(s);
+    }
+    wrap.append(word);
   });
   text.replaceWith(wrap);
 }
