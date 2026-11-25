@@ -23,6 +23,8 @@ for (const source of [md, llms, html]) assert(source.includes(role), 'Current ro
 for (const name of ['LlamaIndex', 'Python Token Killer', 'Squirro', 'NASA Goddard', 'Hunter College', 'Nextcloud', 'Jellyfin', 'AdGuard Home', 'NixOS']) {
   assert(md.includes(name), name);
 }
+assert(md.startsWith('# Abrar Mahi'));
+assert(md.includes('flood_coverage: true'));
 assert(llms.startsWith('# Abrar Mahi\n\n> '));
 assert(llms.includes('https://amahi.dev/index.md'));
 assert.deepEqual(readdirSync('out').sort(), ['assets', 'index.html', 'index.md', 'llms.txt', 'robots.txt', 'sitemap.xml', 'style.css']);
