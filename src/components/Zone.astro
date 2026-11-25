@@ -1,0 +1,28 @@
+---
+// One depth band: sticky scenery, optional depth facts, and the reading column.
+interface Props {
+  cls: string;
+  id?: string;
+  depth: string;        // "from to" in metres, read by dive.js
+  name: string;         // zone label in the instruments
+  labelledby: string;
+  creature?: string;    // sprite in /assets
+  facts?: [text: string, right?: boolean][];
+}
+const { cls, id, depth, name, labelledby, creature, facts = [] } = Astro.props;
+---
+<section id={id} class={`zone ${cls}`} data-depth={depth} data-name={name} aria-labelledby={labelledby}>
+  <div class="ocean" aria-hidden="true">
+    <div class="landscape"></div>
+    {creature && <img class="creature" src={`/assets/${creature}.webp`} alt="" loading="lazy" width="320" height="190" />}
+    {creature && <div class="fore"></div>}
+    <div class="marine-snow"></div>
+  </div>
+  {facts.length > 0 && (
+    <div class="facts" aria-hidden="true">
+      {facts.map(([text, right]) => <p class:list={{ r: right }}>{text}</p>)}
+    </div>
+  )}
+  <slot />
+  <slot name="after" />
+</section>
