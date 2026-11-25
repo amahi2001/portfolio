@@ -1,0 +1,35 @@
+# Selected work, in page order. Lead with the number a reviewer would ask for.
+- id: ptk
+  order: 1
+  catch: { value: "76%", label: "fewer tokens on JSON, code, logs, records and prose (tiktoken cl100k), 89% on code alone" }
+  kind: Open source · Python
+  title: ptk, the Python Token Killer
+  body: Agents burn context on nulls, docstrings and log spam. Python Token Killer is a dependency-free library that compresses any Python object, whether JSON, code, logs or diffs, before it reaches a model. One call, on PyPI.
+  link: { href: "https://github.com/amahi2001/python-token-killer", text: Source and benchmarks }
+- id: graph-rag
+  order: 2
+  catch: { value: "15+", label: "enterprise PoCs across banking, payments and semiconductors" }
+  kind: Graph RAG · Squirro
+  title: The demo that became the house pattern
+  body: "I built Squirro’s flagship Graph RAG demo: LangChain over a knowledge graph, so every answer arrives with the entities and records behind it. It won multiple paid proofs of concept and became the implementation standard the rest of the company builds from."
+- id: extraction
+  order: 3
+  catch: { value: "p. 9", label: "every extracted field cites the page it came from" }
+  kind: Document AI · LlamaIndex
+  title: Extraction you can audit
+  body: "A checkbox on page nine can change an insurance policy. I helped enterprise teams turn forms and PDFs into structured data that checks itself against the source: extract the field, cite the page, and send low-confidence answers to a person."
+  sample: { source: "Policy · p. 9", field: "☑ Flood coverage", code: "flood_coverage: true  # p.9, conf 0.97" }
+  link: { href: "https://watch.getcontrast.io/register/llamaindex-building-document-processing-pipelines-for-agentic-workflows", text: Watch the talk }
+- id: agents
+  order: 4
+  catch: { value: "40%", approx: true, label: "lift in data accuracy over the manual workflow" }
+  kind: Agents · Squirro
+  title: Agents with a real job
+  body: I designed LangChain agents for institutional data providers, Salesforce contact management and web research, wired together with MCP tools and custom pipeline steps. They replaced copy-and-paste work and lifted data accuracy by about 40 percent.
+- id: nypl
+  order: 5
+  catch: { value: "10k+", label: "daily visitors across three public library sites" }
+  kind: Public software · NYPL
+  title: Research tools for The New York Public Library
+  body: I moved LAIR, Research Statistics and the Fellowships portal onto Django, React and Google Cloud with CI/CD and end-to-end tests. Then I built a Gemini RAG assistant on Vertex AI so thousands of staff could search library policy in plain language.
+  link: { href: "https://fellowships.nypl.org/", text: Visit NYPL Fellowships }

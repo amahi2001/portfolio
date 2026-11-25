@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+const { catch: c, kind, title, body, sample, link } = (Astro.props as { entry: CollectionEntry<'work'> }).entry.data;
+---
+<article>
+  <p class="catch"><b>{c.approx && <i class="approx">~</i>}{c.value}</b> <span>{c.label}</span></p>
+  <p class="mono kind">{kind}</p>
+  <h3>{title}</h3>
+  <p>{body}</p>
+  {sample && (
+    <figure class="field-example">
+      <figcaption>Sample extraction</figcaption>
+      <div class="source-field"><small>{sample.source} </small><strong>{sample.field}</strong></div>
+      <code>{sample.code}</code>
+    </figure>
+  )}
+  {link && <a class="project-link" href={link.href}>{link.text} <span aria-hidden="true">↗</span></a>}
+</article>

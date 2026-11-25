@@ -1,0 +1,30 @@
+---
+import { profile as p } from '../data/profile';
+const person = {
+  '@context': 'https://schema.org', '@type': 'ProfilePage', url: `${p.site}/`,
+  mainEntity: {
+    '@type': 'Person', '@id': `${p.site}/#abrar`, name: p.name, email: `mailto:${p.email}`,
+    jobTitle: p.role, worksFor: { '@type': 'Organization', name: p.org },
+    alumniOf: { '@type': 'CollegeOrUniversity', name: 'Hunter College' }, sameAs: [p.github, p.linkedin],
+  },
+};
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#071f34" />
+<title>{p.title}</title>
+<meta name="description" content={p.description} />
+<link rel="canonical" href={`${p.site}/`} />
+<link rel="alternate" type="text/markdown" href="/index.md" title="Markdown version" />
+<link rel="describedby" href="/llms.txt" type="text/plain" />
+<link rel="icon" href="/assets/mark.svg" type="image/svg+xml" />
+<link rel="preload" as="font" href="/assets/pixelify.woff2" type="font/woff2" crossorigin />
+<link rel="preload" as="font" href="/assets/vt323.woff2" type="font/woff2" crossorigin />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={p.title} />
+<meta property="og:description" content={p.ogDescription} />
+<meta property="og:url" content={`${p.site}/`} />
+<meta property="og:image" content={`${p.site}/assets/surface.webp`} />
+<meta property="og:image:alt" content="A pixel-art dive beneath New York Harbor" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json" set:html={JSON.stringify(person)} />

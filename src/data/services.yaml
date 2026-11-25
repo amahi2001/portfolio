@@ -1,0 +1,21 @@
+# Public, editorial descriptions only: no hostnames or access details.
+- id: dev-boxes
+  order: 1
+  name: Agent dev boxes
+  body: Each project gets its own container where Codex or Claude can build, test and open a pull request without touching the host.
+- id: ci
+  order: 2
+  name: CI runners
+  body: Self-hosted GitHub Actions runners, so my private repositories are tested here instead of on rented minutes.
+- id: gateway
+  order: 3
+  name: Agent gateway
+  body: A personal agent with MCP tools for web search and research, running on hardware I own.
+- id: website
+  order: 4
+  name: This website
+  body: Static files behind nginx. A release is a new directory and an atomic symlink swap, so rollback is one command.
+- id: home
+  order: 5
+  name: Home services
+  body: Nextcloud keeps my files in step, Jellyfin remembers the playhead, and AdGuard Home keeps trackers off the network. NixOS holds it all together.
