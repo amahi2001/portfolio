@@ -2,9 +2,18 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "",
-  "buildCommand": "mkdir -p .vercel-redirect && echo 'Moved to https://amahi.dev/' > .vercel-redirect/index.txt",
+  "buildCommand": "mkdir -p .vercel-redirect && echo 'Moved to https://amahi.dev/' > .vercel-redirect/moved.txt",
   "outputDirectory": ".vercel-redirect",
   "redirects": [
-    { "source": "/:path*", "destination": "https://amahi.dev/:path*", "permanent": true }
+    {
+      "source": "/",
+      "destination": "https://amahi.dev/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://amahi.dev/:path*",
+      "permanent": true
+    }
   ]
 }
