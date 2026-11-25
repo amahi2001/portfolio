@@ -141,7 +141,7 @@ const C = {
   snow: ['#4f7f8c', '#6f9ea5', '#93bfbd'].map(hex),
   core: hex('#effffb'), glow: hex('#4de3ff'), dim: hex('#1e6e86'),
   sun: hex('#bff8e8'), warm: hex('#ffd08b'), dock: hex('#7dffc8'),
-  silt: ['#8aa0b4', '#b8c8d4', '#6f8296', '#f4fffb', '#bff8e8'].map(hex),
+  silt: ['#8aa0b4', '#b8c8d4', '#6f8296'].map(hex),
 };
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
 const bayer = (x, y) => (BAYER[((y & 3) << 2) | (x & 3)] + 0.5) / 16;
@@ -196,7 +196,7 @@ const box = el => { const r = el.getBoundingClientRect(); return { x: r.left / S
 const angler = $('.abyss .creature'), berth = $('.berth img');
 const snow = Array.from({ length: 170 }, () => ({ x: Math.random(), y: Math.random(), z: Math.random() < 0.3 ? 1 : Math.random() < 0.5 ? 0.6 : 0.35, seed: rand(0, 100), c: Math.floor(rand(0, 3)) }));
 const plankton = Array.from({ length: 30 }, () => ({ x: Math.random(), y: Math.random(), per: rand(1.8, 3.6), ph: Math.random(), seed: rand(0, 100) }));
-let bubbles = [], pops = [], rings = [], silt = [], litUntil = new Map(), wasUnder = null, flash = 0;
+let bubbles = [], pops = [], rings = [], silt = [], spray = [], litUntil = new Map(), wasUnder = null, flash = 0;
 let pointer = { x: -1e4, y: -1e4 }, lastY = scrollY, vel = 0, t = 0, t0 = performance.now(), docked = false, spawnAcc = 0;
 
 function drawBubble(b) {
@@ -259,14 +259,16 @@ addEventListener('pointermove', e => { pointer = { x: e.clientX / S, y: e.client
 addEventListener('keydown', e => { if ((e.key === 'p' || e.key === 'P') && !e.metaKey && !e.ctrlKey && !e.altKey && !/input|textarea/i.test(e.target.tagName)) ping(); });
 
 function splash(x, y, w) {
-  // Spray off the bow and stern (the hull would hide it in the middle),
-  // thrown above the surface and pulled back down by gravity.
-  for (let i = 0; i < 26; i++) {
-    const side = i % 2 ? 1 : -1;
-    silt.push({ x: x + side * w * rand(0.38, 0.55), y: y - 1, vx: side * rand(8, 34), vy: -rand(45, 95), g: 170, life: 1, max: rand(0.55, 1), c: 3 + (i % 2), s: Math.random() < 0.3 ? 2 : 1 });
+  // Two fans of spray. Heights are relative to the moving waterline.
+  spray = [];
+  for (const side of [-1, 1]) {
+    for (let i = 0; i < 12; i++) {
+      const spread = i / 11;
+      spray.push({ x: x + side * w * rand(0.39, 0.5), y: 0,
+        vx: side * (14 + 48 * spread), vy: -(88 - 38 * spread + rand(-7, 7)) });
+    }
   }
   for (let i = 0; i < 16; i++) bubbles.push({ x0: x + rand(-10, 10), x: x, y: y + rand(2, 14), r: rand(0.6, 2.4), vy: -rand(4, 14), ph: rand(0, TAU), wob: 1, top: y + 1 });
-  for (const r of [3, 6, 10]) pops.push({ x, y: y + 1, r, k: -r * 0.04 });
 }
 
 // Docking is the end of the dive: silt kicks up off the deck, the scene
@@ -277,7 +279,7 @@ function dock() {
   if (lively()) {
     for (let i = 0; i < 44; i++) {
       const dir = i % 2 ? 1 : -1, sp = rand(8, 34);
-      silt.push({ x: s.x + s.w * (0.5 + dir * rand(0.1, 0.45)), y: floor, vx: dir * sp, vy: -rand(6, 22), g: 6, life: 1, max: rand(1.1, 2), c: Math.floor(rand(0, 3)), s: Math.random() < 0.4 ? 2 : 1 });
+      silt.push({ x: s.x + s.w * (0.5 + dir * rand(0.1, 0.45)), y: floor, vx: dir * sp, vy: -rand(6, 22), life: 1, max: rand(1.1, 2), c: Math.floor(rand(0, 3)), s: Math.random() < 0.4 ? 2 : 1 });
     }
     const frames = [];
     for (let i = 0; i <= 12; i++) { const k = (1 - i / 12) ** 2 * 4; frames.push({ translate: `${(k * Math.sin(i * 1.7)).toFixed(1)}px ${(k * Math.sin(i * 2.3)).toFixed(1)}px` }); }
@@ -327,11 +329,17 @@ function step(dt) {
   const wl = waterline(), under = s.y + s.h * 0.3 > wl;
   if (wasUnder === false && under && vel > 0) splash(s.x + s.w * 0.5, wl, s.w);
   wasUnder = under;
+  for (let i = spray.length - 1; i >= 0; i--) {
+    const p = spray[i];
+    p.vy += dt * 150;
+    p.x += p.vx * dt; p.y += p.vy * dt;
+    if (p.y >= 0) spray.splice(i, 1);
+  }
   if (!docked && depth >= MAX - 1) { docked = true; setTimeout(dock, 350); }
   for (let i = silt.length - 1; i >= 0; i--) {
     const p = silt[i];
-    const drag = p.g > 50 ? 0.4 : 2.2;
-    p.vx *= 1 - dt * drag; p.vy = p.vy * (1 - dt * drag) + dt * p.g; p.x += p.vx * dt; p.y += p.vy * dt;
+    const damping = 1 - dt * 2.2;
+    p.vx *= damping; p.vy = p.vy * damping + dt * 6; p.x += p.vx * dt; p.y += p.vy * dt;
     if ((p.life -= dt / p.max) <= 0) silt.splice(i, 1);
   }
   flash = Math.max(0, flash - dt * 4);
@@ -358,6 +366,15 @@ function draw() {
   }
 
   for (const b of bubbles) drawBubble(b);
+  for (const p of spray) {
+    const y = wl + p.y;
+    // A short tail shows the direction of travel even in a single frame.
+    for (let j = 4; j > 0; j--) {
+      const x = p.x - p.vx * j * 0.012, tailY = Math.min(wl, y - p.vy * j * 0.012);
+      col.set(x, tailY, C.rim); col.set(x + 1, tailY, C.lit);
+    }
+    col.set(p.x, y, C.hi); col.set(p.x + 1, y, C.hi);
+  }
   for (const p of silt) {
     const a = p.life * 1.4;
     col.dot(p.x, p.y, C.silt[p.c], a);

@@ -256,9 +256,8 @@ nav a::after { content:""; position:absolute; height:2px; background:var(--amber
   .berth { z-index:3; }
   .actions a,.project-link,.footer-links a { font-size:.82rem; }
 }
-@media(max-width:355px) {
-  .brand { font-size:1rem; }
-  .brand img { width:21px; }
+@media(max-width:25rem) {
+  .brand { font-size:0; gap:0; min-height:2.5rem; min-width:2.5rem; }
 }
 @media(max-height:520px) and (min-width:48rem) {
   .intro { padding-top:4.3rem; }
