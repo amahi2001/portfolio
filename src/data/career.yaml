@@ -1,4 +1,5 @@
-# Newest first. Clients stay unnamed (see PRODUCT.md).
+# Newest first. `proof` links each job to the work cards it produced, so the
+# career log says when and where without restating the cards.
 - id: squirro-mts
   order: 1
   dates: Nov 2026 – now
@@ -10,19 +11,19 @@
   dates: Jun – Oct 2026
   org: LlamaIndex
   role: Applied AI Solutions Architect
-  body: "Presales architecture for document agents: parsing, extraction and agent workflows for enterprise teams."
+  proof: [extraction]
 - id: squirro-se
   order: 3
   dates: May 2024 – Jun 2026
   org: Squirro
   role: Solutions Engineer, Generative AI
-  body: Presales and delivery for Fortune 500 teams in finance, legal and technology. Graph RAG, LLM-based entity extraction, document classification and agent workflows, plus the demos that helped win the accounts.
+  proof: [on-record, graph-rag, agents]
 - id: nypl
   order: 4
   dates: Aug 2022 – May 2024
   org: The New York Public Library
   role: Full Stack Engineer II
-  body: Django, React and Google Cloud for research tools serving 10k+ visitors a day, with Cloud Build pipelines, Cypress and PyTest suites, and security scanning.
+  proof: [nypl]
 - id: nasa
   order: 5
   dates: Summer 2022

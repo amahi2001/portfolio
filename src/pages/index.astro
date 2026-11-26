@@ -6,6 +6,7 @@ import WorkCard from '../components/WorkCard.astro';
 import { profile as p } from '../data/profile';
 import { loadContent } from '../lib/content';
 const { work, career, services } = await loadContent();
+const short = Object.fromEntries(work.map(w => [w.id, w.data.short]));
 const arrow = '↗';
 ---
 <!doctype html>
@@ -40,7 +41,7 @@ const arrow = '↗';
         <div class="surface-intro">
           <p class="lead">{p.lead}</p>
           <p>{p.intro}</p>
-          <div class="manifest"><p class="manifest-title" aria-hidden="true">Dive manifest</p><dl>{p.stats.map(([n, label]) => <div><dt>{n}</dt><dd>{label}</dd></div>)}</dl></div>
+          <div class="manifest"><p class="manifest-title" aria-hidden="true">Dive manifest</p><dl>{p.stats.map(([n, label, to]) => <div><dt>{n}</dt><dd><a href={`#${to}`}>{label} <span aria-hidden="true">↓</span></a></dd></div>)}</dl></div>
           <div class="actions"><a class="button" href="#reef-entry">Start the dive <span aria-hidden="true">↓</span></a> <a href="#server">Skip to the lab</a></div>
         </div>
       </div>
@@ -65,7 +66,7 @@ const arrow = '↗';
         <h2 id="career-title" class="chroma">The dive log<span class="dot">.</span></h2>
         <p class="chapter-intro">{p.careerIntro}</p>
         <div class="timeline">
-          {career.map(({ data: j }) => <article><p class="mono kind">{j.dates}</p><h3 translate="no">{j.org}</h3><p class="role">{j.role}</p><p>{j.body}</p></article>)}
+          {career.map(({ data: j }) => <article><p class="mono kind">{j.dates}</p><h3 translate="no">{j.org}</h3><p class="role">{j.role}</p>{j.body && <p>{j.body}</p>}{j.proof && <p class="proof">{j.proof.map(id => <a href={`#${id}`}><span aria-hidden="true">↑ </span>{short[id]}</a>)}</p>}</article>)}
           <p class="education"><strong>{p.education[0]}</strong><br />{p.education[1]}</p>
           <a class="project-link profile-link" href={p.linkedin}>Connect on LinkedIn <span aria-hidden="true">{arrow}</span></a>
         </div>
