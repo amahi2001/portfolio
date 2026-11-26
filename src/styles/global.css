@@ -454,7 +454,8 @@ a,button { touch-action:manipulation; }
 .helm nav { align-items:center; }
 .still .sub,.still .chroma .ch,.still h1.chroma { animation-play-state:paused !important; }
 .still .creature { animation-play-state:running, paused; }
-.still .fx,.still .vignette { visibility:hidden; }
+.still .vignette { visibility:hidden; }
+.still .fx { opacity:0; visibility:hidden; }
 @media (max-width: 47rem) { .still .creature { animation-play-state:running, running, paused; } .hold { margin-left:.2rem; min-width:1.9rem; padding:.2rem .35rem; } }
 @media (prefers-reduced-motion: reduce) { .js .hold { display:none; } }
 
@@ -466,3 +467,20 @@ a,button { touch-action:manipulation; }
 .manifest dl > div { display:grid; grid-template-columns:4.8ch 1fr; gap:.8rem; align-items:baseline; padding:.08rem 0; border-top:1px dashed #a7f8dc33; }
 .manifest dt { font:400 1.85rem/1.05 var(--hud); color:var(--amber); text-shadow:0 0 12px #ffd08b55; font-variant-numeric:tabular-nums; }
 .manifest dd { margin:0; font:.875rem/1.35 var(--mono); color:#d8f3ef; }
+
+/* Motion pass (find-animation-opportunities) */
+/* Each project's number rises into place as its card scrolls in, and is settled before reading height. */
+@keyframes catch-in { from { opacity:0; transform:translateY(.25em); } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .catch b { display:inline-block; animation:catch-in linear both; animation-timeline:view(); animation-range:entry 0% cover 22%; }
+  }
+}
+/* Pause button: same press feedback as the email button. */
+.hold { transition:border-color .15s ease, color .15s ease, scale .12s cubic-bezier(0.23,1,0.32,1); }
+.hold:active { scale:.97; }
+/* Still water fades the effects out and back in over 200ms instead of cutting them. */
+.fx { transition:opacity .2s cubic-bezier(0.23,1,0.32,1), visibility 0s linear 0s; }
+.still .fx { transition:opacity .2s cubic-bezier(0.23,1,0.32,1), visibility 0s linear .2s; }
+/* Fallback nav underline (no scroll timelines): fade instead of snapping. */
+.no-sdt nav a::after { transition:opacity .15s ease; }
