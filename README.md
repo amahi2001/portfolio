@@ -29,7 +29,8 @@ npm run dev     # live reload on port 3000
 Project skills live in `.agents/skills/` and are pinned in `skills-lock.json`. Each was installed with `bunx skills add` and audited file by file before it was committed (Markdown guidance only; no scripts, hooks or runtime fetching).
 
 - Build: `astro`, `web-perf`
-- Design and motion: `frontend-design`, `web-design-guidelines`, `animate`, `animation-performance`, `game-feel`, `pixel-art-sprites`, plus the project-local Impeccable bundle
+- Design and motion: `frontend-design`, `web-design-guidelines`, `animate`, `animation-performance`, `choreograph`, `game-feel`, `pixel-art-sprites`, plus the project-local Impeccable bundle
+- Motion review: `review-animations` (strict pass over existing motion), `find-animation-opportunities` (read-only, mostly says no)
 - Writing: `no-ai-slop` to edit copy in your own voice, `stop-slop` as a final check
 
 Update with `bunx skills update -p`, and re-audit the diff before committing. Restore the Claude Code links with `bunx skills experimental_install`.
