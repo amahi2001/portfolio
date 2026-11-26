@@ -18,6 +18,6 @@ Each project leads with its catch: one measured number set in the instrument fac
 
 ## Implementation
 
-Self-hosted Pixelify Sans sets titles with a chromatic red and cyan offset. VT323 drives the instruments and catches, IBM Plex Mono labels, and system sans the prose. Warm amber marks actions against water that shifts from teal to indigo. Faint scanlines and a vignette deepen with depth.
+Self-hosted Pixelify Sans sets titles with a chromatic red and cyan offset. VT323 drives the instruments and catches, IBM Plex Mono labels, and system sans the prose. Warm amber marks the numbers and the main buttons; every inline link is seafoam and underlined. The water shifts from teal to indigo. Faint scanlines and a vignette deepen with depth.
 
 Motion follows native scrolling through CSS timelines. `dive.js` adds the instruments, a canvas for light shafts, marine snow, propeller bubbles, bioluminescence and sonar, and a fallback that scrubs the same keyframes in browsers without scroll timelines. Reduced-motion mode drops the canvas and uses stationary poses at sea and at the dock. The page remains readable and navigable without JavaScript.

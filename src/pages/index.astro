@@ -20,7 +20,7 @@ const arrow = '↗';
       <span class="panel sounder"><small>Depth</small> <b></b></span>
       <span class="pips"><i data-zone="0"></i><i data-zone="1"></i><i data-zone="2"></i><i data-zone="3"></i><em class="zone-name">Harbor</em></span>
     </div>
-    <nav aria-label="Main"><a href="#work">Work</a><a href="#career">Career</a><a href="#server">Lab</a><button class="hold" type="button" aria-pressed="false" aria-label="Pause animations">❚❚</button></nav>
+    <nav aria-label="Main"><a href="#work">Work</a><a href="#career">Career</a><a href="#server">Lab</a><span class="controls"><button class="ping" type="button" aria-keyshortcuts="P" title="Sonar ping (P)"><kbd aria-hidden="true">P</kbd><span class="word">Ping</span></button><button class="hold" type="button" aria-pressed="false" title="Pause animations"><span class="glyph" aria-hidden="true">❚❚</span><span class="word">Pause</span></button></span></nav>
     <div class="progress" aria-hidden="true"></div>
   </header>
   <div class="ruler" aria-hidden="true"><span class="you">you</span></div>
@@ -35,7 +35,7 @@ const arrow = '↗';
     <Zone cls="surface" id="surface" depth="0 10" name="Harbor" labelledby="abrar">
       <div class="walk intro">
         <div class="surface-name">
-          <p class="origin">40.69° N, 74.04° W · New York Harbor</p>
+          <p class="origin">Applied AI engineer · New York Harbor</p>
           <h1 id="abrar" class="chroma">{p.name}<span class="dot">.</span></h1>
         </div>
         <div class="surface-intro">
@@ -50,7 +50,7 @@ const arrow = '↗';
     <div class="kelp-crossing" aria-hidden="true"><img src="/assets/kelp.webp" alt="" width="96" height="123" loading="lazy" /></div>
 
     <Zone cls="reef" id="reef-entry" depth="10 200" name="Sunlit" labelledby="work-title" creature="turtle"
-      facts={[['── 10 m · pressure has already doubled'], ['red light is gone by ~15 m. the sub is yellow in theory only ──', true], ['── 200 m · the sunlight zone ends']]}>
+      facts={[['10 m · pressure has already doubled'], ['red light is gone by ~15 m. the sub is yellow in theory only'], ['200 m · the sunlight zone ends']]}>
       <div class="walk log" id="work">
         <p class="depth-tag">Sunlit zone · 0–200 m · Selected work</p>
         <h2 id="work-title" class="chroma">The catch<span class="dot">.</span></h2>
@@ -60,7 +60,7 @@ const arrow = '↗';
     </Zone>
 
     <Zone cls="twilight" depth="200 1000" name="Twilight" labelledby="career-title" creature="whale"
-      facts={[['332 m · deepest scuba dive on record ──', true], ['── most animals down here make their own light', true], ['1,000 m · the midnight zone begins ──', true]]}>
+      facts={[['332 m · deepest scuba dive on record'], ['most animals down here make their own light'], ['1,000 m · the midnight zone begins']]}>
       <div class="walk log" id="career">
         <p class="depth-tag">Twilight zone · 200–1,000 m · Career</p>
         <h2 id="career-title" class="chroma">The dive log<span class="dot">.</span></h2>
@@ -68,15 +68,14 @@ const arrow = '↗';
         <div class="timeline">
           {career.map(({ data: j }) => <article><p class="mono kind">{j.dates}</p><h3 translate="no">{j.org}</h3><p class="role">{j.role}</p>{j.body && <p>{j.body}</p>}{j.proof && <p class="proof">{j.proof.map(id => <a href={`#${id}`}><span aria-hidden="true">↑ </span>{short[id]}</a>)}</p>}</article>)}
           <p class="education"><strong>{p.education[0]}</strong><br />{p.education[1]}</p>
-          <a class="project-link profile-link" href={p.linkedin}>Connect on LinkedIn <span aria-hidden="true">{arrow}</span></a>
         </div>
       </div>
     </Zone>
 
     <Zone cls="abyss" depth="1000 3800" name="Midnight" labelledby="server-title" creature="angler"
-      facts={[['── sperm whales hunt down to ~2,000 m'], ['water here holds at about 2–4 °C. good for servers ──', true], ['3,800 m · the Titanic rests here. so does this server, more comfortably ──', true]]}>
+      facts={[['sperm whales hunt down to ~2,000 m'], ['water here holds at about 2–4 °C. good for servers'], ['the Titanic rests at 3,800 m. so does this server, more comfortably']]}>
       <div class="walk log" id="server">
-        <p class="depth-tag">Midnight zone · 3,800 m · The lab</p>
+        <p class="depth-tag">Midnight zone · 1,000–3,800 m · The lab</p>
         <h2 id="server-title" class="chroma">The lab at the bottom<span class="dot">.</span></h2>
         <p class="chapter-intro">{p.labIntro}</p>
         <dl class="services">{services.map(({ data: s }) => <div><dt>{s.name}</dt><dd>{s.body}</dd></div>)}</dl>

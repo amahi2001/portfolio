@@ -89,8 +89,7 @@ const store = { get: () => { try { return localStorage.getItem('still') === '1';
 const setStill = on => {
   html.classList.toggle('still', on);
   hold.setAttribute('aria-pressed', String(on));
-  hold.setAttribute('aria-label', on ? 'Play animations' : 'Pause animations');
-  hold.textContent = on ? '▶' : '❚❚';
+  $('.glyph', hold).textContent = on ? '▶' : '❚❚';
 };
 setStill(store.get());
 hold.addEventListener('click', () => { const on = !html.classList.contains('still'); setStill(on); store.set(on); if (!on) start?.(); });
@@ -268,6 +267,7 @@ function ping() {
     }, Math.min(1400, reach / RING_SPEED * 1000));
   }
 }
+$('.ping').addEventListener('click', () => ping());
 addEventListener('pointerdown', e => {
   const r = sub.getBoundingClientRect();
   if (e.clientX > r.left - 12 && e.clientX < r.right + 12 && e.clientY > r.top - 12 && e.clientY < r.bottom + 12) ping();

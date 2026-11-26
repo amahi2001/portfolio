@@ -3,7 +3,7 @@ import { profile as p } from '../data/profile';
 
 export const GET: APIRoute = () => new Response(`# ${p.name}
 
-> ${p.name} is a New York-based ${p.role} at ${p.org}. He builds document AI and agents that cite their sources, has deployed enterprise search that 14,000+ people use (including Henkel's R&D community), wrote the open-source Python Token Killer (76% fewer LLM tokens on its benchmark suite), and runs a NixOS home lab where coding agents work in their own dev boxes.
+> ${p.name} is a New York-based ${p.role} at ${p.org}. He builds document AI and agents that cite their sources, has deployed enterprise search with 14,000+ users (including Henkel's R&D community), wrote the open-source Python Token Killer (76% fewer LLM tokens on its benchmark suite), and runs a NixOS home lab where coding agents work in their own dev boxes.
 
 ## Portfolio
 

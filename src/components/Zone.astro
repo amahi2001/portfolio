@@ -1,5 +1,6 @@
 ---
-// One depth band: sticky scenery, optional depth facts, and the reading column.
+// One depth band: sticky scenery (with its depth facts, so they share the
+// creature's viewport and can be kept clear of it) and the reading column.
 interface Props {
   cls: string;
   id?: string;
@@ -7,7 +8,7 @@ interface Props {
   name: string;         // zone label in the instruments
   labelledby: string;
   creature?: string;    // sprite in /assets
-  facts?: [text: string, right?: boolean][];
+  facts?: [text: string][];
 }
 const { cls, id, depth, name, labelledby, creature, facts = [] } = Astro.props;
 ---
@@ -18,12 +19,10 @@ const { cls, id, depth, name, labelledby, creature, facts = [] } = Astro.props;
     {creature && <img class="creature" src={`/assets/${creature}.webp`} alt="" loading="lazy" width="320" height="190" />}
     {creature && <div class="fore"></div>}
     <div class="marine-snow"></div>
+    {facts.length > 0 && (
+      <div class="facts">{facts.map(([text]) => <p>{text}</p>)}</div>
+    )}
   </div>
-  {facts.length > 0 && (
-    <div class="facts" aria-hidden="true">
-      {facts.map(([text, right]) => <p class:list={{ r: right }}>{text}</p>)}
-    </div>
-  )}
   <slot />
   <slot name="after" />
 </section>

@@ -10,13 +10,13 @@ export const profile = {
   lab: 'https://github.com/amahi2001/abrar-homeserver',
   ptk: 'https://github.com/amahi2001/python-token-killer',
   title: 'Abrar Mahi | Applied AI engineer, New York',
-  description: 'Abrar Mahi is a Member of Technical Staff at Squirro in New York. He builds document AI and agents that show their work, has deployed enterprise search that 14,000+ people use, wrote ptk (76% fewer LLM tokens), and runs a NixOS lab for coding agents.',
+  description: 'Abrar Mahi is a Member of Technical Staff at Squirro in New York. He builds document AI and agents that show their work, has deployed enterprise search with 14,000+ users, wrote ptk (76% fewer LLM tokens), and runs a NixOS lab for coding agents.',
   ogDescription: 'Document AI that cites its sources, a library that cuts LLM tokens by 76%, and a NixOS lab at the bottom of the sea. A portfolio from New York.',
   lead: 'I build AI that reads the documents companies actually run on, and makes it show its work.',
   intro: 'Member of Technical Staff at Squirro. Before that: LlamaIndex, The New York Public Library and NASA Goddard. After hours I run a NixOS lab where coding agents get their own dev boxes. You’re reading this page on it.',
   // Each claim links down to the card that backs it.
   stats: [
-    ['14,000+', 'people use four Squirro deployments I shipped', 'on-record'],
+    ['14,000+', 'users across four Squirro deployments I shipped', 'on-record'],
     ['76%', 'fewer LLM tokens with my open-source library', 'ptk'],
     ['15+', 'enterprise GenAI proofs of concept', 'graph-rag'],
   ],

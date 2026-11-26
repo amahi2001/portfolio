@@ -3,16 +3,18 @@
 - id: on-record
   order: 0
   short: On the record
-  catch: { value: "14,000+", label: "people use the four Squirro deployments with public case studies" }
+  catch: { value: "14,000+", label: "users across the four Squirro deployments with public case studies" }
   kind: Enterprise search · Squirro
   title: On the record
   body: "Squirro sells the platform. For each of these clients I architected the deployment and took it to production. They’re the four with published case studies; most of my clients never got one."
   ledger:
     - who: U.S. legislative research agency
       figures: "10,000 users · 1,500+ queries a day"
+      href: "https://squirro.com/enhancing-legal-research"
       note: "One index over Oracle, SharePoint and Power Platform, plus a taxonomy that maps its acronyms and synonyms. Members of Congress search it, and so does the public."
     - who: Henkel, “Nautilus”
       figures: "3,300 R&D users · 45+ sources · 94% satisfaction"
+      href: "https://squirro.com/semantic-enterprise-search-for-manufacturing"
       note: "An engineer searched for how to foam a hot-melt adhesive and found the Henkel team that had already done it. That team offered its equipment for the project."
     - who: U.S. retirement services provider
       figures: "up to 82% less time per NIGO case"
@@ -33,7 +35,7 @@
 - id: graph-rag
   order: 2
   short: Graph RAG
-  catch: { value: "15+", label: "enterprise PoCs across banking, payments and semiconductors" }
+  catch: { value: "15+", label: "client demos and proofs of concept I built for banks, payment networks and chipmakers" }
   kind: Graph RAG · Squirro
   title: The demo that became the house pattern
   body: "I built Squirro’s flagship Graph RAG demo: LangChain over a knowledge graph, so every answer arrives with the entities and records behind it. It won multiple paid proofs of concept and became the implementation standard the rest of the company builds from."
