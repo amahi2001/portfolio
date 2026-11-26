@@ -95,6 +95,10 @@ const setStill = on => {
 setStill(store.get());
 hold.addEventListener('click', () => { const on = !html.classList.contains('still'); setStill(on); store.set(on); if (!on) start?.(); });
 const lively = () => !reduce && !html.classList.contains('still');
+// --p restyles every child of the element it's set on, so write only on change:
+// zones above or below the viewport sit at 0 or 1 and are left alone.
+const lastP = new Map();
+const setP = (el, p) => { const v = p.toFixed(4); if (el && lastP.get(el) !== v) { lastP.set(el, v); el.style.setProperty('--p', v); } };
 function update() {
   const y = scrollY, line = y + vh * 0.6;
   zoneIndex = 0;
@@ -111,8 +115,8 @@ function update() {
   vignette.style.opacity = (depth / MAX).toFixed(3);
   you.style.transform = `translateY(${(clamp(geo.root(y), 0.02, 0.97) * rulerH).toFixed(1)}px) translateY(-50%)`;
   if (html.classList.contains('no-sdt')) {
-    fallback.forEach(([el, f]) => el && el.style.setProperty('--p', clamp(f()(y)).toFixed(4)));
-    zones.forEach(z => z.el.style.setProperty('--p', clamp((y + vh - z.top) / (z.h + vh)).toFixed(4)));
+    fallback.forEach(([el, f]) => setP(el, clamp(f()(y))));
+    zones.forEach(z => setP(z.el, clamp((y + vh - z.top) / (z.h + vh))));
     const ids = ['', 'work', 'career', 'server'];
     navLinks.forEach(a => a.classList.toggle('here', a.hash === '#' + ids[zoneIndex]));
   }
@@ -197,7 +201,7 @@ const angler = $('.abyss .creature'), berth = $('.berth img');
 const snow = Array.from({ length: 170 }, () => ({ x: Math.random(), y: Math.random(), z: Math.random() < 0.3 ? 1 : Math.random() < 0.5 ? 0.6 : 0.35, seed: rand(0, 100), c: Math.floor(rand(0, 3)) }));
 const plankton = Array.from({ length: 30 }, () => ({ x: Math.random(), y: Math.random(), per: rand(1.8, 3.6), ph: Math.random(), seed: rand(0, 100) }));
 let bubbles = [], pops = [], rings = [], silt = [], spray = [], litUntil = new Map(), wasUnder = null, flash = 0;
-let pointer = { x: -1e4, y: -1e4 }, lastY = scrollY, vel = 0, t = 0, t0 = performance.now(), docked = false, spawnAcc = 0;
+let pointer = { x: -1e4, y: -1e4 }, lastY = scrollY, vel = 0, t = 0, t0 = performance.now(), docked = false, thumped = false, spawnAcc = 0;
 
 function drawBubble(b) {
   const r = b.r, cx = b.x, cy = b.y;
@@ -242,21 +246,34 @@ function drawShafts(sun, top) {
   }
 }
 
+const RING_SPEED = 150, unlit = new Map();
+let lastPing = 0;
 function ping() {
-  const s = box(sub);
+  // One ping per recoil, so mashing the key or the hull can't restart it mid-squash.
+  const now = performance.now();
+  if (now - lastPing < 300) return;
+  lastPing = now;
+  const s = box(sub), cx = s.x + s.w * 0.5, cy = s.y + s.h * 0.5;
   // Hull recoil: squash on the pulse, overshoot, settle.
   if (lively()) sub.animate([{ scale: '1' }, { scale: '1.08 0.92' }, { scale: '0.97 1.04' }, { scale: '1' }], { duration: 300, easing: EASE_OUT });
-  rings.push({ x: s.x + s.w * 0.5, y: s.y + s.h * 0.5, r: 2, k: 0 });
-  $$('.creature, .berth img').filter(el => box(el).on).forEach((el, i) => setTimeout(() => {
-    el.classList.add('lit'); litUntil.set(el, t + 0.9); setTimeout(() => el.classList.remove('lit'), 900);
-  }, 180 + i * 140));
+  rings.push({ x: cx, y: cy, r: 2, k: 0 });
+  // Each creature lights when the ring front reaches it, nearest first.
+  for (const el of $$('.creature, .berth img')) {
+    const b = box(el);
+    if (!b.on) continue;
+    const reach = Math.max(0, Math.hypot(b.x + b.w / 2 - cx, b.y + b.h / 2 - cy) - Math.min(b.w, b.h) * 0.3);
+    setTimeout(() => {
+      el.classList.add('lit'); litUntil.set(el, t + 0.9);
+      clearTimeout(unlit.get(el)); unlit.set(el, setTimeout(() => el.classList.remove('lit'), 900));
+    }, Math.min(1400, reach / RING_SPEED * 1000));
+  }
 }
 addEventListener('pointerdown', e => {
   const r = sub.getBoundingClientRect();
   if (e.clientX > r.left - 12 && e.clientX < r.right + 12 && e.clientY > r.top - 12 && e.clientY < r.bottom + 12) ping();
 });
 addEventListener('pointermove', e => { pointer = { x: e.clientX / S, y: e.clientY / S }; }, { passive: true });
-addEventListener('keydown', e => { if ((e.key === 'p' || e.key === 'P') && !e.metaKey && !e.ctrlKey && !e.altKey && !/input|textarea/i.test(e.target.tagName)) ping(); });
+addEventListener('keydown', e => { if (!e.repeat && (e.key === 'p' || e.key === 'P') && !e.metaKey && !e.ctrlKey && !e.altKey && !/input|textarea/i.test(e.target.tagName)) ping(); });
 
 function splash(x, y, w) {
   // Two fans of spray. Heights are relative to the moving waterline.
@@ -281,6 +298,9 @@ function dock() {
       const dir = i % 2 ? 1 : -1, sp = rand(8, 34);
       silt.push({ x: s.x + s.w * (0.5 + dir * rand(0.1, 0.45)), y: floor, vx: dir * sp, vy: -rand(6, 22), life: 1, max: rand(1.1, 2), c: Math.floor(rand(0, 3)), s: Math.random() < 0.4 ? 2 : 1 });
     }
+    // The thump and the email pop land once per visit; re-docking only stirs silt.
+    if (thumped) { flash = 1; return void setTimeout(ping, 450); }
+    thumped = true;
     const frames = [];
     for (let i = 0; i <= 12; i++) { const k = (1 - i / 12) ** 2 * 4; frames.push({ translate: `${(k * Math.sin(i * 1.7)).toFixed(1)}px ${(k * Math.sin(i * 2.3)).toFixed(1)}px` }); }
     for (const el of [$('.abyss .ocean'), $('.berth'), $('.traveler')]) el?.animate(frames, { duration: 420, easing: 'linear' });
@@ -322,7 +342,7 @@ function step(dt) {
     }
   }
   pops = pops.filter(p => (p.k += dt / (p.r > 4 ? 0.6 : 0.22)) < 1);
-  rings = rings.filter(r => { r.r += dt * 150; r.k += dt / 1.5; return r.k < 1; });
+  rings = rings.filter(r => { r.r += dt * RING_SPEED; r.k += dt / 1.5; return r.k < 1; });
   for (const p of snow) { p.y += dt * (0.004 + 0.004 * p.z); p.x += Math.sin(t * 0.3 + p.seed) * 0.00004; }
   for (const p of plankton) { p.y -= dt * 0.002; p.x += Math.sin(t * 0.2 + p.seed) * 0.00005; }
   // Launch: the first time the hull drops through the harbor surface, it splashes.

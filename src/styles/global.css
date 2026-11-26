@@ -312,7 +312,7 @@ nav a::after { content:""; position:absolute; height:2px; background:var(--amber
   clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px),0 6px); }
 .stats b { display:block; font:400 2.4rem/1 var(--hud); color:var(--amber); text-shadow:0 0 14px #ffd08b66; margin-bottom:.15rem; }
 
-.actions .button { border:2px solid var(--amber); box-shadow:3px 3px #041826, 0 0 18px #ffd08b55; transition:box-shadow .2s, background .2s; }
+.actions .button { border:2px solid var(--amber); box-shadow:3px 3px #041826, 0 0 18px #ffd08b55; }
 .actions .button:hover { box-shadow:3px 3px #041826, 0 0 26px #a7f8dc88; border-color:var(--seafoam); }
 
 .catch { display:flex; align-items:baseline; gap:.9rem; margin:0 0 .5rem; }
@@ -442,7 +442,7 @@ html { -webkit-tap-highlight-color:#4de3ff33; }
 a,button { touch-action:manipulation; }
 
 /* Press feedback, quick and small */
-.actions .button { transition:background-color .15s ease, box-shadow .2s ease, scale .12s cubic-bezier(0.23,1,0.32,1); }
+.actions .button { transition:background-color .15s ease, border-color .15s ease, box-shadow .2s ease, scale .12s cubic-bezier(0.23,1,0.32,1); }
 .actions .button:active { scale:.97; }
 
 /* Still water: one switch pauses every idle loop and the water effects */

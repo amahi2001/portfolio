@@ -19,6 +19,18 @@
       "skillPath": "skills/astro/SKILL.md",
       "computedHash": "ebefe26b231d32379c14e41a46c2de7b4b0184543bedab7febdabe4fb21fba4e"
     },
+    "choreograph": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/choreograph/SKILL.md",
+      "computedHash": "01ac79c1e42400e9cf6a52ba65dbccbedee615db4736f6748425a333af07839d"
+    },
+    "find-animation-opportunities": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/find-animation-opportunities/SKILL.md",
+      "computedHash": "06efa7916c6c6996b5a8162d1ce1be7b3006f1de0c0a372aa065a57b19a0de7d"
+    },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",
@@ -42,6 +54,12 @@
       "sourceType": "github",
       "skillPath": "skills/pixel-art-sprites/SKILL.md",
       "computedHash": "6d7f3d45af2fa94e0fe9abe08575e859aa0f24297305ee8b89ac64a7534c9825"
+    },
+    "review-animations": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/review-animations/SKILL.md",
+      "computedHash": "5ff2799f778472c996f548b240cea5a519980f8fe41ffe9e92e17db655c596b2"
     },
     "stop-slop": {
       "source": "hardikpandya/stop-slop",
