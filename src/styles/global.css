@@ -463,8 +463,8 @@ a,button { touch-action:manipulation; }
 .manifest { margin:1.2rem 0 0; max-width:34rem; padding:.55rem .9rem .6rem; background:#06283ad9; border:1px solid #4de3ff40;
   clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px),0 6px); }
 .manifest-title { font:1.05rem/1.3 var(--hud); letter-spacing:.2em; text-transform:uppercase; color:var(--seafoam); margin:0 0 .2rem; }
-.manifest dl { margin:0; }
-.manifest dl > div { display:grid; grid-template-columns:4.8ch 1fr; gap:.8rem; align-items:baseline; padding:.08rem 0; border-top:1px dashed #a7f8dc33; }
+.manifest dl { margin:0; display:grid; grid-template-columns:max-content 1fr; column-gap:.9rem; }
+.manifest dl > div { display:grid; grid-column:1 / -1; grid-template-columns:subgrid; align-items:baseline; padding:.08rem 0; border-top:1px dashed #a7f8dc33; }
 .manifest dt { font:400 1.85rem/1.05 var(--hud); color:var(--amber); text-shadow:0 0 12px #ffd08b55; font-variant-numeric:tabular-nums; }
 .manifest dd { margin:0; font:.875rem/1.35 var(--mono); color:#d8f3ef; }
 
@@ -484,3 +484,17 @@ a,button { touch-action:manipulation; }
 .still .fx { transition:opacity .2s cubic-bezier(0.23,1,0.32,1), visibility 0s linear .2s; }
 /* Fallback nav underline (no scroll timelines): fade instead of snapping. */
 .no-sdt nav a::after { transition:opacity .15s ease; }
+
+/* Manifest claims link down to their proof; career entries link back up. */
+.manifest dd a { color:inherit; text-decoration:none; }
+.manifest dd a span { color:var(--seafoam); }
+@media (hover: hover) and (pointer: fine) { .manifest dd a:hover { color:var(--amber); text-decoration:underline; } }
+.proof { display:flex; flex-wrap:wrap; gap:.15rem 1.1rem; }
+.proof a { font:.875rem/1.5 var(--mono); color:var(--seafoam); padding-block:.3rem; }
+/* "On the record": one row per deployment. */
+.ledger { margin:1rem 0 0; max-width:40rem; }
+.ledger > div { padding:.6rem 0 .65rem; border-top:1px dashed #a7f8dc40; }
+.ledger dt { font:1.15rem/1.2 var(--hud); letter-spacing:.12em; text-transform:uppercase; color:var(--seafoam); }
+.ledger dt a { color:inherit; }
+.ledger dd { margin:.2rem 0 0; font-size:.95rem; line-height:1.55; }
+.ledger dd b { display:block; font:400 1.35rem/1.2 var(--hud); color:var(--amber); font-variant-numeric:tabular-nums; }

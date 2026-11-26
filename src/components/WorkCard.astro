@@ -1,8 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-const { catch: c, kind, title, body, sample, link } = (Astro.props as { entry: CollectionEntry<'work'> }).entry.data;
+const { entry } = Astro.props as { entry: CollectionEntry<'work'> };
+const { catch: c, kind, title, body, sample, link, ledger } = entry.data;
 ---
-<article>
+<article id={entry.id}>
   <p class="catch"><b>{c.approx && <i class="approx">~</i>}{c.value}</b> <span>{c.label}</span></p>
   <p class="mono kind" translate="no">{kind}</p>
   <h3>{title}</h3>
@@ -13,6 +14,16 @@ const { catch: c, kind, title, body, sample, link } = (Astro.props as { entry: C
       <div class="source-field"><small>{sample.source} </small><strong>{sample.field}</strong></div>
       <code>{sample.code}</code>
     </figure>
+  )}
+  {ledger && (
+    <dl class="ledger">
+      {ledger.map(r => (
+        <div>
+          <dt>{r.href ? <a href={r.href}>{r.who} <span aria-hidden="true">↗</span></a> : r.who}</dt>
+          <dd><b>{r.figures}</b> {r.note}</dd>
+        </div>
+      ))}
+    </dl>
   )}
   {link && <a class="project-link" href={link.href}>{link.text} <span aria-hidden="true">↗</span></a>}
 </article>
