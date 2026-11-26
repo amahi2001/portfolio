@@ -23,11 +23,10 @@ const profile = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?
 assert.equal(profile.mainEntity.name, 'Abrar Mahi');
 const role = profile.mainEntity.jobTitle + ' at ' + profile.mainEntity.worksFor.name;
 for (const source of [md, llms, html]) assert(source.includes(role), 'Current role mismatch');
-for (const name of ['LlamaIndex', 'Python Token Killer', 'Graph RAG', 'Jun – Oct 2026', '14,000+', 'Henkel', 'hot-melt adhesive', 'abrar-homeserver', 'Squirro', 'NASA Goddard', 'Hunter College', 'Nextcloud', 'Jellyfin', 'AdGuard Home', 'NixOS']) {
+for (const name of ['LlamaIndex', 'Python Token Killer', 'Graph RAG', 'Jun – Oct 2026', '14,000+', 'Henkel', 'Biggest catch first', 'abrar-homeserver', 'Squirro', 'NASA Goddard', 'Hunter College', 'Nextcloud', 'Jellyfin', 'AdGuard Home', 'NixOS']) {
   assert(md.includes(name), name);
 }
 assert(md.startsWith('# Abrar Mahi'));
-assert(md.includes('flood_coverage: true'));
 assert(llms.startsWith('# Abrar Mahi\n\n> '));
 assert(llms.includes('https://amahi.dev/index.md'));
 assert.deepEqual(readdirSync('out').sort(), ['_astro', 'assets', 'index.html', 'index.md', 'llms.txt', 'robots.txt', 'sitemap.xml']);
@@ -36,4 +35,6 @@ assert.doesNotMatch(html, /<style[\s>]/, 'Inline <style> breaks the server CSP')
 assert.doesNotMatch(html + md + llms, /https?:\/\/(?:[\w.-]+\.amahi\.dev|localhost|127\.0\.0\.1)\b/i);
 assert.doesNotMatch(html, /\sstyle="/, 'Inline style attributes break the server CSP');
 assert.doesNotMatch(html, /<script(?![^>]*(?:type="application\/ld\+json"|src=))/, 'Inline scripts break the server CSP');
+assert.doesNotMatch(md, /undefined/);
+assert.equal([...html.matchAll(/<article id=/g)].length, 4, 'four ranked catches');
 console.log('Verified public files, local links, fragments, structured data and Markdown content.');

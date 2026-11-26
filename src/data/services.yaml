@@ -19,3 +19,9 @@
   order: 5
   name: Home services
   body: Nextcloud keeps my files in step, Jellyfin remembers the playhead, and AdGuard Home keeps trackers off the network.
+- id: ptk
+  order: 6
+  name: ptk
+  figure: "76%"
+  body: Python Token Killer, my open-source library that cuts LLM tokens on JSON, code and logs. No dependencies, on PyPI.
+  link: { href: "https://github.com/amahi2001/python-token-killer", text: Source and benchmarks }
