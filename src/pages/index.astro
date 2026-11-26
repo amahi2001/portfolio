@@ -80,7 +80,7 @@ const arrow = '↗';
         <p class="chapter-intro">{p.labIntro}</p>
         <dl class="services">{services.filter(s => !s.data.figure).map(({ data: s }) => <div><dt>{s.name}</dt><dd>{s.body}</dd></div>)}</dl>
         <p class="built" aria-hidden="true">Built down here</p>
-        <dl class="services built-list">{services.filter(s => s.data.figure).map(({ id, data: s }) => <div id={id}><dt><b>{s.figure}</b> {s.name}</dt><dd>{s.body}{s.link && <> <a href={s.link.href}>{s.link.text} <span aria-hidden="true">{arrow}</span></a></>}</dd></div>)}</dl>
+        <dl class="services built-list">{services.filter(s => s.data.figure).map(({ id, data: s }) => <div id={id}><dt><b>{s.figure}</b> {s.name}</dt><dd>{s.body}{s.link && <><br /><a class="project-link" href={s.link.href}>{s.link.text} <span aria-hidden="true">{arrow}</span></a></>}</dd></div>)}</dl>
         <a class="project-link" href={p.lab}>Read the flake <span aria-hidden="true">{arrow}</span></a>
         <footer id="contact" class="contact">
           <h2 class="chroma">Say hello<span class="dot">.</span></h2>

@@ -524,7 +524,8 @@ main a:not(.button):hover { color:var(--light); text-decoration-color:currentCol
 .strip li { padding:.7rem .9rem .5rem 0; display:grid; align-content:start; gap:.15rem; }
 .strip li + li { padding-left:.9rem; border-left:1px dashed #a7f8dc40; }
 .strip a { font:.875rem/1.35 var(--mono); }
-.strip b { display:block; font:400 2rem/1 var(--hud); color:var(--amber); text-shadow:0 0 12px #ffd08b44; font-variant-numeric:tabular-nums; margin-bottom:.15rem; }
+.strip b i { font:400 .5em/1 var(--mono); font-style:normal; color:#ffd08bcc; }
+.strip b { display:block; white-space:nowrap; font:400 2rem/1 var(--hud); color:var(--amber); text-shadow:0 0 12px #ffd08b44; font-variant-numeric:tabular-nums; margin-bottom:.15rem; }
 .strip small { font:.78rem/1.35 var(--mono); color:#cfeff0bf; }
 .feat .line { margin-top:.6rem; font:.875rem/1.5 var(--mono); color:#cfeff0; }
 .work-list .row { display:grid; grid-template-columns:minmax(6.5ch,auto) 1fr; column-gap:1.4rem; align-items:baseline; padding:1.1rem 0; border-top:1px solid #a4dfd654; }
@@ -539,6 +540,7 @@ main a:not(.button):hover { color:var(--light); text-decoration-color:currentCol
   .strip li:nth-child(n+3) { border-top:1px dashed #a7f8dc40; }
   .work-list .feat { padding:1rem 1rem .9rem; }
   .work-list .row { grid-template-columns:1fr; }
+  .feat .catch { flex-direction:column; gap:.3rem; }
 }
 /* ptk, in the lab: side work lives with side work. */
 .built { margin:1.6rem 0 0; font:1rem/1 var(--hud); letter-spacing:.24em; text-transform:uppercase; color:var(--seafoam); }

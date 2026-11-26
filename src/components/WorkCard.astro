@@ -9,7 +9,7 @@ const { catch: c, title, line, link, ledger } = entry.data;
     <p class="catch"><b>{c.approx && <i class="approx">~</i>}{c.value}</b> <span>{c.label}</span></p>
     <h3>{title}</h3>
     <ol class="strip">
-      {ledger.map(r => <li><a href={r.href}><b>{r.figure}</b> {r.who} <span aria-hidden="true">↗</span></a><small>{r.note}</small></li>)}
+      {ledger.map(r => <li><b>{r.prefix && <i>{r.prefix} </i>}{r.figure}</b><a href={r.href}>{r.who} <span aria-hidden="true">↗</span></a><small>{r.note}</small></li>)}
     </ol>
     <p class="line">{line}</p>
   </article>

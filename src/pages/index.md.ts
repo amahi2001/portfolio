@@ -12,7 +12,7 @@ export const GET: APIRoute = async () => {
     ...work.map(({ data: w }) => [
       `### ${w.title}`,
       `**${w.catch.approx ? '~' : ''}${w.catch.value}**${w.catch.label ? ` ${w.catch.label}.` : ' ·'} ${w.line}`,
-      w.ledger?.map(r => `- **${r.figure}** ${r.who} (${r.note}): ${r.href}`).join('\n'),
+      w.ledger?.map(r => `- **${r.prefix ? r.prefix + ' ' : ''}${r.figure}** ${r.who} (${r.note}): ${r.href}`).join('\n'),
       w.link && `[${w.link.text}](${w.link.href})`,
     ].filter(Boolean).join('\n\n')),
     '## Career', p.careerIntro,

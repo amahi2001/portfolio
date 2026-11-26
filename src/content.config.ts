@@ -15,7 +15,7 @@ export const collections = {
       title: z.string(),
       line: z.string(),
       link: link.optional(),
-      ledger: z.array(z.object({ figure: z.string(), who: z.string(), note: z.string(), href: z.url() })).optional(),
+      ledger: z.array(z.object({ figure: z.string(), prefix: z.string().optional(), who: z.string(), note: z.string(), href: z.url() })).optional(),
     }),
   }),
   career: defineCollection({
