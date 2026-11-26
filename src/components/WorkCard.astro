@@ -1,29 +1,25 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+// A ranked catch. The entry with a ledger is the headline feat; the rest are one-line rows.
 const { entry } = Astro.props as { entry: CollectionEntry<'work'> };
-const { catch: c, kind, title, body, sample, link, ledger } = entry.data;
+const { catch: c, title, line, link, ledger } = entry.data;
 ---
-<article id={entry.id}>
-  <p class="catch"><b>{c.approx && <i class="approx">~</i>}{c.value}</b> <span>{c.label}</span></p>
-  <p class="mono kind" translate="no">{kind}</p>
-  <h3>{title}</h3>
-  <p>{body}</p>
-  {sample && (
-    <figure class="field-example">
-      <figcaption>Sample extraction</figcaption>
-      <div class="source-field"><small>{sample.source} </small><strong>{sample.field}</strong></div>
-      <code>{sample.code}</code>
-    </figure>
-  )}
-  {ledger && (
-    <dl class="ledger">
-      {ledger.map(r => (
-        <div>
-          <dt>{r.href ? <a href={r.href}>{r.who} <span aria-hidden="true">↗</span></a> : r.who}</dt>
-          <dd><b>{r.figures}</b> {r.note}</dd>
-        </div>
-      ))}
-    </dl>
-  )}
-  {link && <a class="project-link" href={link.href}>{link.text} <span aria-hidden="true">↗</span></a>}
-</article>
+{ledger ? (
+  <article id={entry.id} class="feat">
+    <p class="catch"><b>{c.approx && <i class="approx">~</i>}{c.value}</b> <span>{c.label}</span></p>
+    <h3>{title}</h3>
+    <ol class="strip">
+      {ledger.map(r => <li><b>{r.prefix && <i>{r.prefix} </i>}{r.figure}</b><a href={r.href}>{r.who} <span aria-hidden="true">↗</span></a><small>{r.note}</small></li>)}
+    </ol>
+    <p class="line">{line}</p>
+  </article>
+) : (
+  <article id={entry.id} class="row">
+    <p class="catch"><b>{c.approx && <i class="approx">~</i>}{c.value}</b></p>
+    <div>
+      <h3>{title}</h3>
+      <p class="line">{line}</p>
+      {link && <a class="project-link" href={link.href}>{link.text} <span aria-hidden="true">↗</span></a>}
+    </div>
+  </article>
+)}

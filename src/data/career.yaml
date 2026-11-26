@@ -23,7 +23,7 @@
   dates: Aug 2022 – May 2024
   org: The New York Public Library
   role: Full Stack Engineer II
-  proof: [nypl]
+  body: Django and React on Google Cloud for research sites with 10k+ visitors a day, plus a Gemini RAG assistant for staff.
 - id: nasa
   order: 5
   dates: Summer 2022

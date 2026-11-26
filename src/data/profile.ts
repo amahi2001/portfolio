@@ -20,7 +20,7 @@ export const profile = {
     ['76%', 'fewer LLM tokens with my open-source library', 'ptk'],
     ['15+', 'enterprise GenAI proofs of concept', 'graph-rag'],
   ],
-  workIntro: 'Six things I’ve built, numbers first.',
+  workIntro: 'Biggest catch first.',
   careerIntro: 'Since 2022: from satellite retrievals to the documents enterprises bet money on.',
   education: ['Hunter College, CUNY', 'BA in Computer Science, minor in Mathematics. Magna cum laude with departmental honors, 2023.'],
   labIntro: 'My old gaming PC, rebuilt as a single NixOS flake. I declare every service below in code, so I can rebuild the whole machine from one repository.',

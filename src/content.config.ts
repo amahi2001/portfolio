@@ -11,13 +11,11 @@ export const collections = {
     schema: z.object({
       order: z.number(),
       short: z.string(),
-      catch: z.object({ value: z.string(), approx: z.boolean().default(false), label: z.string() }),
-      kind: z.string(),
+      catch: z.object({ value: z.string(), approx: z.boolean().default(false), label: z.string().optional() }),
       title: z.string(),
-      body: z.string(),
-      sample: z.object({ source: z.string(), field: z.string(), code: z.string() }).optional(),
+      line: z.string(),
       link: link.optional(),
-      ledger: z.array(z.object({ who: z.string(), figures: z.string(), note: z.string(), href: z.url().optional() })).optional(),
+      ledger: z.array(z.object({ figure: z.string(), prefix: z.string().optional(), who: z.string(), note: z.string(), href: z.url() })).optional(),
     }),
   }),
   career: defineCollection({
@@ -26,6 +24,6 @@ export const collections = {
   }),
   services: defineCollection({
     loader: file('src/data/services.yaml'),
-    schema: z.object({ order: z.number(), name: z.string(), body: z.string() }),
+    schema: z.object({ order: z.number(), name: z.string(), body: z.string(), figure: z.string().optional(), link: link.optional() }),
   }),
 };
