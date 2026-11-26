@@ -81,7 +81,7 @@ p,dd { text-wrap: pretty; }
   content:""; position:absolute; inset:0; z-index:1;
   background:linear-gradient(var(--reading-direction,90deg),var(--shade) 0%,var(--shade) 25%,transparent 75%);
 }
-.depth-tag { font: .875rem/1.6 var(--mono); color: var(--seafoam); }
+.depth-tag,.kind { font: .875rem/1.6 var(--mono); color: var(--seafoam); }
 .depth-tag { display: flex; align-items: center; gap:.65rem; margin-bottom:.7rem; }
 .depth-tag::before { content:""; width: 1.5rem; height:.4rem; border-block: 2px solid currentColor; }
 .surface {
@@ -528,7 +528,9 @@ main a:not(.button):hover { color:var(--light); text-decoration-color:currentCol
 .strip b { display:block; white-space:nowrap; font:400 2rem/1 var(--hud); color:var(--amber); text-shadow:0 0 12px #ffd08b44; font-variant-numeric:tabular-nums; margin-bottom:.15rem; }
 .strip small { font:.78rem/1.35 var(--mono); color:#cfeff0bf; }
 .feat .line { margin-top:.6rem; font:.875rem/1.5 var(--mono); color:#cfeff0; }
-.work-list .row { display:grid; grid-template-columns:minmax(6.5ch,auto) 1fr; column-gap:1.4rem; align-items:baseline; padding:1.1rem 0; border-top:1px solid #a4dfd654; }
+.timeline .kind { margin-bottom:.26rem; }
+/* A fixed number column so every row's title starts on the same line. */
+.work-list .row { display:grid; grid-template-columns:clamp(5.6rem,8vw,7.4rem) 1fr; column-gap:1.4rem; align-items:baseline; padding:1.1rem 0; border-top:1px solid #a4dfd654; }
 .row .catch { margin:0; }
 .row .catch b { font-size:clamp(2.4rem,3.6vw,3.4rem); }
 .row h3 { font-size:clamp(1.15rem,1.6vw,1.4rem); line-height:1.25; }

@@ -37,4 +37,6 @@ assert.doesNotMatch(html, /\sstyle="/, 'Inline style attributes break the server
 assert.doesNotMatch(html, /<script(?![^>]*(?:type="application\/ld\+json"|src=))/, 'Inline scripts break the server CSP');
 assert.doesNotMatch(md, /undefined/);
 assert.equal([...html.matchAll(/<article id=/g)].length, 4, 'four ranked catches');
+assert.match(css, /\.kind\b[^{]*\{[^}]*var\(--mono\)/, 'career dates need their mono style');
+assert(md.includes('76% fewer LLM tokens'), 'ptk figure needs its unit');
 console.log('Verified public files, local links, fragments, structured data and Markdown content.');
